@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-class twoSum {
+class TwoSum {
     public static int[] Solution(int[] nums, int target) {
         // Arrays.sort(nums);
 

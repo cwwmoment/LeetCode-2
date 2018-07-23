@@ -1,33 +1,35 @@
+import java.util.Arrays;
 
 public class MedianOfTwoSortedArray {
-	
-	public static double getMiddle(int[] a) {
-		int len = a.length;
-		double res = 0.0;
-		if (len == 0) return 0;
+	public static int[] merge(int[] a1, int[] a2) {
+		int[] merged = new int[a1.length+a2.length];
 		
-		if (len % 2 != 0) {
-			return a[len/2];
-		} else {
-			res = (a[len/2] * 1.0 +a[len/2-1] * 1.0) /2;
-
-			return res;
+		int i = 0, j = 0, k = 0;
+		while(i < a1.length && j < a2.length) {
+			merged[k++] = (a1[i] < a2[j]) ? a1[i++] : a2[j++]; 
 		}
+		
+		while(i < a1.length) {
+			merged[k++] = a1[i++];
+		}
+		
+		while(j < a2.length) {
+			merged[k++] = a2[j++];
+		}
+		// System.out.println(Arrays.toString(merged));
+		return merged;
 	}
+	
 	public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
-		if (nums1.length == 0) {
-			return getMiddle(nums2);
+		double res = 0.0;
+		int[] m = merge(nums1, nums2);
+		int n = m.length;
+		if (n % 2 == 0) {
+			res = (m[n/2] + m[(n-1)/2])/2.0;
+		} else {
+			res = m[n/2];
 		}
 		
-		if (nums2.length == 0) {
-			return getMiddle(nums1);
-		}
-		
-		double mid1 = getMiddle(nums1);
-		double mid2 = getMiddle(nums2);
-		
-		double res = (mid1 + mid2) / 2;
-
 		return res;
 	}
 	

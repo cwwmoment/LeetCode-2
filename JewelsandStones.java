@@ -1,5 +1,5 @@
 // Solution 1
-class 771 {
+class JewelsandStones {
     public static int numJewelsInStones(String J, String S) {
         int count = 0;
 
@@ -16,7 +16,7 @@ class 771 {
 }
 
 // Solution 2: HashSet
-class 771 {
+class JewelsandStones {
     public static int numJewelsInStones(String J, String S) {
         int count = 0;
 
@@ -37,7 +37,7 @@ class 771 {
 }
 
 // Solution 3: regex
-class 771 {
+class JewelsandStones {
     public static int numJewelsInStones(String J, String S) {
         return(S.replaceAll("[^" + J + "]", "").length());
     }

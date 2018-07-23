@@ -1,6 +1,6 @@
 import java.util.*;
 
-class uniqueMorse {
+class UniqueMorse {
     public static int uniqueMorseRepresentations(String[] words) {
         Map<Character, String> map = new HashMap<Character, String>();
 

@@ -1,4 +1,4 @@
-class 709 {
+class ToLowerCase {
     public String toLowerCase(String str) {
         return str.toLowerCase();
     }
