@@ -7,3 +7,11 @@ Hope it will last for a long time.
 Keep calm and carry on.
 
 Stupid ZT.
+
+<2018-07-25 Wed 00:55>
+
+Yesterday, I add solutions to three problems:
+
+- 17. Letter Combinations of a Phone Number : DFS
+- 14. Longest Common Prefix : A easy array-related problem
+- 11. Container With Most Water : Two Pointers
