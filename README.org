@@ -1,3 +1,6 @@
+* A Simple Diary
+
+** It begins!
 <2018-07-22 Sun 22:13>
 
 Hey, I recreate my repo.
@@ -8,6 +11,7 @@ Keep calm and carry on.
 
 Stupid ZT.
 
+** Day 0
 <2018-07-25 Wed 00:55>
 
 Yesterday, I add solutions to three problems:
@@ -15,3 +19,15 @@ Yesterday, I add solutions to three problems:
 - 17. Letter Combinations of a Phone Number : DFS
 - 14. Longest Common Prefix : A easy array-related problem
 - 11. Container With Most Water : Two Pointers
+
+** Day 1
+<2018-07-25 Wed 23:20>
+
+Sorry for myself.
+
+I haven't slept well last night, so I performed badly today.
+
+- 18. 4 Sum : Two Pointers
+- 20. Valid Parentheses : Stack
+
+Yeah, wish I can have a great sleep tonight.
