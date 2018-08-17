@@ -4,15 +4,6 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 
 public class BTLevelOrderTraversal {
-	public class TreeNode {
-		int val;
-		TreeNode left;
-		TreeNode right;
-
-		TreeNode(int x) {
-			val = x;
-		}
-	}
 
 	public List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();

@@ -1,15 +1,6 @@
 
 public class AddTwoNumber2 {
 
-	public static class ListNode { // must add static
-		int val;
-		ListNode next;
-
-		ListNode(int x) {
-			val = x;
-		}
-	}
-
 	public void display(ListNode l) {
 		while (l != null) {
 			System.out.print(l.val + " -> ");

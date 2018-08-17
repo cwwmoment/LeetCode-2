@@ -22,7 +22,7 @@ class FlippingAnImage {
         return a;
     }
 
-    public static int[][] flipAndInvertImage(int[][] A) {
+    public static int[][] flipAndInvertImage0(int[][] A) {
 
         A = rev(A);
         for (int i = 0; i < A.length; i++) {
@@ -35,19 +35,8 @@ class FlippingAnImage {
         return A;
     }
 
-    public static void main(String[] args) {
-        int[][] b = {{1,1,0,0}, {1,0,0,1},{0,1,1,1},{1,0,1,0}};
-        b = flipAndInvertImage(b);
-
-        for(int k = 0; k < b.length; k++) {
-            System.out.println(Arrays.toString(b[k]));
-        }
-    }
-}
-
-// Solution 2
-class Solution {
-    public int[][] flipAndInvertImage(int[][] A) {
+    // Solution 2
+    public int[][] flipAndInvertImage2(int[][] A) {
         int len = A.length;
         int leng = A[0].length;
 
@@ -60,12 +49,13 @@ class Solution {
                 A[i][j] = tmp;
             }
         }
+        
+        return A;
     }
-}
-
-// Solution 3
-class Solution {
-    public int[][] flipAndInvertImage(int[][] A) {
+    
+    
+    // Solution 3
+    public int[][] flipAndInvertImage3(int[][] A) {
         int n = A[0].length;
 
         for (int[] row : A) {
@@ -77,5 +67,14 @@ class Solution {
         }
 
         return A;
+    }
+    
+    public static void main(String[] args) {
+        int[][] b = {{1,1,0,0}, {1,0,0,1},{0,1,1,1},{1,0,1,0}};
+        b = flipAndInvertImage0(b);
+
+        for(int k = 0; k < b.length; k++) {
+            System.out.println(Arrays.toString(b[k]));
+        }
     }
 }

@@ -1,7 +1,11 @@
+/*
+ * LeetCode #83. Remove Duplicates from Sorted List
+ * happygirlzt
+ * Created on 16 July 2018
+ */
+
 class RemoveDuplicatesFromSortedList {
     public ListNode deleteDuplicates(ListNode head) {
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
 
         ListNode modified = new ListNode(0);
         modified = head;
@@ -16,11 +20,11 @@ class RemoveDuplicatesFromSortedList {
             }
         }
 
-        return dummy.next;
+        return head;
     }
 
 
-    public ListNode deleteDuplicates(ListNode head) {
+    public ListNode deleteDuplicates2(ListNode head) {
         // ListNode dummy = new ListNode(0);
         // dummy.next = head;
         // if (head == null)
@@ -40,4 +44,11 @@ class RemoveDuplicatesFromSortedList {
         // return dummy.next;
         return head;
     }
+    
+    public ListNode deleteDuplicates3(ListNode head) {
+    	if (head == null || head.next == null) return head;
+    	
+    	head.next = deleteDuplicates3(head.next);
+    	return head.next.val == head.val ? head.next : head;
+    } 
 }

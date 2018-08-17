@@ -8,3 +8,39 @@ Hope it will last for a long time.
 Keep calm and carry on.
 
 Stupid ZT.
+
+* Review 1
+<2018-08-17 Fri 08:51>
+
+Today, I would like to review the questions I have solved during the past month.
+
+1. <2018-07-14 Sat>
+   1. [771.Jewels and Stones]: HashSet
+   2. [804.Unique Morse Code Words]: HashSet
+   3. [595.Big Countries]: sql UNION
+   4. [461.Hamming Distance]: bit manipulation
+
+2. <2018-07-15 Sun>
+   5. [832.Flipping an Image]: Array
+   6. [657.Judge Route Circle]: String
+   7. [617.Merge Two Binary Trees]: Tree, recursive
+   8. [867. Transpose Matrix]: Array
+   9. [627. Swap Salary]: sql, conditions
+
+3. <2018-07-16 Mon>
+   10. [19.Remove Nth Node From End of List]: Two pointers
+   11. [83.Remove Duplicates from Sorted List]: Linked List
+   12. [707.Design Linked List]: Linked List
+
+4. <2018-07-17 Tue>
+   13. [2.Add Two Numbers]: Linked List
+   14. [445. Add Two Numbers II]: Linked List, Stack
+
+5. <2018-07-19 Thu>
+   15. [136. Single Number]: Bit manipulation
+   16. [620. Not Boring Movies]: sql, ORDER
+   17. [669. Trim a Binary Search Tree]: BST
+
+6. <2018-07-20 Fri>
+   18. [700. Search in a Binary Search Tree]: BST
+   19. [637. Average of Levels in Binary Tree]: Binary Tree

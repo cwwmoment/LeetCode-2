@@ -1,3 +1,10 @@
+/*
+ * LeetCode #637. Average of Levels in Binary Tree
+ * happygirlzt
+ * Created on 20 July
+ * 
+ */
+
 import java.util.List;
 import java.util.Queue;
 import java.util.LinkedList;
@@ -49,7 +56,6 @@ public class AverageOfLevelsInBT {
 	}
 
 	public static void main(String[] agrs) {
-		AverageOfLevelsInBT a = new AverageOfLevelsInBT();
 
 		TreeNode root = new TreeNode(3);
 		root.left = new TreeNode(9);

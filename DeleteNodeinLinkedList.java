@@ -1,10 +1,3 @@
-public class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) {
-        val = x;
-    }
-}
 
 public class DeleteNodeinLinkedList {
     public void deleteNode(ListNode node) {

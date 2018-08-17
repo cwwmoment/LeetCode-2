@@ -1,12 +1,19 @@
-// Solution 1
-class Solution {
-    static class pos {
+/*
+ * LeetCode #657.Judge Route Circle
+ * happygirlzt
+ * Created on 15 July 2018
+ * 
+ */
+
+class JudgeRouteCircle {
+	// Solution 1
+	static class pos {
         static int x;
         static int y;
 
         public pos(int a, int b) {
-            this.x = a;
-            this.y = b;
+            x = a;
+            y = b;
         }
 
         public void move(char c) {
@@ -40,11 +47,9 @@ class Solution {
             return true;
         else return false;
     }
-}
-
-// Solution 2
-class Soultion {
-    public boolean judgeCircle(String moves) {
+    
+    // Solution 2
+    public boolean judgeCircle2(String moves) {
         int len = moves.length();
 
         if (len == 0)
@@ -62,21 +67,19 @@ class Soultion {
 
         return ((a['U'-'A']==a['D'-'A'])&&(a['L'-'A']==a['R'-'A']));
     }
-}
+    
+    // Solution 3
+    public boolean judgeCircle3(String moves) {
+        int x = 0;
+        int y = 0;
 
-// Solution 3
-class solution {
-    public boolean judgeCircle(String moves) {
-      int x = 0;
-      int y = 0;
+        for (char ch : moves.toCharArray()) {
+            if (ch == 'U') y++;
+            else if (ch == 'D') y--;
+            else if (ch == 'L') x++;
+            else x--;
+        }
 
-      for (char ch : moves.toCharArray()) {
-          if (ch == 'U') y++;
-          else if (ch == 'D') y--;
-          else if (ch == 'L') x++;
-          else x--;
+        return x == 0 && y == 0;
       }
-
-      return x == 0 && y == 0;
-    }
 }

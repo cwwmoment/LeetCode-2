@@ -1,15 +1,6 @@
 
 public class ConstructionBinaryTreeInorderPostorder {
-	public class TreeNode {
-		int val;
-		TreeNode left;
-		TreeNode right;
-
-		TreeNode(int v) {
-			val = v;
-		}
-	}
-
+	
 	public TreeNode buildTree(int[] inorder, int[] postorder) {
 		return helper(0, inorder.length - 1, 0, inorder.length - 1, inorder, postorder);
 	}

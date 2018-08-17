@@ -15,7 +15,7 @@ public class ConstructBinaryTreePreorderInorderTraversal {
 		if (inorder.length == 0 || inorder == null) return null;
 		if (preorder.length != inorder.length) return null;
 		
-		helper(0, 0, inorder.length - 1, preorder, inorder);
+		return helper(0, 0, inorder.length - 1, preorder, inorder);
 	}
 	
 	public TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int[] inorder) {

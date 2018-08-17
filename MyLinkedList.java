@@ -1,3 +1,9 @@
+/*
+ * LeetCode #707. Design Linked List
+ * happygirlzt
+ * Created on 16 July 2018
+ */
+
 public class MyLinkedList {
 	// nested class
 	private static class ListNode {
@@ -150,8 +156,6 @@ public class MyLinkedList {
 	}
 
 	public static void main(String[] args) {
-		ListNode node = new ListNode(100);
-
 		MyLinkedList obj = new MyLinkedList();
 		obj.addAtHead(1);
 		// obj.display();

@@ -1,5 +1,14 @@
-// Solution 1
+/*
+ * LeetCode #771.Jewels and Stones
+ * happygirlzt
+ * Created on 14 July 2018
+ * 
+ */
+import java.util.HashSet;
+import java.util.Set;
+
 class JewelsandStones {
+	// Solution 1
     public static int numJewelsInStones(String J, String S) {
         int count = 0;
 
@@ -13,14 +22,12 @@ class JewelsandStones {
 
         return count;
     }
-}
-
-// Solution 2: HashSet
-class JewelsandStones {
-    public static int numJewelsInStones(String J, String S) {
+    
+    // Solution 2
+    public static int numJewelsInStones1(String J, String S) {
         int count = 0;
 
-        HashSet setj = new HashSet();
+        Set<Character> setj = new HashSet<>();
 
         for(char i : J.toCharArray()) {
             setj.add(i);
@@ -34,11 +41,9 @@ class JewelsandStones {
 
         return count;
     }
-}
-
-// Solution 3: regex
-class JewelsandStones {
-    public static int numJewelsInStones(String J, String S) {
+    
+    // Solution 3: regex
+    public static int numJewelsInStones2(String J, String S) {
         return(S.replaceAll("[^" + J + "]", "").length());
     }
 }

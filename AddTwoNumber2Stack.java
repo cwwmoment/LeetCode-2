@@ -1,25 +1,8 @@
 import java.util.Stack;
 
 public class AddTwoNumber2Stack {
-	public static class ListNode {
-		int val;
-		ListNode next;
-
-		public ListNode(int v) {
-			val = v;
-			next = null;
-		}
-	}
-
-	public void display(ListNode l) {
-    	while(l != null) {
-    		System.out.print(l.val + " -> ");
-    		l = l.next;
-    	}
-    	System.out.println(l);
-    }
 	
-	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		Stack<ListNode> st1 = new Stack<ListNode>();
 		Stack<ListNode> st2 = new Stack<ListNode>();
 		Stack<ListNode> result = new Stack<ListNode>();
@@ -67,23 +50,22 @@ public class AddTwoNumber2Stack {
 	}
 
 	public static void main(String[] args) {
-		AddTwoNumber2Stack a = new AddTwoNumber2Stack();
 		
 		ListNode l1 = new ListNode(7);
 		l1.next = new ListNode(2);
 		l1.next.next = new ListNode(4);
 		l1.next.next.next = new ListNode(3);
 		
-		a.display(l1);
+		l1.display(l1);
 	
 		ListNode l2 = new ListNode(5);
 		l2.next = new ListNode(6);
 		l2.next.next = new ListNode(4);
 		
-		a.display(l2);
+		l2.display(l2);
 		
-		ListNode res = a.addTwoNumbers(l1, l2);
-		a.display(res);
+		ListNode res = addTwoNumbers(l1, l2);
+		res.display(res);
 		
 	}
 }
