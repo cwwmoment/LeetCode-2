@@ -1,5 +1,4 @@
 import java.util.Stack;
-import org.junit.*;
 
 /**
  * LeetCode 42. Trapping Rain Water
