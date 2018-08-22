@@ -10,22 +10,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class MergeIntervals {
-
-	public static class Interval {
-		int start;
-		int end;
-
-		Interval() {
-			start = 0;
-			end = 0;
-		}
-
-		Interval(int s, int e) {
-			start = s;
-			end = e;
-		}
-	}
-	
 	/**
 	 * 题意：这道题主要是考察写一个sort函数？通过这道题，我学会了如何写list的sort函数；
 	 * 如何遍历、判断比较高效。我的方法太弱智了，特别容易出错；别人的方法就每次更新一下start，
