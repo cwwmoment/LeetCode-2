@@ -11,9 +11,7 @@ public class ImplementStrStr {
 
 		for (int i = 0; i < needLen; i++) {
 			for (int j = 0; j < hayLen - needLen; j++) {
-				if (haystack[j] == needle[i]) {
-					
-				}
+				
 			}
 		}
 		return -1;

@@ -1,4 +1,4 @@
-public class 104{
+public class MaxDepthofBT{
     public int maxDepth(TreeNode root) {
         if (root == null) {
             return 0;

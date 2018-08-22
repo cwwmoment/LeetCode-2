@@ -34,7 +34,7 @@ public class Search2DMatrix {
 		return true;
 	}
 
-	public boolean searchMatrix(int[][] matrix, int target) {
+	public boolean searchMatrix1(int[][] matrix, int target) {
 		int row_num = matrix.length;
 		int col_num = matrix[0].length;
 

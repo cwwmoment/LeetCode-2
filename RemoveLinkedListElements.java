@@ -1,14 +1,5 @@
 public class RemoveLinkedListElements {
-
-	public class ListNode {
-		int val;
-		ListNode next;
-
-		ListNode(int v) {
-			val = v;
-		}
-	}
-
+	
 	public static ListNode removeElements(ListNode head, int val) {
 
 		while (head.val == val) {

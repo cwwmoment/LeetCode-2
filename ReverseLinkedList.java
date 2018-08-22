@@ -1,4 +1,4 @@
-class solution {
+class ReverseLinkedList {
     public ListNode reverseList(ListNode head) {
         if (head  == null || head.next == null)
             return head;

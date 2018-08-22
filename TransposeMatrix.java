@@ -1,4 +1,5 @@
-class Solution {
+class TransposeMatrix {
+	
     public int[][] transpose(int[][] A) {
         int len = A.length;
         int leng = A[0].length;
