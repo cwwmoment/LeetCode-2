@@ -50,3 +50,10 @@ Today, I would like to review the questions I have solved during the past month.
 +56. Merge Intervals+
 +57. Insert Interval+
 +66. Plus One+
+** Day 36
+<2018-08-24 Fri 23:27>
+
++ 200. Number of Islands *dfs*
++ 208. Implement Trie (Prefix Tree)
++ 257. Binary Tree Paths *dfs*
++ 112. Path Sum *dfs*
