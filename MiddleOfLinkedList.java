@@ -17,7 +17,7 @@ public class MiddleOfLinkedList {
 		if (head == null) return null;
 		
 		ListNode tmp = head;
-		ListNode dummy = null;
+		ListNode dummy = new ListNode(0);
 		dummy.next = tmp;
 		
 		int count = 1;

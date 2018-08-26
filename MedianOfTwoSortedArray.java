@@ -1,4 +1,3 @@
-import java.util.Arrays;
 
 public class MedianOfTwoSortedArray {
 	public static int[] merge(int[] a1, int[] a2) {

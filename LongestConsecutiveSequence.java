@@ -81,10 +81,10 @@ public class LongestConsecutiveSequence {
 
 	public static void main(String[] args) {
 		// int[] a = {9,1,4,7,3,-1,0,5,8,-1,6};
-		int[] b = { 9, 1, -3, 2, 4, 8, 3, -1, 6, -2, -4, 7 }; // 4
+		// int[] b = { 9, 1, -3, 2, 4, 8, 3, -1, 6, -2, -4, 7 }; // 4
 		int[] a = { 100, 4, 200, 1, 3, 2 };
-        int[] d = {1,2,0,1};
-		int[] c = { 0, 0 };
+        // int[] d = {1,2,0,1};
+		// int[] c = { 0, 0 };
 		System.out.println(longestConsecutive1(a));
 	}
 }

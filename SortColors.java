@@ -4,9 +4,6 @@
  * on 2018-7-26
  */
 
-import java.util.Arrays;
-import java.util.Collections;
-
 public class SortColors {
 	
 	public void sortColors(int[] nums) {

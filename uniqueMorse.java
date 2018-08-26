@@ -12,8 +12,6 @@ class UniqueMorse {
             i++;
         }
 
-        HashMap<String, String> morseRe = new HashMap<>();
-
         int len = words.length;
         String[] morsed = new String[len];
 
@@ -25,7 +23,7 @@ class UniqueMorse {
             }
         }
 
-        HashSet set = new HashSet();
+        HashSet<String> set = new HashSet<>();
         for (int k = 0; k < len; k++) {
             set.add(morsed[k]);
         }

@@ -4,9 +4,8 @@
  * Created on 2018-7-25 
  * Backtracking
  */
-import java.util.List;
+import java.util.List;		
 import java.util.ArrayList;
-import java.util.Stack;
 import java.lang.StringBuilder;
 
 public class GenerateParentheses {

@@ -55,7 +55,6 @@ public class LongestPalindromicSubstring {
 	private static int start, maxLength;
 
 	public static String longestPalindrome2(String s) {
-		String res = null;
 		if (s == null || s.length() <= 1) {
 			return s;
 		}

@@ -4,7 +4,6 @@
  * Created on 27/07/2018
  */
 import java.util.Stack;
-import java.util.HashMap;
 
 public class LongestValidParentheses {
 	public static int longestValidParentheses(String s) {

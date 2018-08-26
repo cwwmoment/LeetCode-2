@@ -1,7 +1,10 @@
 public class RemoveLinkedListElements {
 	
 	public static ListNode removeElements(ListNode head, int val) {
-
+		if (head == null) {
+			return null;
+		}
+		
 		while (head.val == val) {
 			if (head.next != null) {
 				head = head.next;
@@ -9,8 +12,6 @@ public class RemoveLinkedListElements {
 			    return null;
 			}
 		}
-		
-		if (head == null) return head;
 		
 		ListNode tmp = head;
 		ListNode dummy = tmp;

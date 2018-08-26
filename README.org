@@ -47,9 +47,10 @@ Today, I would like to review the questions I have solved during the past month.
 * Diary
 ** Day 34
 <2018-08-22 Wed 20:11>
-+56. Merge Intervals+
-+57. Insert Interval+
-+66. Plus One+
+- +56. Merge Intervals+
+- +57. Insert Interval+
+- +66. Plus One+
+
 ** Day 36
 <2018-08-24 Fri 23:27>
 
@@ -57,3 +58,13 @@ Today, I would like to review the questions I have solved during the past month.
 + 208. Implement Trie (Prefix Tree)
 + 257. Binary Tree Paths *dfs*
 + 112. Path Sum *dfs*
+
+** Day 38
+<2018-08-26 Sun 23:19>
+
++ 563. Binary Tree Tilt *dfs*
++ 872. Leaf-Similar Trees *dfs*
++ 58. Length of Last Word (String)
++ 654. Maximum Binary Tree *recursive*
++ 96. Unique Binary Search Trees *DP*
++ 95. Unique Binary Search Tree 2 *recursive*

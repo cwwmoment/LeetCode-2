@@ -15,7 +15,7 @@ public class LongestSubstring {
 		int res = 0;
 		HashMap<Character, Integer> map = new HashMap<>();
 		
-		for (int i = 0, j = 0; i < s.length(); i++) {
+		for (int i = 0, j = 0; i < s.length(); ) {
 			if (map.containsKey(s.charAt(i))) {
 				j = Math.max(j, map.get(s.charAt(j))+ 1);
 			}
