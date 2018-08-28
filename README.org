@@ -68,3 +68,10 @@ Today, I would like to review the questions I have solved during the past month.
 + 654. Maximum Binary Tree *recursive*
 + 96. Unique Binary Search Trees *DP*
 + 95. Unique Binary Search Tree 2 *recursive*
+** Day 40 <2018-08-28 Tue 10:16>
+- 559. Maximum Depth of N-ary Tree *Recursive, DFS*
+- 590. N-ary Tree Postorder Traversal *Recursive, DFS*
+- 589. N-ary Tree Preorder Traversal *Recursive, DFS*
+- 429. N-ary Tree Level Order Traversal *Queue, BFS*
+- 653. Two Sum IV - Input is a BST *DFS*
+- 404. Sum of Left Leaves *Recursive*
