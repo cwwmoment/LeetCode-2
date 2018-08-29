@@ -10,26 +10,21 @@ public class SortColors {
 		
 		if (nums.length == 0 || nums == null) return;
 		
-		// int[] tmp = new int[nums.length];
-		
-		int n_0 = 0;
-		int n_1 = 0;
-		int n_2 = 0;
-		
+		int n0 = 0;
+		int n1 = 0;
+
 		for (int i = 0; i < nums.length; i++) {
 			if (nums[i] == 0) {
-				n_0 ++;
+				n0 ++;
 			} else if (nums[i] == 1) {
-				n_1 ++;
-			} else {
-				n_2 ++;
+				n1 ++;
 			}
 		}
 		
 		for (int j = 0; j < nums.length; j++) {
-			if (j < n_0) {
+			if (j < n0) {
 				nums[j] = 0;
-			} else if (j < n_1) {
+			} else if (j < n1) {
 				nums[j] = 1;
 			} else {
 				nums[j] = 2;
@@ -47,13 +42,10 @@ public class SortColors {
 		while (j <= k) {
 			if (nums[j] == 0) {
 				swap(nums, i++, j++);
-				// System.out.println("Before " + nums[j]);
 			} else if (nums[j] == 1) {
 				j++;
-				// System.out.println("Before 1" + nums[j]);
 			} else if (nums[j] == 2) {
 				swap(nums, j, k--);
-				// System.out.println("When nums[j] == 2 " + nums[j]);
 			}
 		}
 	}

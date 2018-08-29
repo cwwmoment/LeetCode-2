@@ -30,7 +30,7 @@ public class PathSum2 {
 		list.add(root.val);
 		
 		if (root.left == null && root.right == null && sum == root.val) {
-				res.add(new LinkedList(list));
+				res.add(new LinkedList<Integer> (list));
 				list.remove(list.size() - 1);
 				return;
 		}
