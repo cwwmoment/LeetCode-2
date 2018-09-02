@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  */
 
-// TODO
+// 这是道组合题。。不是求排列
 public class Combinations {
 	public static List<List<Integer>> combine(int n, int k) {
 		List<List<Integer>> res = new ArrayList<>();
@@ -22,27 +22,27 @@ public class Combinations {
 			return res;
 		}
 
-		backtrack(res, new ArrayList<Integer>(), n, k, 0);
+		backtrack(res, new ArrayList<>(), k, 1, n);
+		
 		return res;
 	}
-
-	public static void backtrack(List<List<Integer>> res, List<Integer> tmp, int n, int k, int cur) {
-		if (tmp.size() == k && !res.contains(tmp)) {
+	
+	public static void backtrack(List<List<Integer>> res, ArrayList<Integer> tmp, int k, int start, int n) {
+		if (tmp.size() == k) {
 			res.add(new ArrayList<>(tmp));
+			return;
 		}
-
-		for (int i = cur; i < k; i++) {
-			for (int j = 1; j <= n; j++) {
-				if (tmp.add(j)) {
-					System.out.println("Added " + tmp);
-					backtrack(res, tmp, n, k, ++cur);
-					tmp.remove(tmp.size() - 1);
-					cur--;
-				} else {
-					j++;
-				}
-			}
+		
+		for (int i = start; i <= n; i++) {
+			tmp.add(i);
+			backtrack(res, tmp, k, i + 1, n);
+			tmp.remove(tmp.size() - 1);
 		}
+	}
+	public static void exchange(int[] nums, int l, int r) {
+		int tmp = nums[l];
+		nums[l] = nums[r];
+		nums[r] = tmp;
 	}
 	
 	public static void main(String[] args) {
