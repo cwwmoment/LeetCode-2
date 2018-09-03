@@ -41,15 +41,14 @@ public class BitwiseORsOfSubarrays {
 		return res.size();
 	}
 
+	// 以每个点为起点，分别求出长度为1...i-1的subarray，存到lists当中
 	public static void backtrack(List<List<Integer>> lists, int[] nums) {
-
 		for (int j = 1; j <= nums.length; j++) {
 			ArrayList<Integer> tmp = new ArrayList<>();
-			for (int i = 0; i < nums.length; i++) {
-				if (!tmp.contains(nums[i])) {
-					tmp.add(nums[i]);
-					lists.add(new ArrayList<>(tmp));
-				}
+			for (int i = j - 1; i < nums.length; i++) {
+				tmp.add(nums[i]);
+				lists.add(new ArrayList<>(tmp));
+				
 				if (tmp.size() == j)
 					tmp.remove(tmp.size() - 1);
 			}
