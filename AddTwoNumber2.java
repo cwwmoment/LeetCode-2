@@ -1,4 +1,9 @@
-
+/**
+ * 445. Add Two Numbers II
+ *
+ * Created by happygirlzt modified on 4 Sep 2018 at 10:05:57 PM
+ *
+ */
 public class AddTwoNumber2 {
 
 	public void display(ListNode l) {
@@ -19,7 +24,6 @@ public class AddTwoNumber2 {
 
 		return count;
 	}
-	
 
 	// Java can't return array by return the name
 
@@ -29,55 +33,6 @@ public class AddTwoNumber2 {
 
 		ListNode tmp = new ListNode(0);
 		ListNode dummy = tmp;
-		// System.out.println("The length of l1 is " + length_1);
-		// ListNode dummy = new ListNode(0);
-		// ListNode cur = dummy;
-		// ListNode res = new ListNode(0);
-		//
-		// int carry = 0;
-		// int last = 0;
-		// if (length_1 == length_2) {
-		// int count = 0;
-		//
-		// while (l1 != null) {
-		// int sum = l1.val + l2.val;
-		//
-		// int value = sum % 10;
-		// // System.out.println("value = " + value);
-		// cur.val = value;
-		//
-		// carry = sum / 10;
-		// System.out.println("carry = " + carry);
-
-		// System.out.println("count = " + count);
-		// if (count == 0 && carry == 1) {
-		// ListNode head = new ListNode(1);
-		// head.next = cur;
-		// res = head;
-		// last = value;
-		// count++;
-		// carry--;
-		// } else if (count != 0 && carry == 1) {
-		// cur.next = new ListNode(cur.val);
-		// cur.val = last + 1;
-		// carry--;
-		// count++;
-		// last = value;
-		// } else if (count != 0 && carry != 1) {
-		// cur.next = new ListNode(cur.val);
-		// cur.val = last;
-		// count++;
-		// last = value;
-		// }
-		//
-		// if (l1 != null)
-		// l1 = l1.next;
-		// if (l2 != null)
-		// l2 = l2.next;
-		// if (cur.next != null) cur = cur.next;
-		// }
-		// }
-		//
 
 		// How to assign values correctly? Attention!
 
@@ -203,22 +158,23 @@ public class AddTwoNumber2 {
 
 		if (res[0] != 0) {
 			for (int i = 0; i < res.length; i++) {
-				tmp.next = new ListNode(0);				
+				tmp.next = new ListNode(0);
 				tmp.next.val = res[i];
 				tmp = tmp.next;
 			}
 
 			return dummy.next;
-		} else {			
+		} else {
 			for (int i = 1; i < res.length; i++) {
 				tmp.next = new ListNode(0);
-				tmp.next.val = res[i];        
+				tmp.next.val = res[i];
 				tmp = tmp.next;
 			}
 			return dummy.next;
 		}
 	}
 	// return res;
+
 
 	public static void main(String[] args) {
 		AddTwoNumber2 a = new AddTwoNumber2();
