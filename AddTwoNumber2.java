@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /**
  * 445. Add Two Numbers II
  *
@@ -5,7 +7,7 @@
  *
  */
 public class AddTwoNumber2 {
-
+    // My naive solution
 	public void display(ListNode l) {
 		while (l != null) {
 			System.out.print(l.val + " -> ");
@@ -109,10 +111,6 @@ public class AddTwoNumber2 {
 
 				System.out.println(res[m] + " is " + m + "th one");
 			}
-//			if (res[1] > 10) {
-//				res[1] = res[1] % 10;
-//				res[0] = res[1] / 10;
-//			}
 			System.out.print(res[0] + " is 0th one");
 		} else {
 			int resLen = length_2 + 1;
@@ -176,6 +174,49 @@ public class AddTwoNumber2 {
 	// return res;
 
 
+	// Using stack
+	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+		Stack<ListNode> st1 = new Stack<ListNode>();
+		Stack<ListNode> st2 = new Stack<ListNode>();
+		Stack<ListNode> result = new Stack<ListNode>();
+		
+		ListNode dummy = new ListNode(0);
+		ListNode cur = dummy;
+		
+		while(l1 != null) {
+			st1.push(new ListNode(l1.val));
+			l1 = l1.next;
+		}
+		
+		while(l2 != null) {
+			st2.push(new ListNode(l2.val));
+			l2 = l2.next;
+		}
+		
+		int sum = 0;
+		
+		while (!st1.empty() || !st2.empty()) {
+			
+		    if (!st1.empty()) sum += st1.pop().val;
+		    
+		    if (!st2.empty()) sum += st2.pop().val;
+		    
+		    result.push(new ListNode(sum % 10));
+		    
+		    sum = sum / 10;
+		}
+		
+		if (sum == 1)
+			result.push(new ListNode(1));
+		
+		while (!result.empty()) {
+			cur.next = result.pop();
+			cur = cur.next;
+		}
+		
+		return dummy.next;
+	}
+	
 	public static void main(String[] args) {
 		AddTwoNumber2 a = new AddTwoNumber2();
 
