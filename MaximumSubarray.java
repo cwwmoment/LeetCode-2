@@ -35,17 +35,21 @@ public class MaximumSubarray {
 		return res;
 	}
 	
-	public int maxSubnumsrray1(int[] nums) {
-		int n = nums.length;
-		int[] dp = new int[n];
-		dp[0] = nums[0];
-		int max = dp[0];
-		
-		for (int i = 0; i < nums.length; i++) {
-			dp[i] = nums[i] + (dp[i - 1] > 0 ? dp[i - 1] : 0);
-			max = Math.max(dp[i], max);
+	public int maxSubArray1(int[] nums) {
+		if (nums.length == 0 || nums == null) return 0;
+		int len = nums.length;
+		int[] b = new int[len];
+		b[0] = nums[0];
+		int res = b[0];
+		for (int i = 1; i < len; i++) {
+			if (nums[i] + b[i - 1] > nums[i]) {
+				b[i] = nums[i] + b[i - 1];
+			} else {
+				b[i] = nums[i];
+			}
+			res = Math.max(b[i], res);
 		}
 		
-		return max;
+		return res;
 	}
 }
