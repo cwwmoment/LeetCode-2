@@ -75,3 +75,10 @@ Today, I would like to review the questions I have solved during the past month.
 - 429. N-ary Tree Level Order Traversal *Queue, BFS*
 - 653. Two Sum IV - Input is a BST *DFS*
 - 404. Sum of Left Leaves *Recursive*
+** Day 52 <2018-09-09 Sun 21:02>
+Simple Dynamic Programming
+- 70. Climbing Stairs
+- 198. House Robber
+- 213. House Robber2 (TODO)
+- 303. Range Sum Query
+- 304. Range Sum Query2
