@@ -3,42 +3,42 @@
  * happygirlzt
  * Created on 14 Aug
  */
-import java.util.*;
+import java.util.PriorityQueue;
 
 public class KthLargestElementInArray {
-	public static int findKthLargest(int[] nums, int k) {
-		if (nums == null || nums.length == 0) return -1;
-		
-		Arrays.sort(nums);
-		
-		int len = nums.length;
-		if (len < k) return -1;
-		
-		return nums[len - k];
-	}
-	
-	// Solution 2: Priority Queue
-	public static int findKthLargest1(int[] nums, int k) {
-		PriorityQueue<Integer> pq = new PriorityQueue<>();
-		
-		for (int i : nums) {
-			pq.offer(i);
-			
-			if (pq.size() > k) {
-				pq.poll();
-			}
-		}
-		
-		return pq.peek();
-	}
-	
-	// Solution 3: Divide and Conquer
-	public int findKthLargest2(int[] nums, int k) {
+    public static int findKthLargest(int[] nums, int k) {
+        if (nums == null || nums.length == 0) return -1;
+
+        Arrays.sort(nums);
+
+        int len = nums.length;
+        if (len < k) return -1;
+
+        return nums[len - k];
+    }
+
+    // Solution 2: Priority Queue
+    public static int findKthLargest1(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for (int i : nums) {
+            pq.offer(i);
+
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        return pq.peek();
+    }
+
+    // Solution 3: Divide and Conquer
+    public int findKthLargest2(int[] nums, int k) {
 
         k = nums.length - k;
         int lo = 0;
         int hi = nums.length - 1;
-        
+
         while (lo < hi) {
             final int j = partition(nums, lo, hi);
             if(j < k) {
@@ -49,7 +49,7 @@ public class KthLargestElementInArray {
                 break;
             }
         }
-        
+
         return nums[k];
     }
 
@@ -57,16 +57,16 @@ public class KthLargestElementInArray {
 
         int i = lo;
         int j = hi + 1;
-        
+
         while(true) {
-        	
+
             while(i < hi && (a[++i] < a[lo]));
             while(j > lo && (a[lo] < a[--j]));
-            
+
             if(i >= j) {
                 break;
             }
-            
+
             exch(a, i, j);
         }
         exch(a, lo, j);
@@ -89,11 +89,11 @@ public class KthLargestElementInArray {
     private int quickSelect(int[] nums, int start, int end, int k) {
         if (start == end)
             return nums[start];
-        
+
         int left = start;
         int right = end;
         int pivot = nums[(left + right) / 2];
-        
+
         while (left <= right) {
             while (left <= right && nums[left] > pivot)
                 left++;
@@ -107,18 +107,17 @@ public class KthLargestElementInArray {
                 right--;
             }
         }
-        
+
         if (start + k - 1 <= right)
             return quickSelect(nums, start, right, k);
         if (start + k - 1 >= left)
             return quickSelect(nums, left, end, k - (left - start));
         return nums[right + 1];
-    }  
-    
-	public static void main(String[] args) {
-		int[] a = {3,2,1,5,6,4};
-			
-		// System.out.println(findKthLargest(a, 2));
-		System.out.println(findKthLargest1(a, 2));
-	}
+    }
+
+    public static void main(String[] args) {
+        int[] a = {3,2,1,5,6,4};
+
+        System.out.println(findKthLargest1(a, 2));
+    }
 }
