@@ -12,8 +12,16 @@ public class Triangle {
         int res = 0;
         int[] dp = new int[len + 1];
 
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < tri.get(i).size(); j++)
+        dp[0] = 0;
+        for (int i = 1; i < len; i++) {
+            for (int j = 1; j < tri.get(i).size(); j++) {
+                dp[i + 1] = Math.min(tri.get(i).get(j) + tri.get(i - 1).get(j - 1),
+                                     tri.get(i).get(j) + tri.get(i - 1).get(j));
+
+                //                dp[i + 1] = Math.min(dp[i + 1], tmp);
+            }
         }
+
+        return dp[len];
     }
 }
