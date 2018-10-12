@@ -82,3 +82,6 @@ Simple Dynamic Programming
 - 213. House Robber2 (TODO)
 - 303. Range Sum Query
 - 304. Range Sum Query2
+** Day 85 <2018-10-12 Fri 22:32>
+Top interview question:
+- 238. Product of Array Except Self
