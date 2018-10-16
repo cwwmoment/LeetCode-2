@@ -85,3 +85,7 @@ Simple Dynamic Programming
 ** Day 85 <2018-10-12 Fri 22:32>
 Top interview question:
 - 238. Product of Array Except Self
+
+** Day 89 <2018-10-16 Tue>
+- 242. Valid Anagram
+- 438. Find All Anagrams in a String: Sliding window
