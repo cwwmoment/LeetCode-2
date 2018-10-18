@@ -2,6 +2,7 @@
  * Created on 17 Oct 2018 by happygirlzt
  *
  * LeetCode #416. Partition Equal Subset Sum
+ *
  */
 
 public class PartitionEqualSubsetSum {
@@ -24,6 +25,6 @@ public class PartitionEqualSubsetSum {
                 }
             }
         }
-        return false;
+        return dp[res];
     }
 }
