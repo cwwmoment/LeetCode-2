@@ -49,8 +49,8 @@ public class SlidingWindowMaximum {
         }
 
         int n = a.length;
-        int[] r = new int[n - k + 1];
-        int ri = 0;
+        int[] win = new int[n - k + 1];
+        int r = 0;
 
         Deque<Integer> q = new ArrayDeque<>();
         for (int i = 0; i < a.length; i++) {
@@ -66,10 +66,10 @@ public class SlidingWindowMaximum {
 
             q.offer(i);
             if (i >= k - 1) {
-                r[ri++] = a[q.peek()];
+                win[r++] = a[q.peek()];
             }
         }
 
-        return r;
+        return win;
     }
 }

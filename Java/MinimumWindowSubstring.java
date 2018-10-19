@@ -22,8 +22,6 @@ public class MinimumWindowSubstring {
             }
         }
 
-
-
        // System.out.println(map);
         char[] tc = t.toCharArray();
         HashMap<Character, Integer> map1 = new HashMap<>();
@@ -99,5 +97,38 @@ public class MinimumWindowSubstring {
 
         res = s.substring(beg, end + 1);
         return res;
+    }
+
+    // 正确解法
+    public String minWindow(String s, String t) {
+
+        int num = t.length(), len = Integer.MAX_VALUE, start = 0, left = 0;
+
+        char[] tc = t.toCharArray();
+        char[] sc = s.toCharArray();
+
+        int[] dict = new int[128];  // 要注意常用的char的ASCII的个数是128，有时用256
+        for (int i = 0; i < tc.length; i++) {
+            dict[tc[i]]++;
+        }
+
+        for (int i = 0, j = 0; j < sc.length; j++) {
+            if (dict[sc[j]] > 0) num--;
+            dict[sc[j]]--;
+
+            while (num == 0) {
+                if (len > j - i + 1) {
+                    len = j - i + 1;
+                    start = i;
+                }
+
+                if (dict[sc[i]] == 0) num++;
+
+                dict[sc[i]]++;
+                i++;
+            }
+        }
+
+        return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
     }
 }
