@@ -32,7 +32,7 @@ public class PartitionToKEqualSumSubsets {
                 return true;
             }
 
-            visites[i] = false;
+            visited[i] = false;
         }
 
         return false;
