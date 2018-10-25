@@ -1,67 +1,41 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Collections;
-import java.util.Collection;
-import java.util.ArrayList;
+/**
+ * Created on 25 Oct 2018 by happygirlzt
+ *
+ * LeetCode #692. Top K Frequent Words
+ *
+ */
 
+// 这题主要考虑排序，比较的问题
 public class TopKFrequentWords {
-	public static List<String> topKFrequent(String[] words, int k) {
-		List<String> res = new ArrayList<>();
+    public List<String> topKFrequent(String[] words, int k) {
+        HashMap<String, Integer> map = new HashMap<>();
 
-		Arrays.sort(words);
+        for (String s : words) {
+            map.put(s, map.getOrDefault(s, 0) + 1);
+        }
 
-		for (String str : words) {
-			System.out.println(str);
-		}
+        List<String> res = new ArrayList<>();
 
-		Set<String> set = new HashSet<>();
+        PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(
+                                                                           (a,b) -> a.getValue()==b.getValue() ? a.getKey().compareTo(b.getKey()) : b.getValue()-a.getValue());
 
-		Map<String, Integer> map = new HashMap<>();
+        // PriorityQueue<Map.Entry<String, Integer>> minHeap = new PriorityQueue<Map.Entry<String, Integer>>(new Comparator<Map.Entry<String, Integer>>() {
+        //         @Override
+        //         public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
+        //             if(entry1.getValue() == entry2.getValue()) {
+        //                 return entry2.getKey().compareTo(entry1.getKey());
+        //             }
+        //             return entry1.getValue() - entry2.getValue();
+        //         }
+        //     });
+        for (Map.Entry<String, Integer> entry: map.entrySet()) {
+            pq.offer(entry);
+        }
 
-		// Build the frequency dict
-		for (String i : words) {
-			if (set.add(i)) {
-				map.put(i, 1);
-			} else {
-				int tmp = map.get(i);
-				map.remove(i);
-				map.put(i, tmp + 1);
-			}
-		}
+        while (res.size() < k) {
+            res.add(pq.poll().getKey());
+        }
 
-		Collection<Integer> val = map.values();
-
-		List<Integer> list = new ArrayList<>();
-
-		for (Integer j : val) {
-			list.add(j);
-		}
-
-		Collections.sort(list);
-		Collections.reverse(list);
-
-		Set<String> tmp = new HashSet<>();
-
-		for (int m = 0; m < k; m++) {
-			for (Map.Entry<String, Integer> entry : map.entrySet()) {
-				if (entry.getValue().equals(list.get(m))) {
-					if (tmp.add(entry.getKey())) {
-						res.add(entry.getKey());
-						continue;
-					}
-				}
-			}
-		}
-
-		return res;
-	}
-
-	public static void main(String[] args) {
-		String[] s = { "i", "love", "leetcode", "i", "love", "coding" };
-		System.out.println(topKFrequent(s, 2));
-	}
+        return res;
+    }
 }
