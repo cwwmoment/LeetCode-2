@@ -88,4 +88,45 @@ public class SurroundedRegions {
             }
         }
     }
+
+    // Modified on 5 Nov 2018
+    // TODO: buggy
+    public static final int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+    public int[][] updateMatrix1(int[][] matrix) {
+        if (matrix == null || matrix.length == 1) return matrix;
+
+        int m = matrix.length, n = matrix[0].length;
+        // int[][] res = new int[m][n];
+
+        Queue<Point> q = new LinkedList<>();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    q.offer(new Point(i, j));
+                    // matrix[i][j] = 0;
+                } else {
+                    matrix[i][j] = Integer.MAX_VALUE;
+                }
+            }
+        }
+
+        while (!q.isEmpty()) {
+            Point p = q.poll();
+
+            for (int[] dir: dirs) {
+                int row = p.x + dir[0];
+                int col = p.y + dir[1];
+
+                if (row < 0 || col < 0 || row >= m || col >= n || matrix[row][col] <= matrix[p.x][p.y] + 1) continue;
+
+                // res[row][col] += 1;
+                q.offer(new Point(row, col));
+                res[row][col] = matrix[p.x][p.y] + 1;
+            }
+        }
+
+        return matrix;
+    }
 }
