@@ -45,6 +45,12 @@ Today, I would like to review the questions I have solved during the past month.
    18. [700. Search in a Binary Search Tree]: BST
    19. [637. Average of Levels in Binary Tree]: Binary Tree
 * Diary
+** Day 111
+BFS
+1. #286 Walls and Gates, 典型的BFS题，很像那种网格的题目，在本身的数组上修改就可以了。非常经典
+2. #515 Find Largest Value in Each Tree Row 这题是树的题，是算一行上最大的值。明显是bfs，注意点是，最后一行的处理，如果每次都直接添加到res中，那么会多加一行。所以需要一个flag来判断是否是最后一行了。
+3. #690 Employee Importance 简单的题目，主要是要想到需要一个hashmap来存id和employee
+4. #815 Bus Routes 这题很神奇，好像可以用DP做。。不过我用的是BFS，然后这题的难点在于，首先，要用hashset，如果用ArrayList会超时。然后bfs的用法和一般的也不一样，因为这题只要算跨越route需要的次数。这题基本是典型的bfs，但是有点特别，所以还是值得多刷的。
 ** Day 34
 <2018-08-22 Wed 20:11>
 - +56. Merge Intervals+
