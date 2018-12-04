@@ -1,8 +1,9 @@
 /**
  * Created on 4 Nov 2018 by happygirlzt
  *
- * LeetCode #542. 01 Matrix
+ * Modified on 4 Dec 2018
  *
+ * LeetCode #542. 01 Matrix
  */
 
 public class ZeroOneMatrix {
@@ -60,5 +61,60 @@ public class ZeroOneMatrix {
         }
 
         return matrix;
+    }
+    
+    // Updated on 4 Dec
+    private int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    
+    public int[][] updateMatrix1(int[][] m) {
+        if (m == null || m.length == 0) return m;
+        int row = m.length, col = m[0].length;
+        int[][] dis = new int[row][col];
+        
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (m[i][j] == 0) {
+                 dis[i][j] = 0;
+                } else {
+                bfs(m, dis, i, j);
+              }
+            }
+            
+        }
+        
+        return dis;
+    }
+    
+    public void bfs(int[][] m, int[][] dis, int r, int c) {
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{r, c});
+        
+        int count = 0;
+        while (!q.isEmpty()) {
+            count++;
+            
+            int size = q.size();
+                            
+            for (int k = 0; k < size; k++) {
+                int[] cur = q.poll();  
+                
+                for (int[] dir : dirs) { 
+                    int newr = cur[0] + dir[0];
+                    int newc = cur[1] + dir[1];
+
+                    if (newr < 0 ||
+                       newr > m.length - 1 ||
+                       newc < 0 ||
+                       newc > m[0].length - 1) continue;
+
+                    if (m[newr][newc] == 0) {
+                        dis[r][c] = count;
+                        return;
+                    } else {
+                        q.offer(new int[]{newr, newc});
+                    }
+             } 
+           }         
+        }        
     }
 }
