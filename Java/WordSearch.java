@@ -46,4 +46,43 @@ public class WordSearch {
         visited[i][j] = false;
         return false;
     }
+
+    // Updated on 4 Dec 2018
+     public boolean exist(char[][] b, String w) {
+        if (b == null || b.length == 0) return false;
+        char[] cs = w.toCharArray();
+        int row = b.length, col = b[0].length;
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (b[i][j] == cs[0]) {
+                    if (dfs(b, cs, i, j, 0)) return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean dfs1(char[][] b, char[] cs, int i, int j, int count) {
+
+        if (count == cs.length) return true;
+        if (i < 0 || i >= b.length ||
+           j < 0 || j >= b[0].length ||
+           cs[count] != b[i][j]) return false;
+
+
+            //System.out.println(b[i][j]);
+
+//            count++;
+
+        b[i][j] ^= 256;
+            if (dfs1(b, cs, i + 1, j, count + 1)) return true;
+            if (dfs1(b, cs, i - 1, j, count + 1)) return true;
+            if (dfs1(b, cs, i, j + 1, count + 1)) return true;
+            if (dfs1(b, cs, i, j - 1, count + 1)) return true;
+
+        b[i][j] ^= 256;
+        return false;
+    }
 }

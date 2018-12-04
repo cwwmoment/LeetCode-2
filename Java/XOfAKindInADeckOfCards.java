@@ -49,4 +49,25 @@ public class XOFAKindInADeckOfCards {
 
         return gcd(m, n - m);
     }
+
+    // Updated on 4 Dec 2018, use HashMap
+    public boolean hasGroupsSizeX(int[] deck) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        int res = 0;
+        for (int i : deck) {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+
+        for (int j : map.values()) {
+            res = gcd1(j, res);
+            // System.out.println("res = " + res);
+        }
+
+        return res > 1;
+    }
+
+    public int gcd1(int a, int b) {
+        return b > 0 ? gcd1(b, a % b) : a;
+    }
 }
