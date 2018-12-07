@@ -1,0 +1,51 @@
+/**
+  * Created on 7 Dec 2018 by happygirlzt
+  *
+  * LeetCode #305. Number of Islands II
+  */
+class Solution {
+    private int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    
+    public List<Integer> numIslands2(int m, int n, int[][] pos) {
+        List<Integer> res = new ArrayList<>();
+        if (m <= 0 || n <= 0) return res;
+        int[] roots = new int[m * n];
+        
+        Arrays.fill(roots, -1);
+        int count = 0;
+        
+        for (int[] p : pos) {
+            int root = p[0] * n + p[1];
+            roots[root] = root;
+            count++;
+            
+            for (int[] dir : dirs) {
+                int r = dir[0] + p[0], c = dir[1] + p[1];
+                int nb = r * n + c;
+                if (r > m - 1 || r < 0 ||
+                   c > n - 1 || c < 0 || roots[nb] == -1) continue;
+                
+                int rootNb = find(roots, nb);
+                
+                if (root != rootNb) {
+                    roots[root] = rootNb;
+                    root = rootNb;
+                    
+                    count--;
+                }
+            }
+            
+            res.add(count);
+        }
+        
+        return res;
+    }
+    
+    public int find(int[] roots, int i) {
+        if (roots[i] != i) {
+            roots[i] = find(roots, roots[i]);
+        }
+        
+        return roots[i];
+    }
+}
