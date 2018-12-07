@@ -48,8 +48,12 @@ Stupid ZT.
 |542| [01 Matrix](https://github.com/happygirlzt/LeetCode/blob/master/Java/ZeroOneMatrix.java) |BFS❤️|
 |623 | [Add One Row to Tree](https://github.com/happygirlzt/LeetCode/blob/master/Java/AddOneRowToTree.java)|
 |637| [Average of Levels in Binary Tree](https://github.com/happygirlzt/LeetCode/blob/master/Java/AverageOfLevelsInBT.java)| Tree Level Traverse|
+|685| Redundant Connection II| |
 |[692](https://leetcode.com/problems/top-k-frequent-words/) | [Top K Frequent Words](https://github.com/happygirlzt/LeetCode/blob/master/Java/TopKFrequentWords.java) | Heap ❤️|
 |693| [Binary Number with Alternating Bits](https://github.com/happygirlzt/LeetCode/blob/master/Java/BinaryNumberWithAlternatingBits.java)|Bitwise❤️|
 |704| [Binary Search](https://github.com/happygirlzt/LeetCode/blob/master/Java/BinarySearch.java)|Binary search|
+|724| [Find Pivot Index](https://github.com/happygirlzt/LeetCode/blob/master/Java/FindPivotIndex.java) | |
+|788| [Rotated Digits](https://github.com/happygirlzt/LeetCode/blob/master/Java/RotatedDigits.java) | DP|
+|859| [Buddy Strings](https://github.com/happygirlzt/LeetCode/blob/master/Java/BuddyStrings.java) | |
 |914| [X of a Kind in a Deck of Cards](https://github.com/happygirlzt/LeetCode/blob/master/Java/XOfAKindInADeckOfCards.java) | gcd|
 |948| [Bag of Tokens](https://github.com/happygirlzt/LeetCode/blob/master/Java/BagsOfTokens.java)| Greedy|
