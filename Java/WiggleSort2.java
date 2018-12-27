@@ -4,18 +4,17 @@
  * Created on 14 Sep 2018 by happygirlzt
  */
 
-// TODO
-public class WiggleSort2 {
+class Solution {
     public void wiggleSort(int[] nums) {
-        if (nums.length == 0 || nums == null) return;
-
+        int n = nums.length, m = (n + 1) >> 1;
         Arrays.sort(nums);
+        int[] copy = Arrays.copyOf(nums, n);
+        for (int i = m - 1, j = 0; i >= 0; j += 2) {
+            nums[j] = copy[i--];
+        }
 
-        int len = nums.length;
-
-        int left = 0, right = len - 1;
-        int mid = left + (right - left) / 2;
-
-
+        for (int i = n - 1, j = 1; i >= m; j += 2) {
+            nums[j] = copy[i--];
+        }
     }
 }

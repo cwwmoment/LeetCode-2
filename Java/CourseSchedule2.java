@@ -11,7 +11,7 @@ public class CourseSchedule2 {
         if (n == 0) return res;
 
         int index = 0;
-        // LinkedList<Integer> tmp = new LinkedList<>();
+
         int[] indegree = new int[n];
         for (int i = 0; i < pr.length; i++) {
             indegree[pr[i][0]]++;
@@ -22,7 +22,6 @@ public class CourseSchedule2 {
             if (indegree[i] == 0) {
                 res[index++] = i;
                 q.offer(i);
-                //                tmp.add(i);
             }
         }
 
@@ -32,7 +31,6 @@ public class CourseSchedule2 {
                 if (pr[i][1] == course) {
                     indegree[pr[i][0]]--;
                     if (indegree[pr[i][0]] == 0) {
-                        //                        tmp.add(pr[i][0]);
                         res[index++] = pr[i][0];
                         q.offer(pr[i][0]);
                     }
@@ -40,12 +38,6 @@ public class CourseSchedule2 {
             }
         }
 
-        // if (tmp.size() == 0) return res;
-
-        // for (int i = 0; i < n; i++) {
-        //     res[i] = tmp.get(i);
-        // }
-        // return res;
         return index == n ? res : new int[0];
     }
 }
