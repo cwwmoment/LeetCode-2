@@ -35,15 +35,35 @@ public class InvertBinaryTree {
         }
     }
 
-    // Other's concise dfs
+    // Updated on 13 Jan 2019
+    // dfs
     public TreeNode invertTree(TreeNode root) {
-        if (root == null) {
-            return null;
-        }
+        if (root == null) return null;
 
-        TreeNode tmp = root.left;
-        root.left = invertTree(root.right);
-        root.right = invertTree(tmp);
+        TreeNode left = invertTree(root.left);
+        TreeNode right = invertTree(root.right);
+        root.left = right;
+        root.right = left;
+
+        return root;
+    }
+
+    // bfs
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
+
+        Deque<TreeNode> q = new ArrayDeque<>();
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            TreeNode cur = q.poll();
+            TreeNode tmp = cur.left;
+            cur.left = cur.right;
+            cur.right = tmp;
+
+            if (cur.left != null) q.offer(cur.left);
+            if (cur.right != null) q.offer(cur.right);
+        }
 
         return root;
     }

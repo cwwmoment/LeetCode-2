@@ -7,75 +7,72 @@ import java.util.Queue;
 import java.util.LinkedList;
 
 public class MaximumDepthofBinaryTree {
-  // iteative
-  public int maxDepth1(TreeNode root) {
-    if (root == null)
-      return 0;
+    // iteative
+    public int maxDepth1(TreeNode root) {
+        if (root == null)
+            return 0;
 
-    Queue<TreeNode> q = new LinkedList<>();
-    q.offer(root);
-    int depth = 0;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        int depth = 0;
 
-    while (!q.isEmpty()) {
-      int size = q.size();
+        while (!q.isEmpty()) {
+            int size = q.size();
 
-      for (int i = 0; i < size; i++) {
-        TreeNode cur = q.poll();
-        // if (cur.left == null && cur.right == null) {
-        // return depth;
-        // }
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = q.poll();
 
-        if (cur.left != null) {
-          q.offer(cur.left);
+                if (cur.left != null) {
+                    q.offer(cur.left);
+                }
+
+                if (cur.right != null) {
+                    q.offer(cur.right);
+                }
+            }
+
+            depth++;
         }
 
-        if (cur.right != null) {
-          q.offer(cur.right);
+        return depth;
+    }
+
+    // recursive
+    public int maxDepth2(TreeNode root) {
+        return helper(root);
+    }
+
+    public int helper(TreeNode root) {
+        // corner case
+        if (root == null)
+            return 0;
+
+        // base case
+        if (root.left == null && root.right == null) {
+            return 1;
         }
-      }
 
-      depth++;
+        if (root.right == null) {
+            return helper(root.left) + 1;
+        }
+
+        if (root.left == null) {
+            return helper(root.right) + 1;
+        }
+
+        return Math.max(helper(root.right), helper(root.left)) + 1;
     }
 
-    return depth;
-  }
+    // recursive 2
+    public int maxDepth(TreeNode root) {
+        if (root == null)
+            return 0;
 
-  // recursive
-  public int maxDepth2(TreeNode root) {
-    return helper(root);
-  }
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
 
-  public int helper(TreeNode root) {
-    // corner case
-    if (root == null)
-      return 0;
-
-    // base case
-    if (root.left == null && root.right == null) {
-      return 1;
+        return Math.max(left, right) + 1;
     }
-
-    if (root.right == null) {
-      return helper(root.left) + 1;
-    }
-
-    if (root.left == null) {
-      return helper(root.right) + 1;
-    }
-
-    return Math.max(helper(root.right), helper(root.left)) + 1;
-  }
-
-  // recursive 2
-  public int maxDepth(TreeNode root) {
-    if (root == null)
-      return 0;
-
-    int left = maxDepth(root.left);
-    int right = maxDepth(root.right);
-
-    return Math.max(left, right) + 1;
-  }
     // Updated on 16 Sep 2018
     public int maxDepth(TreeNode root) {
         if (root == null) return 0;
