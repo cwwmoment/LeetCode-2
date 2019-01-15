@@ -29,7 +29,7 @@ class Solution {
             int[] right = helper(root.right);
             if (root.val == root.right.val + 1) {
                 inc = Math.max(inc, right[0] + 1);
-            } else if (root.val = root.right.val - 1) {
+            } else if (root.val == root.right.val - 1) {
                 dec = Math.max(dec, right[1] + 1);
             }
         }
