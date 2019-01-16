@@ -22,4 +22,31 @@ public class WordBreak {
 
         return dp[s.length()];
     }
+
+    // Solution 1: BFS
+    // Updated on 16 Jan 2019
+    public boolean wordBreak1(String s, List<String> wordDict) {
+        Set<String> set = new HashSet<>();
+        for (String str: wordDict) {
+            set.add(str);
+        }
+
+        Deque<Integer> q = new ArrayDeque<>();
+        q.offer(0);
+        boolean[] visited = new boolean[s.length() + 1];
+        visited[0] = true;
+
+        while (!q.isEmpty()) {
+            int start = q.poll();
+            for (int end = start + 1; end <= s.length(); end++) {
+                if (!visited[end] && set.contains(s.substring(start, end))) {
+                    q.offer(end);
+                    if (end == s.length()) return true;
+                    visited[end] = true;
+                }
+            }
+        }
+
+        return false;
+    }
 }
