@@ -5,7 +5,6 @@
  */
 
 public class MinimumWindowSubstring {
-    // 问题代码。。没空做了啦。。明天再做。。我还要准备作业
     public String minWindow(String s, String t) {
         if (s.length() < t.length()) return "";
                 HashMap<Character, ArrayList<Integer>> map = new HashMap<>();
@@ -130,5 +129,38 @@ public class MinimumWindowSubstring {
         }
 
         return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
+    }
+
+    // Updated on 17 Jan 2019
+    public String minWindow(String s, String t) {
+        int[] map = new int[128];
+        for (char c: t.toCharArray()) {
+            map[c]++;
+        }
+
+        int lo = 0, hi = 0;
+        int[] res = new int[2];
+        int min = Integer.MAX_VALUE;
+        int counter = t.length();
+        while (hi < s.length()) {
+            char cur = s.charAt(hi);
+            if (map[cur] > 0) counter--;
+            map[cur]--;
+            hi++;
+            while (counter == 0) {
+                if (min > hi - lo + 1) {
+                    min = hi - lo + 1;
+                    res[0] = lo;
+                    res[1] = hi;
+                }
+
+                char low = s.charAt(lo);
+                map[low]++;
+                if (map[low] > 0) counter++;
+                lo++;
+            }
+        }
+
+        return min == Integer.MAX_VALUE ? "" : s.substring(res[0], res[1] + 1);
     }
 }
