@@ -148,3 +148,87 @@ class LRUCache {
         tail.pre = node;
     }
 }
+
+// Updated on 20 Jan 2019
+class LRUCache {
+    private final Map<Integer, Node> cache;
+    private int capacity;
+    private Node head;
+    private Node tail;
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        cache = new HashMap<>();
+    }
+
+    public int get(int key) {
+        if (cache.containsKey(key)) {
+            Node n = cache.get(key);
+            remove(n);
+            setHead(n);
+            return n.val;
+        } else {
+            return -1;
+        }
+    }
+
+    public void put(int key, int value) {
+        if (cache.containsKey(key)) {
+            Node old = cache.get(key);
+            old.val = value;
+            remove(old);
+            setHead(old);
+        } else {
+            Node n = new Node(key, value);
+            int size = cache.size();
+            if (size >= this.capacity) {
+                cache.remove(tail.key);
+                remove(tail);
+                setHead(n);
+            } else {
+                setHead(n);
+            }
+            cache.put(key, n);
+        }
+    }
+
+    private void setHead(Node n) {
+        n.next = head;
+        n.pre = null;
+        if (head != null) {
+            head.pre = n;
+        }
+        head = n;
+        if (tail == null) {
+            tail = head;
+        }
+    }
+
+    private void remove(Node n) {
+        Node pre = n.pre;
+        Node next = n.next;
+        if (pre != null) {
+            pre.next = next;
+        } else {
+            head = next;
+        }
+
+        if (next != null) {
+            next.pre = pre;
+        } else {
+            tail = pre;
+        }
+    }
+
+    static class Node {
+        int key;
+        int val;
+        Node pre;
+        Node next;
+
+        public Node(int key, int value) {
+            this.key = key;
+            this.val = value;
+        }
+    }
+}
