@@ -2,92 +2,115 @@ import java.util.Arrays;
 
 /**
  * LeetCode #23. Merge k Sorted Lists
- * 
+ *
  * @happygirlzt Created on 11 Aug 2018
  */
 
 public class MergeKSortedLists {
-	public class ListNode {
-		int val;
-		ListNode next;
-		
-		ListNode(int x) {
-			val = x;
-		}
-	}
+    public class ListNode {
+        int val;
+        ListNode next;
 
-	public ListNode mergeKLists(ListNode[] lists) {
-		if (lists == null || lists.length == 0)
-			return null;
+        ListNode(int x) {
+            val = x;
+        }
+    }
 
-		int k = lists.length;
-		ListNode dummy = new ListNode(0);
-		ListNode res = dummy;
-		int[] r = new int[50000];
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0)
+            return null;
 
-		int count = 0;
-		for (int i = 0; i < k; i++) {
-			while (lists[i] != null) {
-				r[count] = lists[i].val;
-				count++;
-				lists[i] = lists[i].next;
-			}
-		}
+        int k = lists.length;
+        ListNode dummy = new ListNode(0);
+        ListNode res = dummy;
+        int[] r = new int[50000];
 
-		int[] b = new int[count];
+        int count = 0;
+        for (int i = 0; i < k; i++) {
+            while (lists[i] != null) {
+                r[count] = lists[i].val;
+                count++;
+                lists[i] = lists[i].next;
+            }
+        }
 
-		System.arraycopy(r, 0, b, 0, count);
-		Arrays.sort(b);
+        int[] b = new int[count];
 
-		for (int j = 0; j < count; j++) {
-			ListNode tmp = new ListNode(b[j]);
-			res.next = tmp;
-			res = res.next;
-		}
+        System.arraycopy(r, 0, b, 0, count);
+        Arrays.sort(b);
 
-		return dummy.next;
-	}
+        for (int j = 0; j < count; j++) {
+            ListNode tmp = new ListNode(b[j]);
+            res.next = tmp;
+            res = res.next;
+        }
 
-	// Solution 2
-	private ListNode findMinAndMove(ListNode[] lists) {
-		int min_value = Integer.MAX_VALUE;
-		int ret_i = -1;
-		for (int i = 0; i < lists.length; i++) {
-			if (lists[i] == null) {
-				continue;
-			}
+        return dummy.next;
+    }
 
-			if (lists[i].val < min_value) {
-				min_value = lists[i].val;
-				ret_i = i;
-			}
-		}
+    // Solution 2
+    private ListNode findMinAndMove(ListNode[] lists) {
+        int min_value = Integer.MAX_VALUE;
+        int ret_i = -1;
+        for (int i = 0; i < lists.length; i++) {
+            if (lists[i] == null) {
+                continue;
+            }
 
-		ListNode ret_node = null;
-		if (ret_i != -1) {
-			ret_node = lists[ret_i];
-			lists[ret_i] = lists[ret_i].next;
-		}
+            if (lists[i].val < min_value) {
+                min_value = lists[i].val;
+                ret_i = i;
+            }
+        }
 
-		return ret_node;
-	}
+        ListNode ret_node = null;
+        if (ret_i != -1) {
+            ret_node = lists[ret_i];
+            lists[ret_i] = lists[ret_i].next;
+        }
 
-	public ListNode mergeKLists2(ListNode[] lists) {
-		if (lists == null || lists.length == 0) {
-			return null;
-		}
+        return ret_node;
+    }
 
-		ListNode res = new ListNode(0);
-		ListNode cur = res;
-		ListNode tmp = null;
+    public ListNode mergeKLists2(ListNode[] lists) {
+        if (lists == null || lists.length == 0) {
+            return null;
+        }
 
-		while (tmp != null) {
-			tmp = findMinAndMove(lists);
-			cur.next = tmp;
-			cur = cur.next;
-		}
+        ListNode res = new ListNode(0);
+        ListNode cur = res;
+        ListNode tmp = null;
 
-		return res.next;
-	}
+        while (tmp != null) {
+            tmp = findMinAndMove(lists);
+            cur.next = tmp;
+            cur = cur.next;
+        }
 
+        return res.next;
+    }
+
+    // Solution 2: PriorityQueue
+    // Updated on 23 Jan 2019
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
+        PriorityQueue<ListNode> heap = new PriorityQueue<>((l1, l2) -> l1.val - l2.val);
+
+        for (ListNode l: lists) {
+            if (l != null)
+                heap.offer(l);
+        }
+        ListNode dummy = new ListNode(0);
+        ListNode res = dummy;
+        while (heap.size() > 0) {
+            ListNode cur = heap.poll();
+            res.next = new ListNode(cur.val);
+            res = res.next;
+            if (cur.next != null) {
+                heap.offer(cur.next);
+            }
+        }
+
+        return dummy.next;
+    }
 }
