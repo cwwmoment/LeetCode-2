@@ -17,7 +17,7 @@ public class TopKFrequentWords {
         List<String> res = new ArrayList<>();
 
         PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(
-                                                                           (a,b) -> a.getValue()==b.getValue() ? a.getKey().compareTo(b.getKey()) : b.getValue()-a.getValue());
+  (a,b) -> a.getValue()==b.getValue() ? a.getKey().compareTo(b.getKey()) : b.getValue()-a.getValue());
 
 
         for (Map.Entry<String, Integer> entry: map.entrySet()) {
