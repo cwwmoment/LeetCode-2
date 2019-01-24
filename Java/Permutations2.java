@@ -50,6 +50,7 @@ public class Permutations2 {
         System.out.println(permuteUnique(a));
     }
 
+
     public List<List<Integer>> permuteUnique2(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
         if (nums == null || nums.length == 0) return res;
@@ -80,6 +81,32 @@ public class Permutations2 {
                 // unchoose
                 tmp.remove(tmp.size());
                 list.add(i, t);
+            }
+        }
+    }
+
+    // Solution 2, updated on 24 Jan 2019
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null || nums.length == 0) return res;
+        Arrays.sort(nums);
+
+        helper(res, new ArrayList<>(), nums, 0, new boolean[nums.length]);
+        return res;
+    }
+
+    private void helper(List<List<Integer>> res, List<Integer> cur, int[] a, int start, boolean[] visited) {
+        if (cur.size() == a.length) {
+            res.add(new ArrayList(cur));
+            return;
+        } else {
+            for (int i = 0; i < a.length; i++) {
+                if (visited[i] || i > 0 && a[i] == a[i - 1] && !visited[i - 1]) continue;
+                cur.add(a[i]);
+                visited[i] = true;
+                helper(res, cur, a, i + 1, visited);
+                cur.remove(cur.size() - 1);
+                visited[i] = false;
             }
         }
     }

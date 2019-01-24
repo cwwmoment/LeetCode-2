@@ -1,7 +1,6 @@
-
 /**
  * LeetCode #46. Permutations
- * 
+ *
  * Created by happygirlzt on 30 Aug 2018 at 6:23:21 PM
  *
  */
@@ -16,32 +15,32 @@ import java.util.ArrayList;
  */
 
 public class Permutations {
-	public static List<List<Integer>> permute(int[] nums) {
-		List<List<Integer>> res = new ArrayList<>();
-		backtrack(res, new ArrayList<>(), nums);
+    public static List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        backtrack(res, new ArrayList<>(), nums);
 
-		return res;
-	}
+        return res;
+    }
 
-	public static void backtrack(List<List<Integer>> res, ArrayList<Integer> tmp, int[] nums) {
-		if (tmp.size() == nums.length) {
-			res.add(new ArrayList<>(tmp));
-			return;
-		} else {
-			for (int i = 0; i < nums.length; i++) {
-				if (tmp.contains(nums[i]))
-					continue;
-				tmp.add(nums[i]);
-				backtrack(res, tmp, nums);
-				tmp.remove(tmp.size() - 1);
-			}
-		}
-	}
+    public static void backtrack(List<List<Integer>> res, ArrayList<Integer> tmp, int[] nums) {
+        if (tmp.size() == nums.length) {
+            res.add(new ArrayList<>(tmp));
+            return;
+        } else {
+            for (int i = 0; i < nums.length; i++) {
+                if (tmp.contains(nums[i]))
+                    continue;
+                tmp.add(nums[i]);
+                backtrack(res, tmp, nums);
+                tmp.remove(tmp.size() - 1);
+            }
+        }
+    }
 
-	public static void main(String[] args) {
-		int[] a = { 1, 2, 3 };
-		permute(a);
+    public static void main(String[] args) {
+        int[] a = { 1, 2, 3 };
+        permute(a);
 
-		System.out.println(permute(a));
-	}
+        System.out.println(permute(a));
+    }
 }

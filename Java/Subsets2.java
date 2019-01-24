@@ -35,4 +35,28 @@ public class Subset2 {
             cur.remove(cur.size() - 1);
         }
     }
+
+    // Updated on 24 Jan 2019
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null || nums.length == 0) return res;
+
+        Arrays.sort(nums);
+        helper(res, cur, 0, nums);
+        return res;
+    }
+
+    private void helper(List<List<Integer>> res, List<Integer> cur, int start, int[] nums) {
+        if (start == nums.length) {
+            res.add(new ArrayList(cur));
+            return;
+        } else {
+            cur.add(nums[start]);
+            helper(res, cur, start + 1, nums);
+            cur.remove(cur.size() - 1);
+
+            while (start < nums.length - 1 && nums[start + 1] == nums[start]) start++;
+            helper(res, cur, start + 1, nums);
+        }
+    }
 }

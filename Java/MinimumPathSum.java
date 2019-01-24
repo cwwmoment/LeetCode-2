@@ -29,4 +29,24 @@ public class MinimumPathSum {
 
         return dp[row-1][col-1];
     }
+
+    // Updated on 24 Jan 2019
+    public int minPathSum1(int[][] grid) {
+        if (grid == null || grid.length == 0) return 0;
+        int res = Integer.MAX_VALUE;
+        int m = grid.length, n = grid[0].length;
+
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                if (i == m - 1 && j != n - 1) {
+                    grid[i][j] = grid[i][j] + grid[i][j + 1];
+                } else if (j == n - 1 && i != m - 1) {
+                    grid[i][j] = grid[i][j] + grid[i + 1][j];
+                } else if (j != n - 1 && i != m - 1) {
+                    grid[i][j] = grid[i][j] + Math.min(grid[i + 1][j], grid[i][j + 1]);
+                }
+            }
+        }
+        return grid[0][0];
+    }
 }

@@ -40,4 +40,42 @@ public class CourseSchedule2 {
 
         return index == n ? res : new int[0];
     }
+
+    // Updated on 24 Jan 2019
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        int[] indegree = new int[numCourses];
+
+        // 1, 0 : 0 -> 1
+        for (int[] relation : prerequisites) {
+            indegree[relation[0]]++;
+            map.putIfAbsent(relation[1], new ArrayList<>());
+            map.get(relation[1]).add(relation[0]);
+        }
+
+        int[] res = new int[numCourses];
+        int count = 0;
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] == 0) {
+                res[count++] = i;
+                q.offer(i);
+            }
+        }
+
+        while (!q.isEmpty()) {
+            int preCourse = q.poll();
+            List<Integer> nextCourses = map.get(preCourse);
+            if (nextCourses == null) continue;
+            for (int course: nextCourses) {
+                if (--indegree[course] == 0) {
+                    res[count++] = course;
+                    q.offer(course);
+                }
+            }
+        }
+
+        if (count != numCourses) return new int[0];
+        return res;
+    }
 }

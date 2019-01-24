@@ -5,27 +5,6 @@
  */
 
 public class FirstMissingPositive {
-    public int firstMissingPositive(int[] nums) {
-        int res = 1;
-        int left = 0, right = nums.length - 1;
-
-        while (left <= right) {
-            if (left == res || right == res) {
-                res++;
-            } else if (left > res && right < res) {
-                res = right + 1;
-
-            } else if (right > res && left < res) {
-                res = left + 1;
-            }
-
-            left++;
-            right--;
-        }
-
-        return res;
-    }
-
     // priority queue
     public int firstMissingPositive1(int[] nums) {
         if (nums.length == 0 || nums == null) return 1;
@@ -53,5 +32,26 @@ public class FirstMissingPositive {
         } else {
             return res;
         }
+    }
+
+    // Updated on 24 Jan 2019
+    public int firstMissingPositive(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            while (nums[i] > 0 && nums[i] <= nums.length && nums[nums[i] - 1] != nums[i]) {
+                swap(nums, i, nums[i] - 1);
+            }
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i + 1) return i + 1;
+        }
+
+        return nums.length + 1;
+    }
+
+    private void swap(int[] a, int i, int j) {
+        int tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
     }
 }
