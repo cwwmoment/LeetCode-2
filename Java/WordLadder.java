@@ -42,6 +42,7 @@ public class WordLadder {
     }
 
     // Updated on 25 Jan 2019
+    // Solution 0
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> unvisited = new HashSet(wordList);
         Queue<String> q = new LinkedList<>();
@@ -76,6 +77,106 @@ public class WordLadder {
             }
 
             distance++;
+        }
+
+        return 0;
+    }
+
+    // Remember the position where the word comes from
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        Set<String> unvisited = new HashSet(wordList);
+        Map<String, Integer> fromWhere = new HashMap<>();
+        Queue<String> q = new LinkedList<>();
+
+        if (!unvisited.contains(endWord)) return 0;
+        q.offer(beginWord);
+        unvisited.remove(beginWord);
+        fromWhere.put(beginWord, -1);
+
+        int distance = 2;
+        while (!q.isEmpty()) {
+            int size = q.size();
+
+            for (int i = 0; i < size; i++) {
+                StringBuilder curWord = new StringBuilder(q.poll());
+                for (int j = 0; j < curWord.length(); j++) {
+                    if (fromWhere.get(curWord.toString()) == j) continue;
+
+                    char tmp = curWord.charAt(j);
+                    for (int k = 0; k < 26; k++) {
+                        curWord.setCharAt(j, (char) ('a' + k));
+
+                        if (unvisited.contains(curWord.toString())) {
+                            if (curWord.toString().equals(endWord)) {
+                                return distance;
+                            } else {
+                                unvisited.remove(curWord.toString());
+                                //visited.add(curWord.toString());
+                                q.offer(curWord.toString());
+                                fromWhere.put(curWord.toString(), j);
+                            }
+                        }
+                        curWord.setCharAt(j, tmp);
+                    }
+                }
+
+                fromWhere.remove(curWord.toString());
+            }
+
+            distance++;
+        }
+
+        return 0;
+    }
+
+    // Solutioon 3:
+    // Bidirectional BFS
+    public int ladderLength(String beginWord, String endWord, List<String> wordDict) {
+        Set<String> dict = new HashSet(wordDict);
+        if (!dict.contains(endWord)) return 0;
+
+        int level = 0;
+        int wordLen = beginWord.length();
+
+        Set<String> front = new HashSet<>();
+        Set<String> back = new HashSet<>();
+
+        while (!front.isEmpty() && !back.isEmpty()) {
+            level++;
+
+            if (front.size() > back.size()) {
+                Set<String> tmp = front;
+                front = back;
+                back = tmp;
+            }
+
+            Set<String> newFront = new HashSet<>();
+
+            for (String word: front) {
+                StringBuilder sb = new StringBuilder(word);
+
+                for (int pos = 0; pos < wordLen; pos++) {
+                    char original = sb.charAt(pos);
+
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        sb.setCharAt(pos, c);
+                        if (back.contains(sb.toString())) {
+                            if (sb.toString().equals(endWord)) {
+                                return level + 1;
+                            }
+                        }
+                        dict.remove(sb.toString());
+
+                        newFront.add(sb.toString());
+                    }
+
+                    sb.setCharAt(pos, c);
+                }
+            }
+
+            Set<String> tmp = newFront;
+            newFront = front;
+            front = tmp;
         }
 
         return 0;

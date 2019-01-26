@@ -68,3 +68,52 @@ public class ImplementQueueUsingStacks {
         }
     }
 }
+
+// Updated on 26 Jan 2019
+class MyQueue {
+    Deque<Integer> s1;
+    Deque<Integer> s2;
+    private int front;  // Use a front element
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        s1 = new ArrayDeque<>();
+        s2 = new ArrayDeque<>();
+    }
+
+    /*
+      6 3 9
+
+     */
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        if (s1.isEmpty()) {
+            front = x;
+        }
+        s1.push(x);
+    }
+
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        if (s1.isEmpty()) return -1;
+        int res = 0;
+        while (s1.size() > 1) {
+            s2.push(s1.pop());
+        }
+        res = s1.pop();
+        if (!s2.isEmpty()) front = s2.peek();
+        while (s2.size() > 0) {
+            s1.push(s2.pop());
+        }
+        return res;
+    }
+
+    /** Get the front element. */
+    public int peek() {
+        return front;
+    }
+
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return s1.isEmpty();
+    }
+}
