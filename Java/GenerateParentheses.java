@@ -27,13 +27,15 @@ public class GenerateParentheses {
         } else {
             // left
             if (l < n) {
-                helper(n, sb.append("("), result, l + 1, r);
+                sb.append("(");
+                helper(n, sb, result, l + 1, r);
                 sb.setLength(sb.length() - 1);
             }
 
             // right
             if (r < l) {
-                helper(n, sb.append(")"), result, l, r + 1);
+                sb.append(")");
+                helper(n, sb, result, l, r + 1);
                 sb.setLength(sb.length() - 1);
             }
         }
