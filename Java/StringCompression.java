@@ -35,4 +35,26 @@ class Solution {
 
         return index;
     }
+    public int compress1(char[] chars) {
+        int indexRes = 0, i = 0;
+        // for (i = 0; i < chars.length; i++) {
+        while (i < chars.length) {
+            char cur = chars[i];
+            int count = 0;
+
+            while (i < chars.length && chars[i] == cur) {
+                count++;
+                i++;
+            }
+
+            chars[indexRes++] = cur;
+            if (count != 1) {
+                for (char c : String.valueOf(count).toCharArray()) {
+                    chars[indexRes++] = c;
+                }
+            }
+        }
+
+        return indexRes;
+    }
 }

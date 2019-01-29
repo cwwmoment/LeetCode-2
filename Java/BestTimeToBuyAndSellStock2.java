@@ -38,5 +38,24 @@ public class BestTimeToBuyAndSellStock2 {
     }
 
     // Other's solution
+    // Updated on 29 Jan 2019
+    public int maxProfit1(int[] prices) {
+        if (prices == null || prices.length == 0) return 0;
+        int bottom = prices[0], peak = prices[0];
+        int max = 0;
+        int i = 0;
+        while (i < prices.length - 1) {
+            while (i < prices.length - 1 && prices[i] >= prices[i + 1]) {
+                i++;
+            }
+            bottom = prices[i];
+            while (i < prices.length - 1 && prices[i] < prices[i + 1]) {
+                i++;
+            }
+            peak = prices[i];
+            max += peak - bottom;
+        }
 
+        return max;
+    }
 }
