@@ -7,7 +7,7 @@
 public class MinimumWindowSubstring {
     public String minWindow(String s, String t) {
         if (s.length() < t.length()) return "";
-                HashMap<Character, ArrayList<Integer>> map = new HashMap<>();
+        HashMap<Character, ArrayList<Integer>> map = new HashMap<>();
         char[] cs = s.toCharArray();
         for (int i = 0; i < s.length(); i++) {
             if (map.containsKey(cs[i])) {
@@ -21,7 +21,7 @@ public class MinimumWindowSubstring {
             }
         }
 
-       // System.out.println(map);
+        // System.out.println(map);
         char[] tc = t.toCharArray();
         HashMap<Character, Integer> map1 = new HashMap<>();
         for (int i = 0; i < t.length(); i++) {
@@ -57,7 +57,7 @@ public class MinimumWindowSubstring {
             }
         }
 
-      // System.out.println("beg " +beg);
+        // System.out.println("beg " +beg);
         //System.out.println("end " +end);
 
         loops:
@@ -66,23 +66,23 @@ public class MinimumWindowSubstring {
                 return res;
             } else {
                 int size = map.get(tc[k]).size();
-                 int tpMin = -s.length(), tpMax = s.length() * 2;
+                int tpMin = -s.length(), tpMax = s.length() * 2;
                 for (int i = 0; i < size; i++) {
 
                     int temp = map.get(tc[k]).get(i);
-                     //System.out.println("temp " + temp);
+                    //System.out.println("temp " + temp);
                     if (temp > beg && temp < end) {
                         continue loops;
                     } else if (temp < beg) {
                         tpMin = Math.max(temp, tpMin);
-                         //System.out.println(tpMin);
+                        //System.out.println(tpMin);
                     } else if (temp > end) {
                         tpMax = Math.min(temp, tpMax);
                         // System.out.println("tpMax " + tpMax);
                     }
                 }
 
-               // System.out.println(Math.abs(tpMin - beg));
+                // System.out.println(Math.abs(tpMin - beg));
                 //System.out.println(Math.abs(tpMax - end));
 
                 if (Math.abs(tpMin - beg) < Math.abs(tpMax - end)) {
@@ -162,5 +162,44 @@ public class MinimumWindowSubstring {
         }
 
         return min == Integer.MAX_VALUE ? "" : s.substring(res[0], res[1] + 1);
+    }
+
+    // Updated on 30 Jan 2019, the final solution
+    // Two pointers
+    public String minWindow(String s, String t) {
+        if (s == null || s.length() == 0) return "";
+        int lo = 0, hi = 0;
+        int minLen = Integer.MAX_VALUE;
+        int minStart = -1, minEnd = -1;
+
+        int[] map = new int[128];
+        for (char c : t.toCharArray()) {
+            map[c]++;
+        }
+
+        int count = 0;
+        for (hi = 0; hi < s.length(); hi++) {
+            if (map[s.charAt(hi)] > 0) {
+                count++;
+            }
+            map[s.charAt(hi)]--;
+            if (count == t.length()) {
+                while (lo < hi && map[s.charAt(lo)] < 0) {
+                    map[s.charAt(lo)]++;
+                    lo++;
+                }
+
+                if (hi - lo + 1 < minLen) {
+                    minLen = hi - lo + 1;
+                    minStart = lo;
+                    minEnd = hi + 1;
+                }
+                map[s.charAt(lo)]++;
+                count--;
+                lo++;
+            }
+        }
+
+        return (minStart == -1) ? "" : s.substring(minStart, minEnd);
     }
 }

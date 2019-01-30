@@ -1,6 +1,23 @@
 # Tree
+## Traversal
+
+### Inorder traversal
+### Preorder traversal
+- Iterative
+
+- Recursive
+
+### Postorder traversl
+- Iterative
+
+- Recursive
+
+### Level order traversal
+### Vertical traversal
+
 ## Simple pattern
-1. Invert Binary Tree
+### Invert Binary Tree
+
 ```java
 class Solution {
     public TreeNode invertTree(TreeNode root) {
@@ -14,9 +31,9 @@ class Solution {
 }
 ```
 
-2. Merge Two Binary Trees
+### Merge Two Binary Trees
 ```java
-class Solution {
+    class Solution {
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
         if (t1 == null) return t2;
         if (t2 == null) return t1;
@@ -28,7 +45,8 @@ class Solution {
 }
 ```
 
-3. Same Tree
+### Same Tree
+
 ```java
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
@@ -39,7 +57,7 @@ class Solution {
 }
 ```
 
-4. Sum of Left Leaves
+### Sum of Left Leaves
 ```java
 class Solution {
     public int sumOfLeftLeaves(TreeNode root) {
@@ -54,16 +72,10 @@ class Solution {
 }
 ```
 
-5. Tree Traversal
-- Binary Tree Postorder Traversal
-```java
-
-```
-
 ## Path related
 1. Path Sum- From root to leaf
 ```java
-class Solution {
+    class Solution {
     public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) return false;
         if (root.left == null && root.right == null && root.val == sum) {
@@ -142,7 +154,8 @@ class Solution {
 ```
 
 ## BST
-1. Lowest Common Ancestor of a BST
+
+### Lowest Common Ancestor of a BST
 ```java
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
@@ -156,3 +169,17 @@ class Solution {
     }
 }
 ```
+- Lowest Common Ancestor of a binary tree
+
+### Inorder traversal related
+#### Find inorder successor for given key in a BST
+
+## Construction
+1. Build a binary tree from preorder and inorder traversal array
+2. Build a binary tree from postorder and inorder traversal array
+3. Build a binary tree from preorder and postorder traversal array
+
+## Conversion
+### From BST to doubly linked list
+
+## Serialization and deserialization

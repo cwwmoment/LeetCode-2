@@ -14,7 +14,6 @@ public class CopyListWithRandomPointer {
 
         Map<RandomListNode, RandomListNode> map = new HashMap<>();
 
-        // copy all the nodes
         RandomListNode node = head;
 
         while (node != null) {
@@ -54,5 +53,46 @@ public class CopyListWithRandomPointer {
         }
 
         return dummy;
+    }
+
+    // Updated on 30 Jan 2019
+    // 注意比较两种不同的写法，返回值
+    public RandomListNode copyRandomList(RandomListNode head) {
+        if (head == null) return null;
+        Map<RandomListNode, RandomListNode> map = new HashMap<>();
+
+        helper(map, head);
+        return map.get(head);
+    }
+
+    private void helper(Map<RandomListNode, RandomListNode> map, RandomListNode head) {
+        if (head == null || map.containsKey(head)) return;
+
+        map.put(head, new RandomListNode(head.label));
+
+        helper(map, head.next);
+        map.get(head).next = map.get(head.next);
+
+        helper(map, head.random);
+        map.get(head).random = map.get(head.random);
+    }
+
+    // 写法2
+    public RandomListNode copyRandomList(RandomListNode head) {
+        if (head == null) return null;
+        Map<RandomListNode, RandomListNode> map = new HashMap<>();
+
+        return  helper(map, head);
+    }
+
+    private RandomListNode helper(Map<RandomListNode, RandomListNode> map, RandomListNode head) {
+        if (head == null) return null;
+        if (map.containsKey(head)) return map.get(head);
+        RandomListNode node = new RandomListNode(head.label);
+        map.put(head, node);
+        node.next = helper(map, head.next);
+        node.random = helper(map, head.random);
+
+        return node;
     }
 }
