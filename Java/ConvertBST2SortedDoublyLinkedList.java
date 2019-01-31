@@ -32,4 +32,29 @@ public class ConvertBST2SortedDoublyLinkedList {
 
         return head1;
     }
+
+    // Updated on 31 Jan 2019
+    Node pre = null;
+    Node head = null;
+    public Node treeToDoublyList(Node root) {
+        if (root == null) return null;
+        helper(root);
+        head.left = pre;
+        pre.right = head;
+        return head;
+    }
+
+    private void helper(Node root) {
+        if (root == null) return;
+        helper(root.left);
+        if (pre == null) {
+            head = root;
+        } else {
+            root.left = pre;
+            pre.right = root;
+        }
+
+        pre = root;
+        helper(root.right);
+    }
 }

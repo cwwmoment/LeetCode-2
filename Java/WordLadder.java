@@ -181,4 +181,51 @@ public class WordLadder {
 
         return 0;
     }
+
+    // Updated on 30 Jan 2019
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if (wordList == null || wordList.size() == 0) return 0;
+        Set<String> wordSet = new HashSet(wordList);
+
+        if (!wordSet.contains(endWord)) return 0;
+        StringBuilder begin = new StringBuilder(beginWord);
+        Queue<StringBuilder> q = new LinkedList<>();
+        //Queue<String> q = new LinkedList<>();
+        q.add(begin);
+        //q.add(beginWord);
+        if (wordSet.contains(beginWord)) wordSet.remove(beginWord);
+
+        int level = 1;
+
+        while (!q.isEmpty()) {
+            int size = q.size();
+
+            for (int i = 0; i < size; i++) {
+                //StringBuilder cur = new StringBuilder(q.poll());
+                StringBuilder cur = new StringBuilder(q.poll());
+
+                for (int k = 0; k < cur.length(); k++) {
+                    char tmp = cur.charAt(k);
+
+                    for (int j = 0; j < 26; j++) {
+                        cur.setCharAt(k, (char) (j + 'a'));
+
+                        if (wordSet.contains(cur.toString())) {
+                            if (cur.toString().equals(endWord)) return level + 1;
+                            q.offer(new StringBuilder(cur));
+                            // 这个地方，不能直接q.offer(cur)
+                            // 如果直接这样加，就是传进去cur的引用，cur的所有变化
+                            // 都会引起q中值的变化！！！！！
+                            wordSet.remove(cur.toString());
+                        }
+
+                       cur.setCharAt(k, tmp);
+                    }
+                }
+            }
+            level++;
+        }
+
+        return 0;
+    }
 }

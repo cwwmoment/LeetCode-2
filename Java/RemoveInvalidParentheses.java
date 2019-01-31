@@ -53,4 +53,60 @@ public class RemoveInvalidParentheses {
 
         sb.setLength(len);
     }
+
+    // Updated on 31 Jan 2019
+    public List<String> removeInvalidParentheses(String s) {
+        List<String> res = new ArrayList<>();
+        if (s == null || s.length() == 0) {
+            res.add("");
+            return res;
+        }
+
+        Queue<StringBuilder> q = new LinkedList<>();
+        // Set<StringBuilder> visited = new HashSet<>();
+        Set<String> visited = new HashSet<>();
+        q.offer(new StringBuilder(s));
+        visited.add(s);
+        // visited.add(new StringBuilder(s));
+
+        boolean seen = false;
+        while (!q.isEmpty()) {
+            StringBuilder cur = q.poll();
+
+            if (isValid(cur.toString())) {
+                res.add(cur.toString());
+                seen = true;
+            }
+
+            if (seen) continue;
+            for (int j = 0; j < cur.length(); j++) {
+                if (cur.charAt(j) != '(' && cur.charAt(j) != ')') continue;
+
+                StringBuilder modified = new StringBuilder(cur);
+                modified.deleteCharAt(j);
+                /* bug
+                   if (!visited.contains(modified)) {
+                   visited.add(modified);
+                   q.offer(modified);
+                   }
+                */
+                if (!visited.contains(modified.toString())) {
+                    visited.add(modified.toString());
+                    q.offer(modified);
+                }
+            }
+        }
+
+        return res;
+    }
+
+    private boolean isValid(String s) {
+        int open = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '(') open++;
+            if (c == ')' && open-- == 0) return false;
+        }
+
+        return open == 0;
+    }
 }
