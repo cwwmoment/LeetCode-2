@@ -44,4 +44,31 @@ public class FindAllAnagramsInAString {
 
         return res;
     }
+
+    // Updated on 1 Feb 2019
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        if (s.length() < p.length()) return res;
+        int[] map = new int[26];
+
+        for (int i = 0; i < p.length(); i++) {
+            map[s.charAt(i) - 'a']--;
+            map[p.charAt(i) - 'a']++;
+        }
+        if (allZeros(map)) res.add(0);
+        for (int i = p.length(); i < s.length(); i++) {
+            map[s.charAt(i) - 'a']--;
+            map[s.charAt(i - p.length()) - 'a']++;
+            if (allZeros(map)) res.add(i - p.length() + 1);
+        }
+
+        return res;
+    }
+
+    private boolean allZeros(int[] map) {
+        for (int i : map) {
+            if (i != 0) return false;
+        }
+        return true;
+    }
 }

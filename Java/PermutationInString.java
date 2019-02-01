@@ -19,3 +19,32 @@ public boolean checkInclusion(String s1, String s2) {
 
     return s1.length() == 0;
 }
+
+// Updated on 1 Feb 2019
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        if (s1.length() > s2.length()) return false;
+        int[] map = new int[26];
+        for (int i = 0; i < s1.length(); i++) {
+            map[s1.charAt(i) - 'a']++;
+            map[s2.charAt(i) - 'a']--;
+        }
+
+        if (allZeroes(map)) return true;
+        for (int i = s1.length(); i < s2.length(); i++) {
+            map[s2.charAt(i) - 'a']--;
+            map[s2.charAt(i - s1.length()) - 'a']++;
+
+            if (allZeroes(map)) return true;
+        }
+
+        return false;
+    }
+
+    private boolean allZeroes(int[] map) {
+        for (int i : map) {
+            if (i != 0) return false;
+        }
+        return true;
+    }
+}

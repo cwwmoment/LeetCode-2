@@ -79,4 +79,51 @@ public class FindFirstLastPositionOfElementsInSortedArray {
             System.out.println(i);
         }
     }
+
+    // Updated on 1 Feb 2019
+    // Two pass binary search
+    public int[] searchRange(int[] nums, int target) {
+        int[] res = new int[2];
+        res[0] = findFirst(nums, target);
+        res[1] = findLast(nums, target);
+        return res;
+    }
+
+    private int findFirst(int[] nums, int target) {
+        int index = -1;
+        int lo = 0, hi = nums.length - 1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (nums[mid] >= target) { // pay attention >=
+                hi = mid - 1;
+            } else {
+                lo = mid + 1;
+            }
+
+            if (nums[mid] == target) {
+                index = mid;
+            }
+        }
+
+        return index;
+    }
+
+    private int findLast(int[] nums, int target) {
+        int index = -1;
+        int lo = 0, hi = nums.length - 1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (nums[mid] <= target) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+
+            if (nums[mid] == target) {
+                index = mid;
+            }
+        }
+
+        return index;
+    }
 }
