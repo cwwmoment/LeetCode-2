@@ -18,4 +18,35 @@ public class TaskScheduler {
 
         return Math.max(tasks.length, (c[25] - 1) * (n + 1) + 25 - i);
     }
+
+    // Updated on 2 Feb 2019
+    public int leastInterval(char[] tasks, int n) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : tasks) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
+        maxHeap.addAll(map.values());
+
+        int count = 0;
+        while (maxHeap.size() > 0) {
+            List<Integer> tmp = new ArrayList<>();
+            for (int i = 0; i <= n; i++) {
+                if (maxHeap.size() > 0) {
+                    tmp.add(maxHeap.poll());
+                }
+            }
+
+            for (int i : tmp) {
+                if (--i > 0) {
+                    maxHeap.offer(i);
+                }
+            }
+
+            count += maxHeap.size() > 0 ? n + 1 : tmp.size();
+        }
+
+        return count;
+    }
 }
