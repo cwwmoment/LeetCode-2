@@ -57,4 +57,36 @@ public class ConvertBST2SortedDoublyLinkedList {
         pre = root;
         helper(root.right);
     }
+
+    // Updated on 2 Feb 2019: iteratively
+    public Node treeToDoublyList3(Node root) {
+        if (root == null) return null;
+        Node prev = null;
+        Node head = null;
+        Deque<Node> stack = new ArrayDeque<>();
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+
+            root = stack.pop();
+            if (head == null) {
+                head = root;
+            }
+
+            if (prev != null) {
+                root.left = prev;
+                prev.right = root;
+            }
+
+            prev = root;
+            root = root.right;
+        }
+
+        head.left = prev;
+        prev.right = head;
+
+        return head;
+    }
 }
