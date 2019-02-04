@@ -61,8 +61,30 @@ public class ValidPalindrome {
         return true;
     }
 
-    public static void main(String[] args) {
-        String s = "0i";
-        System.out.println(isPalindrome(s));
+    // Updated on 4 Feb 2019
+    public boolean isPalindrome3(String s) {
+        if (s == null || s.length() == 0) return true;
+        int lo = 0, hi = s.length() - 1;
+        while (lo <= hi) {
+            while (lo <= hi && !Character.isLetterOrDigit(s.charAt(lo))) {
+                lo++;
+            }
+
+            while (lo <= hi && !Character.isLetterOrDigit(s.charAt(hi))) {
+                hi--;
+            }
+
+            if (lo > hi) break;
+            char L = s.charAt(lo), R = s.charAt(hi);
+            // if (Character.isLetter(L) && Character.isLetter(R)) {
+                if (Character.toUpperCase(L) != Character.toUpperCase(R)) {
+                    return false;
+                }
+                // } else if (L != R) return false;
+
+            lo++; hi--;
+        }
+
+        return true;
     }
 }

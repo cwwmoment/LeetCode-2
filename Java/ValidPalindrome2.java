@@ -63,4 +63,40 @@ public class ValidPalindrome2 {
 
         return true;
     }
+
+    // Updated on 4 Feb 2019
+    public boolean validPalindrome(String s) {
+       /* for (int i = 0; i < s.length() / 2; i++) {
+            if (s.charAt(i) != s.charAt(s.length() - 1 - i)) {
+                int j = s.length() - 1 - i;
+                return (isPalindromeRange(s, i + 1, j) ||
+                       isPalindromeRange(s, i, j - 1));
+            }
+        }
+        */
+        int lo = 0, hi = s.length() - 1;
+        while (lo <= hi) {
+            if (s.charAt(lo) != s.charAt(hi)) {
+                return isPalindromeRange(s, lo, hi - 1) ||
+                    isPalindromeRange(s, lo + 1, hi);
+            }
+            lo++; hi--;
+        }
+
+        return true;
+    }
+
+    private boolean isPalindromeRange(String s, int i, int j) {
+       /* for (int k = i; k <= i + (j - i) / 2; k++) {
+            if (s.charAt(k) != s.charAt(j - k + i)) {
+                return false;
+            }
+        }
+        */
+        while (i <= j) {
+            if (s.charAt(i) != s.charAt(j)) return false;
+            i++; j--;
+        }
+        return true;
+    }
 }

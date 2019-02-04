@@ -110,4 +110,32 @@ public class LongestPalindromicSubstring {
             max = end - start - 1;
         }
     }
+
+    // Updated on 4 Feb 2019
+    public String longestPalindrome3(String s) {
+        if (s == null || s.length() == 0) return "";
+        int lo = 0, hi = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = extendCenter(s, i, i);
+            int len2 = extendCenter(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > hi - lo) {
+                lo = i - (len - 1) / 2;
+                hi = i + len / 2;
+            }
+        }
+
+        return s.substring(lo, hi + 1);
+    }
+
+    private int extendCenter(String s, int lo, int hi) {
+        int L = lo, R = hi;
+        while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+            L--;
+            R++;
+        }
+
+        // because the valid scope is [L + 1, R - 1];
+        return R - L - 1;
+    }
 }
