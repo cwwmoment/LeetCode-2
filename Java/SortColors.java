@@ -73,14 +73,29 @@ public class SortColors {
         num[j] = tmp;
     }
 
-    public static void main(String[] agrs) {
-        int[] test = {2,0,2,1,1,0};
-
-        sortColors2(test);
-
-        for (int i = 0; i < test.length; i++) {
-            System.out.println(test[i]);
+    /* Updated on 5 Feb 2019
+     * 注意点：因为i <= hi，不是 i < hi，要不然会少比较
+     * edge case: [2, 0, 1]
+     * swap(nums, i, hi--), i不要自增
+     * edge case: [1, 2, 0]
+     */
+    public void sortColors(int[] nums) {
+        int lo = 0, hi = nums.length - 1;
+        int i = 0;
+        while (i <= hi) {
+            if (nums[i] == 2) {
+                swap(nums, i, hi--);
+            } else if (nums[i] == 0) {
+                swap(nums, i++, lo++);
+            } else {
+                i++;
+            }
         }
+    }
 
+    private void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
     }
 }

@@ -65,4 +65,33 @@ class Solution {
         return cmp == 0 ? n - m : cmp;
     }
 
+    // Updated on 5 Feb 2019
+    public boolean isAlienSorted3(String[] words, String order) {
+        int[] map = new int[26];
+        for (int i = 0; i < order.length(); i++) {
+            map[order.charAt(i) - 'a'] = i;
+        }
+
+        for (int i = 1; i < words.length; i++) {
+            String first = words[i - 1];
+            String second = words[i];
+            int len = Math.min(first.length(), second.length());
+            int j = 0;
+            for (j = 0; j < len; j++) {
+                if (first.charAt(j) != second.charAt(j)) {
+                    if (map[first.charAt(j) - 'a'] > map[second.charAt(j) - 'a']) {
+                        return false;
+                    }
+
+                    break;
+                }
+            }
+            // 记得这里的判断，别忘记
+            if (j == len && first.length() > len) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
