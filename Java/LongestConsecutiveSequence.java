@@ -89,7 +89,7 @@ public class LongestConsecutiveSequence {
 
     // Updated on 1 Feb 2019
     // Overall O(n)
-    public int longestConsecutive(int[] nums) {
+    public int longestConsecutive2(int[] nums) {
         Set<Integer> set = new HashSet<>();
         for (int i : nums) {
             set.add(i);

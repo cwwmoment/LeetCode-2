@@ -1,9 +1,9 @@
 /*
- * LeetCode #17. Letter Combinations of a Phone Number
- * happygirlzt
- * 2018/7/24
- * dfs
- */
+* LeetCode #17. Letter Combinations of a Phone Number
+* happygirlzt
+* 2018/7/24
+* dfs
+*/
 import java.util.List;
 import java.util.LinkedList;
 import java.util.HashMap;
@@ -52,11 +52,8 @@ public class LetterCombinationsOfPhoneNumber {
             sb.deleteCharAt(sb.length() - 1);
         }
     }
-}
 
-// Updated on
-class Solution {
-    public List<String> letterCombinations(String digits) {
+    public List<String> letterCombinations2(String digits) {
         Map<String, String> map = new HashMap<>();
         map.put("2", "abc");
         map.put("3", "def");
@@ -85,6 +82,29 @@ class Solution {
             cur += c;
             helper(map, res, cur, rest.substring(1));
             cur = cur.substring(0, cur.length() - 1);
+        }
+    }
+
+    // Updated on 9 Feb 2019
+    public List<String> letterCombinations3(String digits) {
+        String[] mapping = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        List<String> res = new ArrayList<>();
+        if (digits.length() == 0) return res;
+        helper(digits, 0, mapping, res, new StringBuilder());
+        return res;
+    }
+    
+    private void helper(String digits, int index, String[] mapping, List<String> res, StringBuilder sb) {
+        if (index == digits.length()) {
+            res.add(sb.toString());
+            return;
+        } else {
+            String digit = digits.substring(index, index + 1);
+            for (char c : mapping[Integer.parseInt(digit)].toCharArray()) {
+                sb.append(c);
+                helper(digits, index + 1, mapping, res, sb);
+                sb.setLength(sb.length() - 1);
+            }
         }
     }
 }

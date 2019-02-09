@@ -23,4 +23,26 @@ class Solution {
         return Math.max(helper(node.left, node.val + 1, curr, max),
                         helper(node.right, node.val + 1, curr, max));
     }
+
+    // Updated on 9 Feb 2019
+    private int maxLen = 0;
+    public int longestConsecutive1(TreeNode root) {
+        dfs(root);
+        return maxLen;
+    }
+    
+    private int dfs(TreeNode root) {
+        if (root == null) return 0;
+        int L = dfs(root.left) + 1;
+        int R = dfs(root.right) + 1;
+        if (root.left != null && root.val + 1 != root.left.val) {
+            L = 1;
+        }
+        if (root.right != null && root.val + 1 != root.right.val) {
+            R = 1;
+        }
+        int len = Math.max(L, R);
+        maxLen = Math.max(maxLen, len);
+        return len;
+    }
 }

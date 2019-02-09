@@ -60,4 +60,31 @@ public class PerfectSquares {
 		int n = 12;
 		System.out.println(numSquares(n));
 	}
+
+	// BFS: Updated on 9 Feb 2019
+	public int numSquares1(int n) {
+		Queue<Integer> q = new LinkedList<>();
+		Set<Integer> visited = new HashSet<>();
+		q.offer(0);
+		visited.add(0);
+		int depth = 0;
+		while (!q.isEmpty()) {
+			int size = q.size();
+			depth++;
+			for (int i = 0; i < size; i++) {
+				int u = q.poll();
+				for (int j = 1; j * j <= n; j++) {
+					int v = u + j * j;
+					if (v == n) return depth;
+					if (v > n) break;
+					if (!visited.contains(v)) {
+						q.offer(v);
+						visited.add(v);
+					}
+				}
+			}
+		}
+
+		return depth;
+	}
 }

@@ -42,4 +42,16 @@ public class ReverseInteger {
         }
         return (int)res*signBit;
     }
+
+    // Updated on 9 Feb 2019
+    public int reverse2(int x) {
+        long rev = 0;
+        
+        while (x != 0) {
+            rev = rev * 10 + x % 10;
+            x = x / 10;
+        }
+        
+        return (int) rev == rev ? (int) rev : 0;
+    }
 }
