@@ -51,7 +51,7 @@ public class XOFAKindInADeckOfCards {
     }
 
     // Updated on 4 Dec 2018, use HashMap
-    public boolean hasGroupsSizeX(int[] deck) {
+    public boolean hasGroupsSizeX1(int[] deck) {
         HashMap<Integer, Integer> map = new HashMap<>();
 
         int res = 0;

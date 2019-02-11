@@ -20,7 +20,7 @@ public class TaskScheduler {
     }
 
     // Updated on 2 Feb 2019
-    public int leastInterval(char[] tasks, int n) {
+    public int leastInterval1(char[] tasks, int n) {
         Map<Character, Integer> map = new HashMap<>();
         for (char c : tasks) {
             map.put(c, map.getOrDefault(c, 0) + 1);

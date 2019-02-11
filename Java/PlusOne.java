@@ -7,32 +7,6 @@ import java.util.Arrays;
  */
 
 public class PlusOne {
-
-	// 这个方法不行。。
-	public static int[] plusOne0(int[] digits) {
-		int len = digits.length;
-		int tmp = 0;
-
-		for (int i = 0; i < len; i++) {
-			tmp += digits[i] * (int) Math.pow(10.0, len - i - 1.0);
-		}
-
-		tmp += 1;
-		// System.out.println(tmp);
-
-		String s = Integer.toString(tmp);
-
-		int[] res = new int[s.length()];
-
-		for (int j = 0; j < res.length; j++) {
-			// System.out.println(s.charAt(j));
-			res[j] = Character.getNumericValue(s.charAt(j));
-			// System.out.println(res[j]);
-		}
-
-		return digits;
-	}
-
 	public static int[] plusOne2(int[] digits) {
 		int len = digits.length;
 		int[] tmp = new int[len + 1];

@@ -1,49 +1,11 @@
 /**
- * Created on 6 Jan 2019 by happygirlzt
- *
- * LeetCode #227. Basic Calculator II
- *
+ * Created on 11 Feb 2019 by happygirlzt
+ * 
+ * LeetCode #772. Basic Calculator III
  */
 
 class Solution {
     public int calculate(String s) {
-        Deque<Integer> st = new ArrayDeque<>();
-        int num = 0;
-        int res = 0;
-        char sign = '+';
-
-        int index = 0;
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-
-            if (Character.isDigit(c)) {
-                num = 10 * num + (int) (c - '0');
-            }
-
-            if (!Character.isDigit(c) && c != ' ' || i == s.length() - 1) {
-                if (sign == '+') {
-                    st.push(num);
-                } else if (sign == '-') {
-                    st.push(-num);
-                } else if (sign == '*') {
-                    st.push(st.pop() * num);
-                } else if (sign == '/') {
-                    st.push(st.pop() / num);
-                }
-                sign = c;
-                num = 0;
-            }
-        }
-
-        for (int i : st) {
-            res += i;
-        }
-
-        return res;
-    }
-
-    // Updated on 11 Feb 2019, two stacks
-    public int calculate1(String s) {
         Deque<Character> ops = new ArrayDeque<>();
         Deque<Integer> vals = new ArrayDeque<>();
         
@@ -51,11 +13,19 @@ class Solution {
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if (c == ' ') continue;
-            if (c >= '0' && c <= '9') {
-                num = (int) (c - '0');
+            if (c == '(') {
+                ops.push(c);
+            } else if (c == ')') {
+                while (ops.peek() != '(') {
+                    vals.push(applyOp(ops.pop(), vals.pop(), vals.pop()));
+                }
+                ops.pop();
+            } else if (c >= '0' && c <= '9') {
+                num = num * 10 + (int) (c - '0');
                 while (i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
                     num = num * 10 + (int) (s.charAt(++i) - '0');
                 }
+                
                 vals.push(num);
                 num = 0;
             } else if (c == '+' || c == '-' || c == '*' || c == '/') {
@@ -74,13 +44,16 @@ class Solution {
         return vals.pop();
     }
     
-    // op2 has precedence than op1
+    
     private boolean hasPrecedence(char op1, char op2) {
-        if ((op1 == '*' || op1 == '/') && (op2 == '+' || op2 == '-')) {
+        if (op2 == '(' || op2 == ')') {
             return false;
         }
-        
-        return true;
+        if ((op1 == '*' || op1 == '/') && (op2 == '+' || op2 == '-')) {
+            return false;
+        } else {
+            return true;
+        }
     }
     
     private int applyOp(char op, int b, int a) {
@@ -93,7 +66,7 @@ class Solution {
                 return a * b;
             case '/' :
                 if (b == 0) {
-                    throw new UnsupportedOperationException("hello");
+                    throw new UnsupportedOperationException("Cannot");
                 }
                 return a / b;
         }
