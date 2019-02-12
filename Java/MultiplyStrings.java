@@ -36,4 +36,27 @@ public class MultiplyStrings {
 
         return sb.length() == 0 ? "0" : sb.toString();
     }
+
+    // Updated on 12 Feb 2019
+    public String multiply1(String num1, String num2) {
+        if (num1.length() == 0 || num2.length() == 0) return "";
+        StringBuilder sb = new StringBuilder();
+        
+        int[] pos = new int[num1.length() + num2.length()];
+        for (int j = num2.length() - 1; j >= 0; j--) {
+            for (int i = num1.length() - 1; i >= 0; i--) {            
+                int mul = (int) (num1.charAt(i) - '0') * (int) (num2.charAt(j) - '0');
+                mul += pos[i + j + 1];
+                pos[i + j] += mul / 10;
+                pos[i + j + 1] = mul % 10;
+            }
+        }
+        
+        for (int i : pos) {
+            if (sb.length() != 0 || i != 0) {
+                sb.append(i);
+            }
+        }
+        return sb.length() == 0 ? "0" : sb.toString();
+    }
 }
