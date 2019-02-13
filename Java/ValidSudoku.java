@@ -1,4 +1,3 @@
-
 /*
  * LeetCode #36 Valid Sudoku
  * happygirlzt
@@ -34,4 +33,23 @@ public class ValidSudoku {
 		
 		return true;
 	}
+
+	// Updated on 13 Feb 2019
+	public boolean isValidSudoku1(char[][] board) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char c = board[i][j];
+                for (int k = 0; k < 9; k++) {
+					// Must first guarantee that is not equal to .
+                    if (k != i && board[k][j] != '.' && board[k][j] == c) return false;
+                    if (k != j && board[i][k] != '.' && board[i][k] == c) return false;
+					if (i != 3 * (i / 3) + k / 3 && j != 3 * (j / 3) + k % 3 
+					&& board[3 * (i / 3) + k / 3][3 * (j / 3) + k % 3] != '.' 
+					&& board[3 * (i / 3) + k / 3][3 * (j / 3) + k % 3] == c) return false;
+                }
+            }
+        }
+        
+        return true;
+    }
 }

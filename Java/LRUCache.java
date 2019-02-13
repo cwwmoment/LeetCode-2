@@ -6,10 +6,6 @@
 import java.util.HashMap;
 import java.util.LinkedList;
 
-/**
- * 这题原来是要用双向链表。。。
- * java.util里的链表删除特定位置的节点是O(n)
- */
 public class LRUCache1 {
     // My TLE trial...
     class LRUCache1 {
@@ -230,5 +226,83 @@ class LRUCache {
             this.key = key;
             this.val = value;
         }
+    }
+}
+
+// Updated on 13 Feb 2019
+class LRUCache {
+    class Node {
+        int key;
+        int val;
+        Node prev;
+        Node next;
+    }
+    
+    private Node head;
+    private Node tail;
+    private Map<Integer, Node> map;
+    private int capacity;
+    private int size;
+    
+    public LRUCache(int capacity) {
+        /*
+        Pay attention to initialize and link the head and tail
+        */
+        head = new Node();
+        tail = new Node();
+        head.next = tail;
+        tail.prev = head;
+        map = new HashMap<>();
+        this.capacity = capacity;
+        this.size = 0;
+    }
+    
+    public int get(int key) {
+        if (map.containsKey(key)) {
+            Node node = map.get(key);
+            remove(node);
+            addHead(node);
+            return node.val;
+        }
+        
+        return -1;
+    }
+    
+    public void put(int key, int value) {
+        if (map.containsKey(key)) {
+            Node node = map.get(key);
+            remove(node);
+            node.val = value;
+            addHead(node);
+        } else {
+            Node node = new Node();
+            node.key = key;
+            node.val = value;
+            addHead(node);
+            if (size > capacity) removeTail();
+        }
+    }
+    
+    private void addHead(Node node) {
+        map.put(node.key, node);
+        node.next = head.next;
+        head.next.prev = node;
+        head.next = node;
+        node.prev = head;
+        size++;
+    }
+    
+    private void remove(Node node) {
+        map.remove(node.key);
+        Node prev = node.prev;
+        Node next = node.next;
+        prev.next = next;
+        next.prev = prev;
+        size--;
+    }
+    
+    private void removeTail() {
+        Node node = tail.prev;
+        remove(node);
     }
 }
