@@ -69,4 +69,64 @@ public class FriendsCircles {
 
         return roots[i];
     }
+
+    // Updated on 14 Feb 2019
+    class DSU {
+        int[] size;
+        int[] parent;
+        int count;
+        
+        public DSU(int N) {
+            size = new int[N];
+            parent = new int[N];
+            
+            Arrays.fill(size, 1);
+           // Arrays.fill(parent, -1);
+            for (int i = 0; i < N; i++) {
+                parent[i] = i;
+            }
+            
+            count = N;
+        }
+        
+        public int find(int x) {
+            if (parent[x] == x) {
+                return x;
+            } else {
+                parent[x] = find(parent[x]);
+                return parent[x];
+            }
+        }
+        
+        public void union(int p, int q) {
+            int i = find(p);
+            int j = find(q);
+            if (i == j) return;
+            if (size[i] < size[j]) {
+                parent[i] = j;
+                size[j] += size[i];
+            } else {
+                parent[j] = i;
+                size[i] += size[j];
+            }
+            
+            count--;
+        }
+    }
+    
+    public int findCircleNum2(int[][] M) {
+        if (M == null || M.length == 0) return 0;
+        int N = M.length;
+        DSU dsu = new DSU(N);
+        for (int i = 0; i < N; i++) {
+            for (int j = i + 1; j < N; j++) {
+                if (M[i][j] == 1) {
+                   // if (dsu.parent[i] == -1) dsu.parent[i] = i;
+                    dsu.union(i, j);
+                }
+            }
+        }
+        
+        return dsu.count;
+    }
 }

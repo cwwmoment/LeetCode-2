@@ -70,4 +70,57 @@ public class NumberOfConnectedComponents {
             helper(graph, node, visited);
         }
     }
+
+    // Updated on 14 Feb 2019
+    class DSU {
+        int[] size;
+        int[] parent;
+        int count;
+        
+        public DSU(int N) {
+            size = new int[N];
+            parent = new int[N];
+            
+            for (int i = 0; i < N; i++) {
+                size[i] = 1;
+                parent[i] = i;
+            }
+            count = 0;
+        }
+        
+        public int find(int x) {
+            if (parent[x] == x) {
+                return x;
+            } else {
+                parent[x] = find(parent[x]);
+                return parent[x];
+            }
+        }
+        
+        public void union(int p, int q) {
+            int i = find(p);
+            int j = find(q);
+            if (i == j) return;
+            if (size[i] < size[j]) {
+                parent[i] = j;
+                size[j] += size[i];
+            } else {
+                parent[j] = i;
+                size[i] += size[j];
+            }
+            count--;
+        }
+    }
+    
+    public int countComponents2(int n, int[][] edges) {
+        if (edges == null || edges.length == 0) return n;
+        DSU dsu = new DSU(n);
+        dsu.count = n;
+        
+        for (int[] e : edges) {
+            dsu.union(e[0], e[1]);
+        }
+        
+        return dsu.count;
+    }
 }

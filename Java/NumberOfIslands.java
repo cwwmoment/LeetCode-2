@@ -138,4 +138,73 @@ public class NumberOfIslands {
 
         return n;
     }
+
+    // Updated on 14 Feb 2019
+    class DSU {
+        int[] size;
+        int[] parent;
+        int count;
+        
+        public DSU(int N) {
+            size = new int[N];
+            parent = new int[N];
+            
+            Arrays.fill(size, 1);
+            Arrays.fill(parent, -1);
+            count = 0;
+        }
+        
+        public int find(int x) {
+            if (parent[x] == x) {
+                return x;
+            } else {
+                parent[x] = find(parent[x]);
+                return parent[x];
+            }
+        }
+        
+        public void union(int p, int q) {
+            int i = find(p);
+            int j = find(q);
+            if (i == j) return;
+            if (size[i] < size[j]) {
+                parent[i] = j;
+                size[j] += size[i];
+            } else {
+                parent[j] = i;
+                size[i] += size[j];
+            }
+            
+            count--;
+        }
+    }
+    
+    public int numIslands4(char[][] grid) {
+        if (grid == null || grid.length == 0) return 0;
+        int m = grid.length, n = grid[0].length;
+        int N = m * n;
+        int[] r = {1, -1, 0, 0};
+        int[] c = {0, 0, 1, -1};
+        DSU dsu = new DSU(N);
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    int a = i * n + j;
+                    
+                    dsu.parent[a] = a;
+                    dsu.count++;
+                    for (int k = 0; k < 4; k++) {
+                        int rr = i + r[k];
+                        int cc = j + c[k];
+                        if (rr < 0 || cc < 0 || rr >= m || cc >= n || dsu.parent[rr * n + cc] == -1) continue;
+                        int b = rr * n + cc;
+                        dsu.union(a, b);
+                    }
+                }
+            }
+        }
+        
+        return dsu.count;
+    }
 }

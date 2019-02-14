@@ -5,6 +5,8 @@
  *
  */
 
+ import java.util.*;
+
 class Solution {
     public List<List<String>> accountsMerge(List<List<String>> accounts) {
         List<List<String>> res = new ArrayList<>();
@@ -50,5 +52,81 @@ class Solution {
                 dfs(list, graph, neigh, visited);
             }
         }
+    }
+
+    // Updated on 14 Feb 2019
+    // Union-find
+    class DSU {
+        int[] size;
+        int[] parent;
+        
+        public DSU(int N) {
+            size = new int[N];
+            parent = new int[N];
+            
+            Arrays.fill(size, 1);
+            // Arrays.fill(parent, -1);
+            for (int i = 0; i < N; i++) {
+                parent[i] = i;
+            }
+        }
+        
+        public int find(int x) {
+            if (parent[x] == x) {
+                return x;
+            } else {
+                parent[x] = find(parent[x]);
+                return parent[x];
+            }
+        }
+        
+        public void union(int p, int q) {
+            int i = find(p);
+            int j = find(q);
+            if (i == j) return;
+            if (size[i] < size[j]) {
+                parent[i] = j;
+                size[j] += size[i];
+            } else {
+                parent[j] = i;
+                size[i] += size[j];
+            }
+        }
+    }
+    
+    public List<List<String>> accountsMerge1(List<List<String>> accounts) {
+        DSU dsu = new DSU(10001);
+        
+        Map<String, String> emailToName = new HashMap<>();
+        Map<String, Integer> emailToId = new HashMap<>();
+        
+        int id = 0;
+        for (List<String> account : accounts) {
+            String name = "";
+            for (String email : account) {
+                if (name == "") {
+                    name = email;
+                    continue;
+                }
+                
+                emailToName.put(email, name);
+                emailToId.putIfAbsent(email, id++);
+                dsu.union(emailToId.get(account.get(1)), emailToId.get(email));
+            }
+        }
+        
+        Map<Integer, List<String>> res = new HashMap<>();
+        for (String email : emailToName.keySet()) {
+            int index = dsu.find(emailToId.get(email));
+            res.putIfAbsent(index, new ArrayList<>());
+            res.get(index).add(email);
+        }
+        
+        for (List<String> list: res.values()) {
+            Collections.sort(list);
+            list.add(0, emailToName.get(list.get(0)));
+        }
+        
+        return new ArrayList(res.values());
     }
 }
