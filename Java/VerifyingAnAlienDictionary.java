@@ -42,7 +42,7 @@ class Solution {
     // Solution 2
     int[] map = new int[26];
 
-    public boolean isAlienSorted(String[] words, String order) {
+    public boolean isAlienSorted2(String[] words, String order) {
         for (int i = 0; i < order.length(); i++) {
             map[order.charAt(i) - 'a'] = i;
         }

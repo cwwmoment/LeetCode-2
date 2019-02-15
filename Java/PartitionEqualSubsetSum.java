@@ -27,4 +27,26 @@ public class PartitionEqualSubsetSum {
         }
         return dp[res];
     }
+
+    // Updated on 15 Feb 2019
+    // dp[i] represents that if i can be the sum of the elements in nums
+    public boolean canPartition1(int[] nums) {
+        int sum = 0;
+        for (int i : nums) {
+            sum += i;
+        }
+        
+        if (sum % 2 != 0) return false;
+        boolean[] dp = new boolean[sum + 1];
+        dp[0] = true;
+        
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = sum / 2; j >= 0; j--) {
+                if (dp[j]) dp[j + nums[i]] = true;
+                if (dp[sum / 2]) return true;
+            }
+        }
+        
+        return false;
+    }
 }

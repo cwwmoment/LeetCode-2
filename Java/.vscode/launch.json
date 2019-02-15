@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - CoinChange",
+            "request": "launch",
+            "mainClass": "CoinChange",
+            "projectName": "Java_3caa6f5d"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - PerfectSquares",
             "request": "launch",
             "mainClass": "PerfectSquares"

@@ -74,4 +74,21 @@ public class PalindromicSubstrings {
             high++;
         }
     }
+
+    // Updated on 15 Feb 2019
+    public int countSubstrings3(String s) {
+        int len = s.length();
+        int res = 0;
+        for (int i = 0; i < 2 * len - 1; i++) {
+            int lo = i / 2;
+            int hi = lo + i % 2;
+            while (lo >= 0 && hi < len && s.charAt(lo) == s.charAt(hi)) {
+                res++;
+                lo--;
+                hi++;
+            }
+        }
+        
+        return res;
+    }
 }

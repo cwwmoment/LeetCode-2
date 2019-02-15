@@ -3,9 +3,14 @@
  *
  * LeetCode #518. Coin Change 2
  *
+ * 
+ * You are given coins of different denominations
+ *  and a total amount of money. Write a function
+ *  to compute the number of combinations that
+ *  make up that amount. You may assume that
+ *  you have infinite number of each kind of coin.
  */
 public class CoinChange2 {
-    // solution 1
     public int change(int amount, int[] coins) {
         int[] dp = new int[amount + 1];
         dp[0] = 1;
@@ -15,23 +20,5 @@ public class CoinChange2 {
             }
         }
         return dp[amount];
-    }
-
-    // solution 2
-    public int change2(int amount, int[] coins) {
-        int[][] dp = new int[coins.length + 1][amount + 1];
-
-        Arrays.fill(dp[0], 0);
-
-        for (int i = 1; i <= coins.length; i++) {
-            for (int j = 1; j <= amount; j++) {
-                dp[i][j] = 0;
-                for (int k = 0; k * coins[i - 1] <= j; k++) {
-                    dp[i][j] += dp[i - 1][j - k * coins[i - 1]];
-                }
-            }
-        }
-
-        return dp[coins.length][amount];
     }
 }
