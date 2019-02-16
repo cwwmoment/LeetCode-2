@@ -23,4 +23,23 @@ public class RotateImage {
             }
         }
     }
+
+    // Updated on 16 Feb 2019
+    // Start from the outer layer and then to the inner layer
+    public void rotate1(int[][] m) {
+        if (m.length == 0 || m.length != m[0].length) return;
+        int n = m.length;
+        for (int layer = 0; layer < n / 2; layer++) {
+            int first = layer;
+            int last = n - 1 - layer;
+            for (int i = first; i < last; i++) {
+                int offset = i - first;
+                int top = m[first][first + offset];
+                m[first][first + offset] = m[last - offset][first];
+                m[last - offset][first] = m[last][last - offset];
+                m[last][last - offset] = m[first + offset][last];
+                m[first + offset][last] = top;
+            }
+        }
+    }
 }
