@@ -5,6 +5,12 @@
  *
  */
 
+class RandomListNode {
+    int label;
+    RandomListNode next, random;
+    RandomListNode(int x) { this.label = x; }
+};
+
 // 这题的意思是返回一个原来链表的复制
 
 public class CopyListWithRandomPointer {
