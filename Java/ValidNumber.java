@@ -22,6 +22,7 @@ class Solution {
                 numSeen = false;
             } else if (c == '-' || c == '+') {
                 // " 005047e+6" is true
+                // '-' can occur many times
                 if (i != 0 && s.charAt(i - 1) != 'e') return false;
                 signSeen = true;
             } else if (c == '.') {
