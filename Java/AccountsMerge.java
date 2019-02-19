@@ -38,6 +38,7 @@ class Solution {
                 String neigh = account.get(i - 1);
                 graph.putIfAbsent(email, new HashSet<>());
                 graph.putIfAbsent(neigh, new HashSet<>());
+                // Do not forget to add two-ways
                 graph.get(email).add(neigh);
                 graph.get(neigh).add(email);
             }
