@@ -44,4 +44,47 @@ class Solution {
 
         return res;
     }
+
+    // Updated on 20 Feb 2019
+    public int[] maxSumOfThreeSubarrays1(int[] nums, int m) {
+        // Be care of all the borders
+        int n = nums.length;
+        int len = n - m + 1;
+        int[] dp = new int[len];
+        int sum = 0;
+         for (int i = 0; i < nums.length; i++) {
+             sum += nums[i];
+             if (i >= m) sum -= nums[i - m];
+             if (i >= m - 1) dp[i - m + 1] = sum;
+         }
+        
+        int[] left = new int[len];
+        int best = 0;
+        for (int i = 0; i < len; i++) {
+            if (dp[i] > dp[best]) best = i;
+            left[i] = best;
+        }
+        
+        int[] right = new int[len];
+        best = len - 1;
+        for (int i = len - 1; i >= 0; i--) {
+            if (dp[i] > dp[best]) best = i;
+            right[i] = best;
+        }
+        
+        int[] res = new int[3];
+        Arrays.fill(res, -1);
+        // Pay attention to the border check!!!
+        for (int j = m; j < n - 2 * m + 1; j++) {
+            if (res[0] == -1 || dp[j] + dp[left[j - m]] + dp[right[j + m]] >
+               dp[res[0]] + dp[res[1]] + dp[res[2]]) {
+                res[0] = left[j - m];
+                res[1] = j;
+                res[2] = right[j + m];
+            }
+        }
+        
+        return res;
+    }
+}
 }

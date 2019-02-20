@@ -135,4 +135,55 @@ public class EvaluateDivision {
 
         return -1;
     }
+
+    // Updated on 20 Feb 2019 DFS
+    public double[] calcEquation2(String[][] equations, double[] values, String[][] queries) {
+        Map<String, Map<String, Double>> g = new HashMap<>();
+        buildGraph(g, equations, values);
+        
+        double[] res = new double[queries.length];
+        Arrays.fill(res, -1.0);
+        int index = 0;
+        for (String[] q : queries) {
+            String a = q[0];
+            String b = q[1];
+            if (!g.containsKey(a) || !g.containsKey(b)) {
+                index++;
+                continue;
+            }
+            if (a.equals(b)) {
+                res[index++] = 1.0;
+            } else {
+                dfs(g, a, b, new HashSet<>(), res, index, 1.0);
+                index++;
+            }
+        }
+        
+        return res;
+    }
+    
+    private void buildGraph(Map<String, Map<String, Double>> g, String[][] equations, double[] values) {
+        for (int i = 0; i < values.length; i++) {
+            String a = equations[i][0];
+            String b = equations[i][1];
+            g.putIfAbsent(a, new HashMap<>());
+            g.putIfAbsent(b, new HashMap<>());
+            g.get(a).put(b, values[i]);
+            g.get(b).put(a, 1.0 / values[i]);
+        }
+    }
+    
+    private void dfs(Map<String, Map<String, Double>> g, String a, String b, Set<String> visited, double[] res, int index, double tmp) {
+        visited.add(a);
+        if (g.get(a) == null || g.get(a).size() == 0) return;
+        if (g.get(a).containsKey(b)) {
+            res[index] = g.get(a).get(b) * tmp;
+            return;
+        }
+        
+        for (String neigh: g.get(a).keySet()) {
+            if (visited.contains(neigh)) continue;
+            dfs(g, neigh, b, visited, res, index, tmp * g.get(a).get(neigh));
+        }
+    }
 }
