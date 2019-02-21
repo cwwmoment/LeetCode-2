@@ -62,4 +62,52 @@ class Solution {
 
           return path;
     }
+
+    // Updated on 21 Feb 2019
+    public List<List<String>> solveNQueens1(int n) {
+        List<List<String>> res = new ArrayList<>();
+        if (n < 1) return res;
+        char[][] board = new char[n][n];
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(board[i], '.');
+        }
+        
+        dfs(board, 0, new boolean[n], new boolean[n * 2 + 1], new boolean[n * 2 + 1], res);
+        return res;
+    }
+    
+    private void dfs(char[][] board, int row, boolean[] col, boolean[] left, boolean[] right, List<List<String>> res) {
+        if (row == board.length) {
+            addRes(board, res);
+            return;
+        }
+        
+        for (int i = 0; i < board.length; i++) {
+            if (!col[i] && !left[i + row] && !right[i - row + board.length - 1]) {
+                board[row][i] = 'Q';
+                col[i] = true;
+                left[i + row] = true;
+                right[i - row + board.length - 1] = true;
+                
+                dfs(board, row + 1, col, left, right, res);
+                
+                board[row][i] = '.';
+                col[i] = false;
+                left[i + row] = false;
+                right[i - row + board.length - 1] = false;
+            }
+        }
+    }
+    
+    private void addRes(char[][] board, List<List<String>> res) {
+        List<String> tmp = new ArrayList<>();
+        for (int i = 0; i < board.length; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < board.length; j++) {
+                sb.append(board[i][j]);
+            }
+            tmp.add(sb.toString());
+        }
+        res.add(tmp);
+    }
 }
