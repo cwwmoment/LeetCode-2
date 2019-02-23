@@ -101,3 +101,41 @@ public class NestedIterator implements Iterator<Integer> {
         return false;
     }
 }
+
+// Updated on 23 Feb 2019
+// The order is tricky!!!
+// [1,[4,[6]]]
+// -> [1, 4, 6]
+// So, use addLast() and removeFirst()
+public class NestedIterator implements Iterator<Integer> {
+
+    private Deque<Integer> stack;
+    public NestedIterator(List<NestedInteger> nestedList) {
+        stack = new ArrayDeque<>();
+        pushAll(nestedList);
+    }
+
+    private void pushAll(List<NestedInteger> nestedList) {
+        if (nestedList.size() == 0) return;
+        
+        for (NestedInteger ni: nestedList) {
+            if (ni.isInteger()) {
+                stack.addLast(ni.getInteger());
+            } else {
+                pushAll(ni.getList());
+            }
+        }
+    }
+    
+    @Override
+    public Integer next() {
+        if (!hasNext()) return -1;
+        return stack.removeFirst();
+    }
+
+    @Override
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
+}
+

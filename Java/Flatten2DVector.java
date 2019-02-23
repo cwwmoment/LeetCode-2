@@ -35,3 +35,36 @@ public class Vector2D implements Iterator<Integer> {
  * Vector2D i = new Vector2D(vec2d);
  * while (i.hasNext()) v[f()] = i.next();
  */
+
+ // Updated on 23 Feb 2019
+class Vector2D1 {
+    private int i;
+    private int j;
+    private int[][] v;
+    public Vector2D1(int[][] v) {
+        this.v = v;
+        this.i = 0;
+        this.j = 0;
+    }
+    
+    public int next() {
+        if (hasNext()) {
+            int res = v[i][j];
+            j++;
+            return res;
+        }
+        
+        return -1;
+    }
+    
+    public boolean hasNext() {
+        if (i == v.length) return false;
+        while (j == v[i].length) {
+            j = 0;
+            i++;
+            if (i == v.length) return false;
+        }
+        
+        return true;
+    }
+}
