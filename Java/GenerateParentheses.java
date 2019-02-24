@@ -40,4 +40,27 @@ public class GenerateParentheses {
             }
         }
     }
+
+    // Updated on 24 Feb 2019
+    public List<String> generateParenthesis1(int n) {
+        List<String> res = new ArrayList<>();
+        helper(res, n, n, new StringBuilder());
+        return res;
+    }
+    
+    private void helper(List<String> res, int left, int right, StringBuilder cur) {
+        int len = cur.length();
+        if (left > right || left < 0 || right < 0) return;
+        if (left == 0 && right == 0) {
+            res.add(cur.toString());
+            return;
+        }
+        
+        cur.append('(');
+        helper(res, left - 1, right, cur);
+        cur.setLength(len);
+        cur.append(')');
+        helper(res, left, right - 1, cur);
+        cur.setLength(len);
+    }
 }

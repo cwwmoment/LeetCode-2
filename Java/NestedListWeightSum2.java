@@ -73,4 +73,37 @@ public class NestedListWeightSum2 {
 
         return total;
     }
+
+    // Updated on 24 Feb 2019
+    public int depthSumInverse2(List<NestedInteger> nestedList) {
+        int depth = getDepth(nestedList);
+        return helper(nestedList, depth);
+    }
+    
+    private int getDepth(List<NestedInteger> nestedList) {
+        if (nestedList == null) return 0;
+        int res = 1;
+        for (NestedInteger e : nestedList) {
+            if (e.isInteger()) {
+                continue;
+            } else {
+                res = Math.max(res, getDepth(e.getList()) + 1);
+            }
+        }
+        
+        return res;
+    }
+    
+    private int helper(List<NestedInteger> nestedList, int depth) {
+        int sum = 0;
+        for (NestedInteger e : nestedList) {
+            if (e.isInteger()) {
+                sum += e.getInteger() * depth;
+            } else {
+                sum += helper(e.getList(), depth - 1);
+            }
+        }
+        
+        return sum;
+    }
 }
