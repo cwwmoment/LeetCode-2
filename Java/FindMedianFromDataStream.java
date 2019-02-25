@@ -97,4 +97,52 @@ public class FindMedianFromDataStream {
      * obj.addNum(num);
      * double param_2 = obj.findMedian();
      */
+
+     // Updated on 25 Feb 2019
+     // Use balance()
+     class MedianFinder2 {
+
+        private PriorityQueue<Integer> minHeap;
+        private PriorityQueue<Integer> maxHeap;
+        
+        private void balance() {
+            int minSize = minHeap.size();
+            int maxSize = maxHeap.size();
+            if (Math.abs(minSize - maxSize) < 2) return;
+            
+            if (maxSize > minSize) {
+                minHeap.offer(maxHeap.poll());
+            } else {
+                maxHeap.offer(minHeap.poll());
+            }
+        }
+        
+        /** initialize your data structure here. */
+        public MedianFinder() {
+            minHeap = new PriorityQueue<>((a, b) -> a - b);
+            maxHeap = new PriorityQueue<>((a, b) -> b - a);
+        }
+        
+        public void addNum(int num) {
+            if (minHeap.size() == 0 || num > minHeap.peek()) {
+                minHeap.offer(num);
+            } else {
+                maxHeap.offer(num);
+            }
+            
+            balance();
+        }
+        
+        public double findMedian() {
+            
+            if (minHeap.size() == maxHeap.size())
+                return (double) (minHeap.peek() + maxHeap.peek()) / 2;
+            
+            if (minHeap.size() > maxHeap.size()) {
+                return (double) minHeap.peek();
+            }
+            
+            return (double) maxHeap.peek();
+        }
+    }
 }

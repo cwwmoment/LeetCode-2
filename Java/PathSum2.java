@@ -74,4 +74,38 @@ public class PathSum2 {
             tmp.remove(tmp.size() - 1);
         }
     }
+
+    // Updated on 25 Feb 2019
+    public List<List<Integer>> pathSum2(TreeNode root, int sum) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+        List<Integer> tmp = new ArrayList<>();
+       // tmp.add(root.val);
+        helper(res, tmp, root, sum);
+        return res;
+    }
+    
+    private void helper(List<List<Integer>> res, List<Integer> tmp, TreeNode root, int sum) {
+        if (root == null) return;
+        tmp.add(root.val);
+        
+        if (root.left == null && root.right == null) {
+            if (root.val == sum) {
+                res.add(new ArrayList(tmp));
+            }
+           // return;
+        }
+        
+       // if (root.left != null) {
+        //    tmp.add(root.left.val);
+            helper(res, tmp, root.left, sum - root.val);
+       //     tmp.remove(tmp.size() - 1);
+       // }
+        
+       // if (root.right != null) {
+        //    tmp.add(root.right.val);
+            helper(res, tmp, root.right, sum - root.val);
+            tmp.remove(tmp.size() - 1);
+       // }
+    }
 }

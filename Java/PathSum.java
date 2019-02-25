@@ -59,19 +59,29 @@ public class PathSum {
         return set.contains(sum);
     }
 
-    public void helper1(TreeNode root, HashSet<Integer> set, int tmp) {
+    public void helper(TreeNode root, HashSet<Integer> set, int tmp) {
         if (root != null && root.left == null && root.right == null) {
             set.add(tmp);
             return;
         }
 
         if (root.left != null) {
-            helper1(root.left, set, tmp + root.left.val);
+            helper(root.left, set, tmp + root.left.val);
         }
 
         if (root.right != null) {
-            helper1(root.right, set, tmp + root.right.val);
+            helper(root.right, set, tmp + root.right.val);
         }
+    }
 
+    // Updated on 25 Feb 2019
+    public boolean hasPathSum3(TreeNode root, int sum) {
+        if (root == null) return false;
+        if (root.left == null && root.right == null) {
+            return root.val == sum;
+        }
+        
+        return hasPathSum(root.left, sum - root.val) ||
+            hasPathSum(root.right, sum - root.val);
     }
 }
