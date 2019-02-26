@@ -49,4 +49,25 @@ public class TaskScheduler {
 
         return count;
     }
+
+    // O(N), O(1)
+    public int leastInterval2(char[] tasks, int n) {
+        int[] map = new int[26];
+        for (int i : tasks) {
+            map[i - 'A']++;
+        }
+
+        int maxFreq = 0;
+        int num = 0;
+        for (int i : map) {
+            if (i > maxFreq) {
+                maxFreq = i;
+                num = 1;
+            } else if (i == maxFreq) {
+                num++;
+            }
+        }
+
+        return Math.max(tasks.length, (maxFreq - 1) * (n + 1) + num);
+    }
 }

@@ -100,4 +100,38 @@ public class PalindromeLinkedList {
 
         return pre;
     }
+
+    // Updated on 26 Feb 2019
+    public boolean isPalindrome2(ListNode head) {
+        if (head == null) return true;
+
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+
+        ListNode cur = slow.next;
+        slow.next = null;
+        ListNode prev = null;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+
+        ListNode node = head;
+        while (node != null && prev != null) {
+            if (node.val != prev.val) return false;
+            node = node.next;
+            prev = prev.next;
+        }
+
+        return true;
+    }
 }
