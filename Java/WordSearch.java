@@ -48,7 +48,7 @@ public class WordSearch {
     }
 
     // Updated on 4 Dec 2018
-     public boolean exist(char[][] b, String w) {
+    public boolean exist(char[][] b, String w) {
         if (b == null || b.length == 0) return false;
         char[] cs = w.toCharArray();
         int row = b.length, col = b[0].length;
@@ -68,21 +68,55 @@ public class WordSearch {
 
         if (count == cs.length) return true;
         if (i < 0 || i >= b.length ||
-           j < 0 || j >= b[0].length ||
-           cs[count] != b[i][j]) return false;
-
-
-            //System.out.println(b[i][j]);
-
-//            count++;
+            j < 0 || j >= b[0].length ||
+            cs[count] != b[i][j]) return false;
 
         b[i][j] ^= 256;
-            if (dfs1(b, cs, i + 1, j, count + 1)) return true;
-            if (dfs1(b, cs, i - 1, j, count + 1)) return true;
-            if (dfs1(b, cs, i, j + 1, count + 1)) return true;
-            if (dfs1(b, cs, i, j - 1, count + 1)) return true;
+        if (dfs1(b, cs, i + 1, j, count + 1)) return true;
+        if (dfs1(b, cs, i - 1, j, count + 1)) return true;
+        if (dfs1(b, cs, i, j + 1, count + 1)) return true;
+        if (dfs1(b, cs, i, j - 1, count + 1)) return true;
 
         b[i][j] ^= 256;
+        return false;
+    }
+
+    // Updated on 27 Feb 2019
+    /**
+     * 这题是backtracking，而不是普通的dfs，choose完要unchoose，因为这样在下个点
+     * 还能继续搜索。如果不unchoose就会找不到。每次的visited，其实只能在一次搜索的
+     * 时候用。
+     * Time: 4^N*N^2,最坏情况就是搜索完整个board，达到每个board的最大深度
+     */
+    public boolean exist2(char[][] board, String word) {
+        if (board == null || word == null) return false;
+        int row = board.length;
+        int col = board[0].length;
+        boolean[][] visited = new boolean[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (word.charAt(0) == board[i][j]) {
+                    if (dfs(board, word, 0, i, j, visited)) return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean dfs(char[][] board, String word, int index, int r, int c, boolean[][] visited) {
+        if (index == word.length()) return true;
+
+        if (r < 0 || c < 0 || r > board.length - 1 || c > board[0].length - 1) return false;
+        if (visited[r][c]) return false;
+        if (word.charAt(index) != board[r][c]) return false;
+
+        visited[r][c] = true;
+        if (dfs(board, word, index + 1, r + 1, c, visited) ||
+            dfs(board, word, index + 1, r - 1, c, visited) ||
+            dfs(board, word, index + 1, r, c + 1, visited) ||
+            dfs(board, word, index + 1, r, c - 1, visited)) return true;
+        visited[r][c] = false;
         return false;
     }
 }

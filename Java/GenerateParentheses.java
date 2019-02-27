@@ -47,7 +47,7 @@ public class GenerateParentheses {
         helper(res, n, n, new StringBuilder());
         return res;
     }
-    
+
     private void helper(List<String> res, int left, int right, StringBuilder cur) {
         int len = cur.length();
         if (left > right || left < 0 || right < 0) return;
@@ -55,12 +55,34 @@ public class GenerateParentheses {
             res.add(cur.toString());
             return;
         }
-        
+
         cur.append('(');
         helper(res, left - 1, right, cur);
         cur.setLength(len);
         cur.append(')');
         helper(res, left, right - 1, cur);
         cur.setLength(len);
+    }
+
+    // Updated on 27 Feb 2019
+    public List<String> generateParenthesis2(int n) {
+        List<String> res = new ArrayList<>();
+        helper(res, "", n, n);
+        return res;
+    }
+
+    private void helper(List<String> res, String cur, int open, int close) {
+        if (open == 0 && close == 0) {
+            res.add(cur);
+            return;
+        } else {
+            if (open > 0) {
+                helper(res, cur + "(", open - 1, close);
+            }
+
+            if (close > open) {
+                helper(res, cur + ")", open, close - 1);
+            }
+        }
     }
 }
