@@ -17,7 +17,7 @@ public class ExpressionAddOperators {
         return res;
     }
 
-    public void helper(List<String> res, String path, String num, int target, int pos, long eval, long multed){
+    public void helper(List<String> res, String path, String num, int target, int pos, long eval, long multed) {
         if (pos == num.length()) {
             if (target == eval)
                 res.add(path);
@@ -38,4 +38,6 @@ public class ExpressionAddOperators {
             }
         }
     }
+}
+
 }

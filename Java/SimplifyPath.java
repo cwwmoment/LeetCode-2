@@ -26,4 +26,29 @@ class Solution {
 
         return sb.toString();
     }
+
+    // Updated on 28 Feb 2019
+    // bidirectional-queue
+    // .., pop(), finally, poll()
+    public String simplifyPath1(String path) {
+        if (path == null || path.length() == 0) return "";
+        Deque<String> q = new ArrayDeque<>();
+
+        for (String s : path.split("/")) {
+            if (s.equals("..")) {
+                if (!q.isEmpty()) q.pollLast();
+            } else if (!s.equals(".") && !s.equals("")) {
+                q.offer(s);
+            }
+        }
+
+        if (q.size() == 0) return "/";
+        StringBuilder sb = new StringBuilder();
+        while (q.size() > 0) {
+            sb.append("/");
+            sb.append(q.poll());
+        }
+
+        return sb.toString();
+    }
 }
