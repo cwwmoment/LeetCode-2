@@ -28,7 +28,7 @@ class Solution {
     }
 
     // Updated on 28 Feb 2019
-    // bidirectional-queue
+    // bidirectional-queue, which is deque
     // .., pop(), finally, poll()
     public String simplifyPath1(String path) {
         if (path == null || path.length() == 0) return "";

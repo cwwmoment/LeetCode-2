@@ -7,12 +7,16 @@
 
 class Solution {
     public boolean increasingTriplet(int[] nums) {
-        int small = Integer.MAX_VALUE, large = Integer.MAX_VALUE;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] <= small) {
-                small = nums[i];
-            } else if (nums[i] <= large) {
-                large = nums[i];
+        // Time: O(N), Space: O(1)
+
+        // Pay attention that these two are both MAX_VALUE
+        int smallest = Integer.MAX_VALUE;
+        int largest = Integer.MAX_VALUE;
+        for (int i : nums) {
+            if (i <= smallest) {
+                smallest = i;
+            } else if (i <= largest) {
+                largest = i;
             } else {
                 return true;
             }

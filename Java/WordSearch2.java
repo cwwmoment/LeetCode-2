@@ -23,9 +23,9 @@ public class WordSearch2 {
         char c = board[i][j];
         if (c == '#' || p.next[c - 'a'] == null) return;
         p = p.next[c - 'a'];
-        if (p.word != null) {   // found one
+        if (p.word != null) {
             res.add(p.word);
-            p.word = null;     // de-duplicate
+            p.word = null;
         }
 
         board[i][j] = '#';
@@ -54,5 +54,73 @@ public class WordSearch2 {
     class TrieNode {
         TrieNode[] next = new TrieNode[26];
         String word;
+    }
+
+    // Updated on 1 Mar 2019 by happygirlzt
+    class TrieNode {
+        TrieNode[] children;
+        String word;
+        public TrieNode() {
+            children = new TrieNode[26];
+            word = null;
+        }
+    }
+
+    public List<String> findWords1(char[][] board, String[] words) {
+        List<String> res = new ArrayList<>();
+        if (board == null || board.length == 0) return res;
+        TrieNode root = new TrieNode();
+        buildTrie(words, root);
+
+        TrieNode cur = root;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                char c = board[i][j];
+                if (cur.children[c - 'a'] != null) {
+                    dfs(board, res, i, j, cur);
+                }
+            }
+        }
+
+        return res;
+    }
+
+    private void dfs(char[][] board, List<String> res, int i, int j, TrieNode cur) {
+        if (i < 0 || j < 0 || i > board.length - 1 || j > board[0].length - 1) return;
+
+        char c = board[i][j];
+
+        if (c == '#' || cur.children[c - 'a'] == null)
+            return;
+
+        cur = cur.children[c - 'a'];
+
+        if (cur.word != null) {   // found one
+            res.add(cur.word);
+            cur.word = null;     // de-duplicate
+        }
+
+        board[i][j] = '#';
+        dfs(board, res, i - 1, j ,cur);
+        dfs(board, res, i, j - 1, cur);
+        dfs(board, res, i + 1, j, cur);
+        dfs(board, res, i, j + 1, cur);
+        board[i][j] = c;
+    }
+
+    private void buildTrie1(String[] words, TrieNode root) {
+        for (String word : words) {
+            TrieNode cur = root;
+
+            for (char c : word.toCharArray()) {
+                int index = (int) (c - 'a');
+                if (cur.children[index] == null) {
+                    cur.children[index] = new TrieNode();
+                }
+
+                cur = cur.children[index];
+            }
+            cur.word = word;
+        }
     }
 }
