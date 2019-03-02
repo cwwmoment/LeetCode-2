@@ -40,4 +40,46 @@ public class ExpressionAddOperators {
     }
 }
 
+class Solution {
+    public List<String> addOperators(String num, int target) {
+        List<String> result = new ArrayList<>();
+        char[] nums = num.toCharArray();
+        int n = nums.length;
+        char[] chars = new char[n + n]; // at most n-1 operators to insert.
+
+        for(int j = 0, i = 0; i < n; ++i) {
+            value = value * 10 + nums[i] - '0';
+            chars[j++] = nums[i];
+            helper(result, nums, n, i + 1, target, chars, j, 0, value); // virtual +.
+            if (value == 0) { // if this is a leading 0, cannot follow any digit.
+                break;
+            }
+        }
+        return result;
+    }
+
+    // result and tail are for evaluating +-*/ on the fly.
+    static void helper(List<String> results, char[] nums, int n, int i, long target,
+                       char[] chars, int j, long result, long tail) {
+        if (i == n) {
+            if (result + tail == target) {
+                results.add(String.valueOf(chars, 0, j));
+            }
+        } else {
+            long value = 0;
+            for(int op = j++, k = i; k < n; ++k) { // save the position for operator.
+                value = value * 10 + nums[k] - '0';
+                chars[j++] = nums[k]; // keep appending.
+                chars[op] = '+';
+                helper(results, nums, n, k + 1, target, chars, j, result + tail, value);
+                chars[op] = '-';
+                helper(results, nums, n, k + 1, target, chars, j, result + tail, -value);
+                chars[op] = '*';
+                helper(results, nums, n, k + 1, target, chars, j, result, tail * value);
+                if (value == 0) { // leading 0
+                    break;
+                }
+            }
+        }
+    }
 }

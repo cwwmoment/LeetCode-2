@@ -40,4 +40,36 @@ class Solution {
 
         return true;
     }
+
+    // Updated on 2 Mar 2019
+    public boolean isCompleteTree1(TreeNode root) {
+        if(root == null) return true;
+
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        boolean seen = false;
+        while (!q.isEmpty()) {
+            int size = q.size();
+
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = q.poll();
+
+                if (cur.left == null && cur.right != null) return false;
+
+                if (cur.left != null) {
+                    if (seen) return false;
+                    q.offer(cur.left);
+                } else seen = true;
+
+                if (cur.right != null) {
+                    if (seen) return false;
+                    q.offer(cur.right);
+                } else {
+                    seen = true;
+                }
+            }
+        }
+
+        return true;
+    }
 }

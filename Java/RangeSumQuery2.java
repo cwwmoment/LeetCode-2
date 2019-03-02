@@ -62,7 +62,6 @@ public class RangeSumQuery2 {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 dp[i + 1][j + 1] = dp[i + 1][j] + dp[i][j + 1] + matrix[i][j] - dp[i][j];
-                // System.out.println(dp[i + 1][j + 1]);
             }
         }
     }
