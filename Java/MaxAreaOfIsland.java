@@ -62,19 +62,15 @@ public class MaxAreaOfIsland {
 
     public void bfs(int[][] grid, int i, int j, boolean[][] visited, int[] res) {
         int tmp = 1;
-        // Queue<Point> q = new LinkedList<>();
-        // q.offer(new Point(i, j));
+
         Queue<int[]> q = new LinkedList<>();
         q.offer(new int[]{i, j});
         visited[i][j] = true;
 
         while (!q.isEmpty()) {
-            // Point cur = q.poll();
             int[] cur = q.poll();
             int row = cur[0];
             int col = cur[1];
-
-            System.out.println("row = " + row + " col = " + col);
 
             for (int[] dir : dirs) {
                 if ((row + dir[0] < 0) || (row + dir[0] >= grid.length) ||
@@ -92,5 +88,38 @@ public class MaxAreaOfIsland {
         }
 
         res[0] = Math.max(res[0], tmp);
+    }
+
+    // Updated on 3 Mar 2019
+    public int maxAreaOfIsland(int[][] grid) {
+        if (grid == null || grid.length == 0) return 0;
+
+        int max = 0;
+        int[] area = new int[1];
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    area[0] = 0;
+                    dfs(grid, i, j, area);
+                    max = Math.max(max, area[0]);
+                }
+            }
+        }
+
+        return max;
+    }
+
+    private void dfs(int[][] grid, int row, int col, int[] area) {
+        if (row < 0 || col < 0 || row > grid.length - 1 ||
+            col > grid[0].length - 1) return;
+        if (grid[row][col] == 0) return;
+
+        grid[row][col] = 0;
+        area[0]++;
+        dfs(grid, row + 1, col, area);
+        dfs(grid, row - 1, col, area);
+        dfs(grid, row, col + 1, area);
+        dfs(grid, row, col - 1, area);
     }
 }

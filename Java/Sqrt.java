@@ -24,4 +24,24 @@ public class Sqrt {
             }
         }
     }
+
+    // Updated on 3 Mar 2019
+    public int mySqrt1(int x) {
+        if (x == 0) return 0;
+        int lo = 1;
+        int hi = x / 2;
+
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (mid <= x / mid && (mid + 1) > x / (mid + 1)) return mid;
+
+            if (mid < x / mid) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+
+        return 0;
+    }
 }

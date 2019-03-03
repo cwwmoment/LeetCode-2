@@ -23,6 +23,19 @@ public class ImplementStrStr {
         return -1;
     }
 
+    // Updated on 3 Mar 2019
+    public int strStr(String hayStack, String needle) {
+        if (needle.isEmpty()) return 0;
+
+        for (int i = 0; i <= hayStack.length() - needle.length(); i++) {
+            for (int j = 0; j < needle.length() && hayStack.charAt(i + j) == needle.charAt(j); j++) {
+                if (j == needle.length() - 1) return i;
+            }
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         String s1 = "hello";
         String s2 = "ll";

@@ -6,6 +6,7 @@
  */
 
 class Solution {
+    // O(NlogK)
     public int[][] kClosest(int[][] points, int K) {
         PriorityQueue<int[]> maxHeap = new PriorityQueue<>((a, b) -> {
                 return b[0] * b[0] + b[1] * b[1] - a[0] * a[0] - a[1] * a[1];
