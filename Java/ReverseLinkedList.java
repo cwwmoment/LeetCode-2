@@ -38,4 +38,14 @@ class ReverseLinkedList {
 
         return pre;
     }
+
+    // Updated on 4 Mar 2019
+    // Recursive
+    ListNode reverseList(ListNode head) {
+        if (head == null || head.next.next == null) return head;
+        ListNode prev = reverseList(head.next);
+        head.next.next = prev;
+        head.next = null;
+        return prev;
+    }
 }
