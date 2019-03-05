@@ -10,36 +10,6 @@
 import java.util.Stack;
 
 public class BinarySearchTreeIterator {
-    // TODO Where is the problem?
-    public class BSTIterator1 {
-        TreeNode root;
-
-        public BSTIterator1(TreeNode node) {
-            root = node;
-        }
-
-        /** @return whether we have a next smallest number */
-        public boolean hasNext() {
-            if (root == null)
-                return false;
-            if (root.left != null) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        /** @return the next smallest number */
-        public int next() {
-            TreeNode dummy = root;
-            while (dummy.left != null) {
-                dummy = dummy.left;
-            }
-
-            return dummy.val;
-        }
-    }
-
     public class BSTIterator {
         // 中序遍历，用栈
         private Stack<TreeNode> st;

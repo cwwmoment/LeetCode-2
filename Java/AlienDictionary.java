@@ -117,14 +117,16 @@ public class AlienDictionary {
         buildGraph(graph, inDegree, words);
         return bfs(graph, inDegree);
     }
-    
+
     private void buildGraph(Map<Character, Set<Character>> graph, int[] inDegree, String[] words) {
+        // !!! Attention: 这个地方一定要先把所有出现的char放到graph里，
+        // 这样才能完全涵盖所有的char
         for (String s : words) {
             for (char c : s.toCharArray()) {
                 graph.putIfAbsent(c, new HashSet<>());
             }
         }
-        
+
         for (int i = 1; i < words.length; i++) {
             String first = words[i - 1];
             String second = words[i];
@@ -142,7 +144,7 @@ public class AlienDictionary {
             }
         }
     }
-    
+
     private String bfs(Map<Character, Set<Character>> graph, int[] inDegree) {
         StringBuilder sb = new StringBuilder();
         Queue<Character> q = new LinkedList<>();
@@ -151,7 +153,7 @@ public class AlienDictionary {
                 q.offer(c);
             }
         }
-        
+
         while (!q.isEmpty()) {
             char out = q.poll();
             sb.append(out);
@@ -162,7 +164,7 @@ public class AlienDictionary {
                 }
             }
         }
-        
+
         return sb.length() == graph.size() ? sb.toString() : "";
     }
 }
