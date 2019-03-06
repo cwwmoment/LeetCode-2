@@ -10,7 +10,6 @@ class Solution {
         Map<Character, Integer> map = new HashMap<>();
         int i = 0;
         for (char c : order.toCharArray()) {
-            // System.out.println(map);
             map.put(c, i++);
         }
 

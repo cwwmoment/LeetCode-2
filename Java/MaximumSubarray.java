@@ -1,11 +1,10 @@
 /**
- *
  * Created by happygirlzt on 7 Sep 2018 at 7:10:35 PM
  *
  * LeetCode #53. Maximum Subarray
+ *
  */
 public class MaximumSubarray {
-
     // TLE solution
     public int maxSubnumsrray(int[] nums) {
         if (nums.length == 0)
@@ -105,5 +104,23 @@ public class MaximumSubarray {
         }
         // return sum of elements on left and right of mid
         return (leftSum + rightSum);
+    }
+
+    // Updated on 6 Mar 2019
+    // Time: O(N), Space: O(1)
+    public int maxSubArray(int[] nums) {
+        int maxSoFar = Integer.MIN_VALUE;
+        int maxEndHere = 0;
+        for (int i = 0; i < nums.length; i++) {
+            maxEndHere += nums[i];
+            if (maxSoFar < maxEndHere) {
+                maxSoFar = maxEndHere;
+            }
+            if (maxEndHere < 0) {
+                maxEndHere = 0;
+            }
+        }
+
+        return maxSoFar;
     }
 }

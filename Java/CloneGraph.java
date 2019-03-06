@@ -5,31 +5,59 @@
  *
  */
 
-/**
- * Definition for undirected graph.
- * class UndirectedGraphNode {
- *     int label;
- *     List<UndirectedGraphNode> neighbors;
- *     UndirectedGraphNode(int x) { label = x; neighbors = new ArrayList<UndirectedGraphNode>(); }
- * };
- */
 public class Solution {
-    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
-        if (node == null) return null;
-        Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
-        helper(map, node);
+    class Node {
+        public int val;
+        public List<Node> neighbors;
+
+        public Node() {}
+
+        public Node(int _val,List<Node> _neighbors) {
+            val = _val;
+            neighbors = _neighbors;
+        }
+    };
+
+    public Node cloneGraph(Node node) {
+        Map<Node, Node> map = new HashMap<>();
+        dfs(node, map);
         return map.get(node);
     }
 
-    private void helper(Map<UndirectedGraphNode, UndirectedGraphNode> map, UndirectedGraphNode node) {
+    private void dfs(Node node, Map<Node, Node> map) {
+        if (node == null) return;
         if (map.containsKey(node)) return;
-        map.put(node, new UndirectedGraphNode(node.label));
-        if (node.neighbors == null) return;
-        for (UndirectedGraphNode neigh: node.neighbors) {
-            helper(map, neigh);
-            // Pay attention to here
-            // should firstly get the cloned node, then add them
+        Node dup = new Node(node.val, new ArrayList<>());
+        map.put(node, dup);
+        for (Node neigh: node.neighbors) {
+            dfs(neigh, map);
             map.get(node).neighbors.add(map.get(neigh));
         }
+    }
+
+    // Updated on 6 Mar 2019
+    // bfs
+    public Node cloneGraph1(Node node) {
+        Map<Node, Node> map = new HashMap<>();
+        Queue<Node> q = new LinkedList<>();
+        q.offer(node);
+        Node dup = new Node(node.val, new ArrayList<>());
+        map.put(node, dup);
+        while (!q.isEmpty()) {
+            Node cur = q.poll();
+
+            for (Node neigh: cur.neighbors) {
+                if (!map.containsKey(neigh)) {
+                    q.offer(neigh);
+                    Node neighDup = new Node(neigh.val, new ArrayList<>());
+                    map.put(neigh, neighDup);
+                    map.get(cur).neighbors.add(neighDup);
+                } else {
+                    map.get(cur).neighbors.add(map.get(neigh));
+                }
+            }
+        }
+
+        return dup;
     }
 }
