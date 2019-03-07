@@ -116,54 +116,52 @@ public class KthLargestElementInArray {
     }
 
     // Updated on 24 Jan 2019
-    class Solution {
-        public int findKthLargest(int[] nums, int k) {
-            int order = nums.length - k;
-            int pivotIndex = quickSelect(nums, 0, nums.length - 1, order);
-            return nums[pivotIndex];
+    public int findKthLargest(int[] nums, int k) {
+        int order = nums.length - k;
+        int pivotIndex = quickSelect(nums, 0, nums.length - 1, order);
+        return nums[pivotIndex];
+    }
+
+    private int quickSelect(int[] a, int lo, int hi, int k) {
+        // System.out.println("lo: " + lo + " hi: " + hi);
+        if (lo == hi) return lo;
+
+
+        int pivotIndex = partition(a, lo, hi);
+
+        if (pivotIndex == k) {
+            return pivotIndex;
+        } else if (pivotIndex > k) {
+            return quickSelect(a, lo, pivotIndex - 1, k);
+        } else {
+            return quickSelect(a, pivotIndex + 1, hi, k);
         }
+    }
 
-        private int quickSelect(int[] a, int lo, int hi, int k) {
-            // System.out.println("lo: " + lo + " hi: " + hi);
-            if (lo == hi) return lo;
+    private int partition(int[] a, int lo, int hi) {
+        Random r = new Random();
+        int pivotIndex = lo + r.nextInt(hi - lo);
+        // System.out.println("pivotIndex " + pivotIndex);
+        int pivot = a[pivotIndex];
 
-
-            int pivotIndex = partition(a, lo, hi);
-
-            if (pivotIndex == k) {
-                return pivotIndex;
-            } else if (pivotIndex > k) {
-                return quickSelect(a, lo, pivotIndex - 1, k);
+        swap(a, pivotIndex, hi);
+        int pos = hi;
+        hi--;
+        while (lo <= hi) {
+            if (a[lo] > pivot) {
+                swap(a, lo, hi--);
             } else {
-                return quickSelect(a, pivotIndex + 1, hi, k);
+                lo++;
             }
         }
 
-        private int partition(int[] a, int lo, int hi) {
-            Random r = new Random();
-            int pivotIndex = lo + r.nextInt(hi - lo);
-            // System.out.println("pivotIndex " + pivotIndex);
-            int pivot = a[pivotIndex];
+        swap(a, lo, pos);
+        return lo;
+    }
 
-            swap(a, pivotIndex, hi);
-            int pos = hi;
-            hi--;
-            while (lo <= hi) {
-                if (a[lo] > pivot) {
-                    swap(a, lo, hi--);
-                } else {
-                    lo++;
-                }
-            }
-
-            swap(a, lo, pos);
-            return lo;
-        }
-
-        private void swap(int[] a, int i, int j) {
-            int tmp = a[i];
-            a[i] = a[j];
-            a[j] = tmp;
-        }
+    private void swap(int[] a, int i, int j) {
+        int tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
     }
 }

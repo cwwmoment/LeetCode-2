@@ -10,7 +10,8 @@ class Solution {
         Set<String> set = new HashSet<>(Arrays.asList("0", "1", "8", "11", "00", "69", "96", "88"));
         int i = 0, j = num.length() - 1;
         while (i <= j) {
-            if (!set.contains(num.charAt(i) + "" + num.charAt(j)))                     return false;
+            if (!set.contains(num.charAt(i) + "" + num.charAt(j)))
+                return false;
             i++; j--;
         }
 

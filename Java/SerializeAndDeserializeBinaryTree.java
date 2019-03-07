@@ -40,12 +40,11 @@ public class SerializeAndDeserializeBinaryTree {
         private TreeNode buildTree(Deque<String> nodes) {
             String val = nodes.remove();
             if (val.equals(NN)) return null;
-            else {
-                TreeNode node = new TreeNode(Integer.valueOf(val));
-                node.left = buildTree(nodes);
-                node.right = buildTree(nodes);
-                return node;
-            }
+
+            TreeNode node = new TreeNode(Integer.valueOf(val));
+            node.left = buildTree(nodes);
+            node.right = buildTree(nodes);
+            return node;
         }
     }
 }

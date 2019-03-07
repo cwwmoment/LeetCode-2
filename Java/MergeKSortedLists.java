@@ -113,4 +113,49 @@ public class MergeKSortedLists {
 
         return dummy.next;
     }
+
+    // Updated on 7 Mar 2019
+    // Merge Sort
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
+        return mergeSort(lists, 0, lists.length - 1);
+    }
+
+    private ListNode mergeSort(ListNode[] lists, int lo, int hi) {
+        // 注意这里的边界条件
+        if (lo == hi) return lists[lo];
+        int mid = lo + (hi - lo) / 2;
+        ListNode left = mergeSort(lists, lo, mid);
+        ListNode right = mergeSort(lists, mid + 1, hi);
+        return merge(left, right);
+    }
+
+    private ListNode merge(ListNode left, ListNode right) {
+        ListNode dummy = new ListNode(0);
+        ListNode res = dummy;
+        while (left != null && right != null) {
+            if (left.val < right.val) {
+                res.next = left;
+                left = left.next;
+            } else {
+                res.next = right;
+                right = right.next;
+            }
+            res = res.next;
+        }
+
+        while (left != null) {
+            res.next = left;
+            left = left.next;
+            res = res.next;
+        }
+
+        while (right != null) {
+            res.next = right;
+            right = right.next;
+            res = res.next;
+        }
+
+        return dummy.next;
+    }
 }

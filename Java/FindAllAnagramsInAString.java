@@ -71,4 +71,39 @@ public class FindAllAnagramsInAString {
         }
         return true;
     }
+
+    // Updated 7 Mar 2019
+    // More efficient, sliding window, O(N)
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        int[] map = new int[128];
+        for (char c : p.toCharArray()) {
+            map[c]++;
+        }
+
+        int count = 0;
+        int lo = 0;
+        int hi = 0;
+        for (; hi < s.length(); hi++) {
+            if (map[s.charAt(hi)]-- > 0) {
+                count++;
+            }
+
+            if (count == p.length()) {
+                while (lo < hi && map[s.charAt(lo)] < 0) {
+                    map[s.charAt(lo++)]++;
+                }
+
+                // Have to check this
+                if (hi - lo + 1 == p.length())
+                    res.add(lo);
+
+                map[s.charAt(lo)]++;
+                lo++;
+                count--;
+            }
+        }
+
+        return res;
+    }
 }
