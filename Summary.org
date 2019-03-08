@@ -1,0 +1,266 @@
+#+TITLE: LeetCode in One
+#+DATE: <2019-03-08 Fri 19:32>
+
+* Array Manipulation
+** Set Matrix Zeroes
+** Rotate Matrix
+
+* Two Pointers Approach
+When you see array/String problem, please think whether you can take use of two pointers approach.
+
+** Typical Situation
+*** Trapping Rain Water
+ Compared to Container With Most Water
+
+*** Check valid palindrome
+*** 3Sum
+   Sort at first
+*** Merge Sorted Array
+*** Sort Colors
+*** Move Zeroes
+*** Squares of a Sorted Array
+
+* Linked List
+1. Need to remember the slow and fast pointers technique.
+2. Use dummy node to handle the null
+** Remove Nth Node From End
+** Reverse Related
+*** Reverse Nodes in k-Group
+*** Reorder List
+1. Find mid node (use slow, fast node approach)
+2. Reverse the right part
+3. Merge the second node to the first node (kind like Zig-zag merge style)
+** Merge K Sorted Lists
+ Two approaches O(NlogK)
+1. Use Heap
+2. Merge Sort
+
+** Manipulation
+*** Insert Into a Cyclic Sorted List
+
+* HashMap
+** Relation between chars
+Usually lower case characters
+*** Verifying an Alien Dictionary
+*** Custom Sort String
+
+** Intersection of Two Arrays
+If one array is much smaller than the other, can use binary search.
+
+** Deep Copy
+1. Clone Graph
+2. Copy List with Random Pointer
+
+** Valid Sudoku
+** Brick Wall
+* Heap
+** Top K Frequent Elemnts
+** Find Median From Data Stream
+
+* Stack
+** Simulate the Call Stack
+  - Exclusive Time of Functions
+** Nested Structures
+*** Flatten a Multilevel Doubly Linked List
+*** Flatten Nested List Iterator
+** Simplify Path
+** Backspace String Compare
+** Remove K digits
+** Decode String
+Two stacks, numStack and strStack
+
+* Tree
+** Height/Depth Related
+*** Diameter of Binary Tree
+*** Balanced Binary Tree
+
+** Breadth-first Search
+*** Binary Tree Vertial Order Traversal
+
+** Path Related - From root to leaf
+*** Binary Tree Paths
+
+** Lowest Common Ancestor of Binary Tree
+
+** Shape Validation
+- Check Completeness of a Binary Tree
+1. BFS
+2. DFS
+*** Subtree of Another Tree
+*** Count Complete Tree Nodes
+*** Symmetric Tree
+
+** Shape modification
+*** Flatten Binary Tree to Linked List
+*** Invert Binary Tree
+*** Increasing Order Search Tree
+
+** Binary Search Tree
+*** Use BST property
+**** Validate Binary Search Tree
+**** Closest Binary Search Tree Value
+**** Kth Smallest Element in a BST
+
+*** Simulating Inorder Traversal
+**** Binary Search Tree Iterator
+    Separate the inoder traversal
+**** Recover Binary Search Tree
+
+* Graph
+** Explicit Graph
+*** Breath-first Search
+Suitable for find the shortest path in undirected graphs.
+**** Shortest Distance from All Buildings(With obstacles)
+   Compared with Best Meeting Point(Without obstacles)
+
+**** Walls and Gates
+**** The Maze
+
+*** Depth-first Search
+**** Bipartite Graph
+   Try to color the nodes with two colors.
+**** Clone Graph(Also can use BFS)
+**** Number of Islands
+The call stack would be O(MN)
+**** Accounts Merge
+Steps:
+1. Build Graph
+2. DFS
+**** Max Area of Island
+
+** Implicit Graph
+*** Breadth-first Search
+**** Remove Invalid Parentheses
+Compared to minimum Add to Make parenthese valid
+**** Word Ladder
+Bi-directional bfs
+
+*** Depth-first Search
+**** Eulerian Path
+Reconstruct Itinerary
+**** Word Search
+**** Nested List Weight Sum
+
+** Topological Sort
+*** Course Schedule
+*** Alien Dictionary
+
+* Math
+** Valid Number
+1. eSeen
+2. numSeen
+3. dotSeen
+
+** Multiply Strings
+** Add Strings
+
+** Modular
+1. Palindrome Number
+2. Reverse Integer
+
+* Binary Search
+If you see the array is *Sorted*, think of using binary search.
+** Rotated Sorted
+One side should be sorted.
+1. Search in Rotated Sorted Array
+2. Find Minimum in Rotated Sorted Array
+
+** First Bad Version
+** Find First and Last Position of Sorted Array
+Compared to Find K Closest Elements
+
+** Math Related
+*** Divide Two Integers-bit manipulation
+*** Pow(x, n)
+*** Sqrt(x)
+
+** Peak Related
+We do not have to iterate the whole array
+*** Find Peak Element
+     Related: Monotonic Array: O(N), O(1)
+*** Peak Index in a Mountain Array
+
+** Search a 2D Matrix
+
+* Backtracking
+** Add and Search Word
+Have regular expression ., so should use backtracking to try every probability.
+** Expression Add Operators
+At each slot, try four choices: +, -, *, empty.
+
+** Letter Combinations of a Phone Number
+** Strobogrammatic Number 3
+** N-Queens
+** Sudoku Solver
+** Generate Parentheses
+** Restore IP Addresses
+** Word Search 2
+Many words, should use Trie
+** Permutations
+** Word Pattern 2
+** Subsets
+
+* Dynamic Programming
+** Longest Increasing Subsequence
+
+** Cache
+*** Prefix Sum
+- 560	Subarray Sum Equals K
+- 523 Continuous Subarray Sum
+- Maximum Subarray
+maxSoFar, maxEndHere
+
+*** 2D array
+Range Sum Query 2D
+*** Fixed Size Sum
+Maximum Sum of 3 Non-Overlapping subarray
+
+*** Longest Increasing Path in a matrix
+** String related
+*** Regular Expression Matching
+*** Word Break
+*** Longest Valid Parentheses
+*** Longest Palindromic Substring
+*** Edit Distance
+*** Palindromic Substrings
+*** Wildcard Matching
+
+** Knapsack
+*** Coin Change-Minimum coins
+** Subset sum
+*** Partition Equal Subset Sum
+*** Target Sum
+** Optimal Structure
+*** Decode Ways
+*** Unique Paths
+*** Coin Change2
+* Sliding Window
+Basically, use a *hi* pointer find a valid/possible window and use a *lo* pointer to find a minimum/correct window. Usually will use a HashMap, or a map array
+** Minimum Window Substring
+** Find All anagrams in a String
+** Longest Substring with At Most K Characters
+** Permutation in String
+* Iterator
+** Flatten 2D Array
+
+* Kth Problems
+Usually have two typical approaches.
+- Heap: O(nlogK)
+- Quick Select/Divide and Conquer: O(n) Random pick the pivot
+
+** K Closest Points to Origin
+
+* Design
+** LRU Cache
+1. Doubly Linked List: Remove is O(1)
+2. HashMap: Lookup is O(1)
+** Design Tic-tac-toc
+Use two array, rows, cols, two variables, diagonal, antiDiagonal, use record the marks of two players
+Core point is how to handle the index.
+** All O(1) Data Structure
+** Insert Delete GetRandom O(1)
+** Circular Queue
+
+* Bit Manipulation
+** Single Number
+** Total Hamming Distance

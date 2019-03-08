@@ -34,4 +34,31 @@ public class MaximumBinaryTree {
 
         return root;
     }
+
+    // Modular
+    // Updated on 8 Mar 2019
+    // O(N^2), O(N)
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        return helper(nums, 0, nums.length - 1);
+    }
+
+    private TreeNode helper(int[] nums, int lo, int hi) {
+        if (lo > hi) return null;
+        int maxIndex = findMax(nums, lo, hi);
+        TreeNode root = new TreeNode(nums[maxIndex]);
+        root.left = helper(nums, lo, maxIndex - 1);
+        root.right = helper(nums, maxIndex + 1, hi);
+        return root;
+    }
+
+    private int findMax(int[] nums, int lo, int hi) {
+        int maxIndex = lo;
+        for (int i = lo; i <= hi; i++) {
+            if (nums[i] > nums[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+
+        return maxIndex;
+    }
 }
