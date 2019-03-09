@@ -71,4 +71,36 @@ public class BinaryTreePaths {
         helper(res, sb, root.right);
         sb.setLength(len);
     }
+
+    // Updated on 9 Mar 2019
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> res = new ArrayList<>();
+        if (root == null) return res;
+        StringBuilder sb = new StringBuilder();
+        sb.append(root.val);
+        helper(res, root, sb);
+        return res;
+    }
+
+    private void helper(List<String> res, TreeNode root, StringBuilder sb) {
+        int len = sb.length();
+        if (root == null) return;
+        if (root.left == null && root.right == null) {
+            res.add(sb.toString());
+            sb.setLength(len);
+            return;
+        }
+        if (root.left != null) {
+            sb.append("->");
+            sb.append(root.left.val);
+            helper(res, root.left, sb);
+            sb.setLength(len);
+        }
+        if (root.right != null) {
+            sb.append("->");
+            sb.append(root.right.val);
+            helper(res, root.right, sb);
+            sb.setLength(len);
+        }
+    }
 }

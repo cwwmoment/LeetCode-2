@@ -42,4 +42,37 @@ public class LongestIncreasingPathInAMatrix {
         memo[i][j] = max;
         return max;
     }
+
+    // Updated on 9 Mar 2019
+    static final int[] r = {1, -1, 0, 0};
+    static final int[] c = {0, 0, 1, -1};
+    public int longestIncreasingPath(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) return 0;
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int[][] dp = new int[rows][cols];
+
+        int max = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                max = Math.max(max, dfs(matrix, i, j, dp));
+            }
+        }
+
+        return max;
+    }
+
+    private int dfs(int[][] matrix, int row, int col, int[][] dp) {
+        if (dp[row][col] != 0) return dp[row][col];
+        for (int i = 0; i < 4; i++) {
+            int rr = r[i] + row;
+            int cc = c[i] + col;
+            if (rr >= 0 && cc >= 0 && rr < matrix.length && cc < matrix[0].length &&
+               matrix[rr][cc] > matrix[row][col]) {
+                dp[row][col] = Math.max(dp[row][col], dfs(matrix, rr, cc, dp));
+            }
+        }
+        dp[row][col] += 1;
+        return dp[row][col];
+    }
 }

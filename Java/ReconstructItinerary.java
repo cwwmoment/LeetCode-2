@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
  *
  */
 
-public class ReconstructItinerary {    
+public class ReconstructItinerary {
     public List<String> findItinerary(String[][] tickets) {
         Map<String, PriorityQueue<String>> flights = new HashMap<>();
         LinkedList<String> res = new LinkedList<>();
@@ -40,16 +40,44 @@ public class ReconstructItinerary {
             graph.putIfAbsent(out, new PriorityQueue<>());
             graph.get(out).add(in);
         }
-        
+
         dfs("JFK", graph, res);
         return res;
     }
-    
+
     private void dfs(String out, Map<String, PriorityQueue<String>> graph, List<String> res) {
         PriorityQueue<String> ins = graph.get(out);
         while (ins != null && !ins.isEmpty()) {
             dfs(ins.poll(), graph, res);
         }
         res.add(0, out);
+    }
+
+    // Updated on 9 Mar 2019
+    public List<String> findItinerary(String[][] tickets) {
+        LinkedList<String> res = new LinkedList<>();
+        Map<String, PriorityQueue<String>> g = new HashMap<>();
+        buildGraph(g, tickets);
+        dfs(g, "JFK", res);
+        return res;
+    }
+
+    private void dfs(Map<String, PriorityQueue<String>> g, String from, LinkedList<String> res) {
+        PriorityQueue<String> arrivals = g.get(from);
+        while (arrivals != null && !arrivals.isEmpty()) {
+            String to = arrivals.poll();
+            dfs(g, to, res);
+
+        }
+        res.addFirst(from);
+    }
+
+    private void buildGraph(Map<String, PriorityQueue<String>> g, String[][] tickets) {
+        for (String[] travel : tickets) {
+            String from = travel[0];
+            String to = travel[1];
+            g.putIfAbsent(from, new PriorityQueue<>());
+            g.get(from).offer(to);
+        }
     }
 }

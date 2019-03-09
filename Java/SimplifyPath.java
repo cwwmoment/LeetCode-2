@@ -30,10 +30,10 @@ class Solution {
     // Updated on 28 Feb 2019
     // bidirectional-queue, which is deque
     // .., pop(), finally, poll()
+    // removeLast(), removeFirst(), addLast()
     public String simplifyPath1(String path) {
         if (path == null || path.length() == 0) return "";
         Deque<String> q = new ArrayDeque<>();
-
         for (String s : path.split("/")) {
             if (s.equals("..")) {
                 if (!q.isEmpty()) q.pollLast();
