@@ -92,4 +92,28 @@ public class DecodeWays {
 
         return dp[s.length()];
     }
+
+    // Updated on 10 Mar 2019
+    public int numDecodings1(String s) {
+        int len = s.length();
+        int[] dp = new int[len + 1];
+        dp[0] = 1;
+        dp[1] = s.charAt(0) == '0' ? 0 : 1;
+
+        for (int i = 2; i <= len; i++) {
+            // 这个地方要注意，不能写成Integer.valueOf(s.charAt(i - 1)); 这样
+            // 返回的不是int的值，而是ASCII码值。。所以要-'0'
+            int oneDigit = s.charAt(i - 1) - '0';
+            if (oneDigit >= 1 && oneDigit <= 9) {
+                dp[i] = dp[i - 1];
+            }
+
+            int twoDigits = Integer.valueOf(s.substring(i - 2, i));
+            if (twoDigits >= 10 && twoDigits <= 26) {
+                dp[i] += dp[i - 2];
+            }
+        }
+
+        return dp[len];
+    }
 }

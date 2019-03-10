@@ -7,6 +7,7 @@
 public class LongestPalindromicSubstring {
 
     // Solution 1: Dynamic Programming
+    // Time: O(N^2), Space: O(N^2)
     public static String longestPalindrome(String s) {
         String res = null;
         if (s == null | s.length() <= 1)
@@ -15,14 +16,13 @@ public class LongestPalindromicSubstring {
         int n = s.length();
         boolean[][] dp = new boolean[n][n];
 
-        // Length = 1
         for (int i = 0; i < n; i++) {
             dp[i][i] = true;
         }
 
         int maxLen = 1;
         int start = 0;
-        // Length = 2
+
         for (int i = 0; i < n - 1; i++) {
             if (s.charAt(i) == s.charAt(i + 1)) {
                 dp[i][i + 1] = true;
@@ -41,8 +41,6 @@ public class LongestPalindromicSubstring {
                     maxLen = k;
                     start = i;
                     dp[i][j] = true;
-                    // System.out.println("maxLen = " + maxLen);
-                    // System.out.println("Start from " + start);
                 }
             }
         }

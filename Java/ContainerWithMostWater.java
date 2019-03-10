@@ -5,28 +5,28 @@
  * 2018/7/24
  */
 public class ContainerWithMostWater {
-	public int maxArea(int[] height) {
-		int n = height.length;
-		int left = 0, right = n - 1;
-		int max = 0;
-		
-		while(left < right) {
-			int candidate = (height[left] < height[right] ? height[left] : height[right])
-					* (right - left);
-			max = (max > candidate) ? max : candidate;
-			
-			if (height[left] < height[right]) {
-				left++;
-			} else {
-				right--;
-			}
-		}
-		
-		return max;
-	}
+    public int maxArea(int[] height) {
+        int n = height.length;
+        int left = 0, right = n - 1;
+        int max = 0;
 
-	// Updated on 9 Feb 2019
-	public int maxArea1(int[] height) {
+        while(left < right) {
+            int candidate = (height[left] < height[right] ? height[left] : height[right])
+                * (right - left);
+            max = (max > candidate) ? max : candidate;
+
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return max;
+    }
+
+    // Updated on 9 Feb 2019
+    public int maxArea1(int[] height) {
         int lo = 0, hi = height.length - 1;
         int max = 0;
         int leftMax = height[0], rightMax = height[hi];
@@ -45,7 +45,28 @@ public class ContainerWithMostWater {
                 rightMax = Math.max(rightMax, height[hi]);
             }
         }
-        
+
+        return max;
+    }
+
+    // Updated on 10 Mar 2019
+    public int maxArea2(int[] height) {
+        int lo = 0, hi = height.length - 1;
+        int max = 0;
+        while (lo < hi) {
+            int leftHeight = height[lo];
+            int rightHeight = height[hi];
+            max = Math.max(max, Math.min(leftHeight, rightHeight) * (hi - lo));
+            if (leftHeight < rightHeight) {
+                lo++;
+            } else if (leftHeight > rightHeight) {
+                hi--;
+            } else {
+                lo++;
+                hi--;
+            }
+        }
+
         return max;
     }
 }

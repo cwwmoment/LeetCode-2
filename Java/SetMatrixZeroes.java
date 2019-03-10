@@ -61,7 +61,7 @@ public class SetMatrixZeroes {
             }
         }
 
-        // first row
+        // Regular iteration is enough
         for (int i = 1; i < rowNum; i++) {
             for (int j = 1; j < colNum; j++) {
                 if (matrix[i][0] == 0 || matrix[0][j] == 0) {
