@@ -36,7 +36,7 @@ public class Vector2D implements Iterator<Integer> {
  * while (i.hasNext()) v[f()] = i.next();
  */
 
- // Updated on 23 Feb 2019
+// Updated on 23 Feb 2019
 class Vector2D1 {
     private int i;
     private int j;
@@ -46,17 +46,17 @@ class Vector2D1 {
         this.i = 0;
         this.j = 0;
     }
-    
+
     public int next() {
         if (hasNext()) {
             int res = v[i][j];
             j++;
             return res;
         }
-        
+
         return -1;
     }
-    
+
     public boolean hasNext() {
         if (i == v.length) return false;
         while (j == v[i].length) {
@@ -64,7 +64,37 @@ class Vector2D1 {
             i++;
             if (i == v.length) return false;
         }
-        
+
+        return true;
+    }
+}
+
+// Updated on 11 Mar 2019
+class Vector2D {
+
+    private int rowPtr;
+    private int colPtr;
+    private int[][] v;
+    public Vector2D(int[][] v) {
+        this.v = v;
+        rowPtr = 0;
+        colPtr = 0;
+    }
+
+    public int next() {
+        if (hasNext()) return v[rowPtr][colPtr++];
+        return -1;
+    }
+
+    public boolean hasNext() {
+        // 这句不能少，因为可能给定的v是空的，所以0也是不合适的
+        if (rowPtr >= v.length) return false;
+        while (colPtr >= v[rowPtr].length) {
+            rowPtr++;
+            if (rowPtr == v.length) return false;
+            colPtr = 0;
+        }
+
         return true;
     }
 }
