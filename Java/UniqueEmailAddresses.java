@@ -6,8 +6,8 @@
  */
 
 public class UniqueEmailAddresses {
-   public int numUniqueEmails(String[] emails) {
-        HashSet<String> set = new HashSet<>();
+    public int numUniqueEmails(String[] emails) {
+        Set<String> set = new HashSet<>();
         for (String s : emails) {
             set.add(modify(s));
         }
@@ -58,5 +58,29 @@ public class UniqueEmailAddresses {
         }
 
         return modified.size();
+    }
+
+    // Updated on 19 Mar 2019
+    public int numUniqueEmails(String[] emails) {
+        Set<String> set = new HashSet<>();
+        for (String mail : emails) {
+            set.add(modify(mail));
+        }
+
+        return set.size();
+    }
+
+    private String modify(String email) {
+        String[] addresses = email.split("@");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < addresses[0].length(); i++) {
+            if (addresses[0].charAt(i) == '+') break;
+            if (addresses[0].charAt(i) == '.') continue;
+            sb.append(addresses[0].charAt(i));
+        }
+
+        sb.append('@');
+        sb.append(addresses[1]);
+        return sb.toString();
     }
 }

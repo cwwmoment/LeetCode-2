@@ -1,6 +1,4 @@
-import java.util.Arrays;
-
-class FlippingAnImage {
+public class FlippingAnImage {
     public static int[][] rev(int[][] a) {
 
         int len = a.length;  // rows
@@ -13,10 +11,6 @@ class FlippingAnImage {
                 a[i][j] = a[i][leng-j-1];
                 a[i][leng-j-1] = tmp;
             }
-        }
-
-        for(int k = 0; k < a.length; k++) {
-            System.out.println(Arrays.toString(a[k]));
         }
 
         return a;
@@ -49,11 +43,11 @@ class FlippingAnImage {
                 A[i][j] = tmp;
             }
         }
-        
+
         return A;
     }
-    
-    
+
+
     // Solution 3
     public int[][] flipAndInvertImage3(int[][] A) {
         int n = A[0].length;
@@ -68,13 +62,37 @@ class FlippingAnImage {
 
         return A;
     }
-    
-    public static void main(String[] args) {
-        int[][] b = {{1,1,0,0}, {1,0,0,1},{0,1,1,1},{1,0,1,0}};
-        b = flipAndInvertImage0(b);
 
-        for(int k = 0; k < b.length; k++) {
-            System.out.println(Arrays.toString(b[k]));
+    // Updated on 19 Mar 2019
+    public int[][] flipAndInvertImage(int[][] A) {
+        for (int[] row: A) {
+            reverse(row);
+            flip(row);
         }
+
+        return A;
+    }
+
+    private void flip(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                nums[i] = 1;
+            } else {
+                nums[i] = 0;
+            }
+        }
+    }
+
+    private void reverse(int[] nums) {
+        int lo = 0, hi = nums.length - 1;
+        while (lo < hi) {
+            swap(nums, lo++, hi--);
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
     }
 }

@@ -2,13 +2,13 @@
  * LeetCode #771.Jewels and Stones
  * happygirlzt
  * Created on 14 July 2018
- * 
+ *
  */
 import java.util.HashSet;
 import java.util.Set;
 
 class JewelsandStones {
-	// Solution 1
+    // Solution 1
     public static int numJewelsInStones(String J, String S) {
         int count = 0;
 
@@ -22,7 +22,7 @@ class JewelsandStones {
 
         return count;
     }
-    
+
     // Solution 2
     public static int numJewelsInStones1(String J, String S) {
         int count = 0;
@@ -41,9 +41,26 @@ class JewelsandStones {
 
         return count;
     }
-    
+
     // Solution 3: regex
     public static int numJewelsInStones2(String J, String S) {
         return(S.replaceAll("[^" + J + "]", "").length());
+    }
+
+    // Solution 4: HashMap
+    public int numJewelsInStones(String J, String S) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : S.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        int count = 0;
+        for (char c : J.toCharArray()) {
+            if (map.containsKey(c)) {
+                count += map.get(c);
+            }
+        }
+
+        return count;
     }
 }

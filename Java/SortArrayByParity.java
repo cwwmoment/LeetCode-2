@@ -28,4 +28,20 @@ class Solution {
 
         return a;
     }
+
+    // Updated on 19 Mar 2019
+    public int[] sortArrayByParity1(int[] A) {
+        int n = A.length;
+        int[] res = new int[n];
+        int i = 0, j = n - 1;
+        for (int index = 0; index < n; index++) {
+            if (A[index] % 2 == 0) {
+                res[i++] = A[index];
+            } else {
+                res[j--] = A[index];
+            }
+        }
+
+        return res;
+    }
 }
