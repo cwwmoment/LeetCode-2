@@ -7,29 +7,34 @@
 
 class Solution {
     public int oddEvenJumps(int[] A) {
-        int n = A.length;
-        if(n < 2) return n;
-        int[] higher = new int[n];
-        Arrays.fill(higher,-1);
-        int[] lower = new int[n];
-        Arrays.fill(lower,-1);
+        int N = A.length;
+        boolean[] odd = new boolean[N];
+        boolean[] even = new boolean[N];
+        odd[N - 1] = true;
+        even[N - 1] = true;
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        map.put(A[N - 1], N - 1);
 
-        TreeMap<Integer,Integer> map= new TreeMap<>();
-        map.put(A[n-1],n-1);
-        higher[n - 1] = 1;
-        lower[n - 1] = 1;
+        for (int i = N - 2; i >= 0; i--) {
+            int num = A[i];
+            Integer lower = map.floorKey(num);
+            Integer higher = map.ceilingKey(num);
 
-        for (int i = n - 2; i > -1; i--) {
-            Map.Entry hi= map.ceilingEntry(A[i]);
-            Map.Entry lo= map.floorEntry(A[i]);
-            if (hi!=null) higher[i] = lower[(int)hi.getValue()];
-            if (lo!=null) lower[i] = higher[(int)lo.getValue()];
-            map.put(A[i],i);
+            if (lower != null) {
+                even[i] = odd[map.get(lower)];
+            }
+
+            if (higher != null) {
+                odd[i] = even[map.get(higher)];
+            }
+
+            map.put(A[i], i);
         }
 
-        int ans = 0;
-        for (int x: higher)
-            if(x == 1) ans++;
-        return ans;
+        int count = 0;
+        for (boolean val : odd) {
+            if (val) count++;
+        }
+        return count;
     }
 }
