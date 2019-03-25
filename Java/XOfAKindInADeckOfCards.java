@@ -61,13 +61,14 @@ public class XOFAKindInADeckOfCards {
 
         for (int j : map.values()) {
             res = gcd1(j, res);
-            // System.out.println("res = " + res);
         }
 
         return res > 1;
     }
 
-    public int gcd1(int a, int b) {
-        return b > 0 ? gcd1(b, a % b) : a;
+    public int gcd(int a, int b) {
+        // Time complexity: O(log(min(a, b)))
+        if (b == 0) return a;
+        return gcd(b, a % b);
     }
 }

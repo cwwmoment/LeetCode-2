@@ -32,4 +32,31 @@ class Solution {
 
         return res;
     }
+
+    // Updated on 25 Mar 2019
+    // Time: O(max(n, m))
+    // Space: O(n)
+    public int numComponents1(ListNode head, int[] G) {
+        Set<Integer> set = new HashSet<>();
+        for (int i : G) {
+            set.add(i);
+        }
+        int count = 0;
+        ListNode node = head;
+        boolean prevInSet = false;
+        while (node != null) {
+            if (set.contains(node.val)) {
+                set.remove(node.val);
+                if (!prevInSet) {
+                    count++;
+                    prevInSet = true;
+                }
+            } else {
+                prevInSet = false;
+            }
+            node = node.next;
+        }
+
+        return count;
+    }
 }

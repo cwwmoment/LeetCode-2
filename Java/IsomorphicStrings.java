@@ -7,20 +7,15 @@
 
 public class IsomorphicStrings {
     public boolean isIsomorphic(String s, String t) {
-        if (s.length() != t.length()) return false;
-        if (s == null || s.length() == 0) return true;
-
         int[] m1 = new int[256];
         int[] m2 = new int[256];
-        char[] cs = s.toCharArray();
-        char[] ts = t.toCharArray();
-
-        for (int i = 0; i < s.length(); i++) {
-            if (m1[cs[i]] != m2[ts[i]]) return false;
-            m1[cs[i]] = i + 1;
-            m2[ts[i]] = i + 1;
+        if (s.length() != t.length()) return false;
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            if (m1[s.charAt(i)] != m2[t.charAt(i)]) return false;
+            m1[s.charAt(i)] = i + 1;  // Attach a new value
+            m2[t.charAt(i)] = i + 1;
         }
-
         return true;
     }
 }
