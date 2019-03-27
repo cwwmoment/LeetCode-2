@@ -12,7 +12,7 @@ public class MinCostClimbingStairs {
 
         dp[0] = 0;
         for (int i = 1; i < len; i++) {
-            dp[i+1] = Math.min(dp[i] + cost[i], dp[i-1] + cost[i - 1]);
+            dp[i+1] = Math.min(dp[i] + cost[i], dp[i - 1] + cost[i - 1]);
         }
 
         return dp[len];
