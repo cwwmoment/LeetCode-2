@@ -36,4 +36,34 @@ class Solution {
 
         return true;
     }
+
+    // Updated on 30 Mar 2019
+    // O(N)
+    public boolean canTransform(String start, String end) {
+        if (start.length() != end.length()) return false;
+        // if (!start.replace("X", "").equals(end.replace("X", ""))) return false;
+
+        int indexS = 0, indexE = 0;
+        int len = start.length();
+        while (indexS < len && indexE < len) {
+            while (indexS < len && start.charAt(indexS) == 'X') {
+                indexS++;
+            }
+
+            while (indexE < len && end.charAt(indexE) == 'X') {
+                indexE++;
+            }
+
+            if ((indexE == len) ^ (indexS == len)) return false;
+            if (indexE < len && indexS < len) {
+                if (start.charAt(indexS) != end.charAt(indexE)) return false;
+                if (start.charAt(indexS) == 'R' && indexS > indexE) return false;
+                if (start.charAt(indexS) == 'L' && indexS < indexE) return false;
+            }
+
+            indexS++;
+            indexE++;
+        }
+        return true;
+    }
 }

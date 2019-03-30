@@ -71,15 +71,6 @@ public class FindFirstLastPositionOfElementsInSortedArray {
         return new int[]{-1, -1};
     }
 
-    public static void main(String[] args) {
-        int[] a = {1};
-        int[] res = searchRange1(a, 1);
-
-        for (int i : res) {
-            System.out.println(i);
-        }
-    }
-
     // Updated on 1 Feb 2019
     // Two pass binary search
     public int[] searchRange(int[] nums, int target) {
@@ -126,4 +117,7 @@ public class FindFirstLastPositionOfElementsInSortedArray {
 
         return index;
     }
+
+    // Updated on 30 Mar 2019
+
 }

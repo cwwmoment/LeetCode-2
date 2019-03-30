@@ -11,8 +11,8 @@ public class BullsAndCows {
 
         int len = secret.length();
         char[] sc = secret.toCharArray(), gc = guess.toCharArray();
-        HashMap<Character, Integer> map1 = new HashMap<>();
-        HashMap<Character, Integer> map2 = new HashMap<>();
+        Map<Character, Integer> map1 = new HashMap<>();
+        Map<Character, Integer> map2 = new HashMap<>();
 
         for (int i = 0; i < len; i++) {
             if (sc[i] == gc[i]) {
@@ -46,7 +46,7 @@ public class BullsAndCows {
         int bulls = 0;
         int cows = 0;
         int[] numbers = new int[10];
-        for (int i = 0; i<secret.length(); i++) {
+        for (int i = 0; i < secret.length(); i++) {
             int s = Character.getNumericValue(secret.charAt(i));
             int g = Character.getNumericValue(guess.charAt(i));
             if (s == g) bulls++;
