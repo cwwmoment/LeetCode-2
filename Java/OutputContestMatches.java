@@ -24,6 +24,5 @@ class Solution {
             helper(sb, sum * 2 - 1, n, sum - val);
             sb.append(')');
         }
-
     }
 }

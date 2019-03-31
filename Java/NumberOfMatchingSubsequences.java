@@ -1,6 +1,6 @@
 /**
  * Created on 18 Feb 2019 by happygirlzt
- * 
+ *
  * LeetCode #792. Number of Matching Subsequences
  */
 
@@ -47,5 +47,47 @@ public class Solution {
         }
 
         return list.get(lo) > prev ? list.get(lo) : -1;
+    }
+
+    // Updated on 31 Mar 2019
+    public int numMatchingSubseq(String S, String[] words) {
+        int count = 0;
+        Set<String> sub = new HashSet<>();
+        Set<String> nonSub = new HashSet<>();
+
+        for (String word : words) {
+            if (sub.contains(word)) {
+                count++;
+                continue;
+            }
+
+            if (nonSub.contains(word)) {
+                continue;
+            }
+
+            if (isSub(word, S)) {
+                sub.add(word);
+                count++;
+            } else {
+                nonSub.add(word);
+            }
+        }
+
+        return count;
+    }
+
+    private boolean isSub(String word, String s) {
+        if (word.length() > s.length()) return false;
+        int indexW = 0, indexS = 0;
+        while (indexW < word.length() && indexS < s.length()) {
+            if (word.charAt(indexW) == s.charAt(indexS)) {
+                indexW++;
+                indexS++;
+            } else {
+                indexS++;
+            }
+        }
+
+        return indexW == word.length();
     }
 }

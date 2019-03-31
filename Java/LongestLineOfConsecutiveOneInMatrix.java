@@ -5,7 +5,7 @@
  *
  */
 
- class Solution {
+class Solution {
     public int longestLine(int[][] m) {
         if (m == null || m.length == 0) return 0;
         int[][][] dp = new int[m.length + 1][m[0].length + 2][4];
@@ -25,34 +25,31 @@
         return res;
     }
 
-     // Updated on 18 Mar
-     public int longestLine1(int[][] M) {
-         if (M == null || M.length == 0) return 0;
-         int max = 0;
-         int m = M.length, n = M[0].length;
-         int[] row = new int[m];
-         int[] col = new int[n];
-         int[] diag = new int[m + n];
-         int[] adiag = new int[m + n];
+    // Updated on 31 Mar 2019
+    public int longestLine1(int[][] M) {
+        if (M == null || M.length == 0) return 0;
+        int rows = M.length, cols = M[0].length;
 
-         for (int i = 0; i < m; i++) {
-             for (int j = 0; j < n; j++) {
-                 if (M[i][j] == 1) {
-                     row[i]++;
-                     col[j]++;
-                     diag[i + j]++;
-                     adiag[j - i + m]++;
-                     max = Math.max(max, Math.max(row[i], col[j]));
-                     max = Math.max(max, Math.max(diag[i + j], adiag[j - i + m]));
-                 } else {
-                     row[i] = 0;
-                     col[j] = 0;
-                     diag[i + j] = 0;
-                     adiag[j - i + m] = 0;
-                 }
-             }
-         }
+        int[][][] dp = new int[rows + 1][cols + 2][4];
+        int res = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (M[i][j] == 1) {
+                    dp[i + 1][j + 1][0] = dp[i][j + 1][0] + 1;
+                    res = Math.max(res, dp[i + 1][j + 1][0]);
 
-         return max;
-     }
+                    dp[i + 1][j + 1][1] = dp[i + 1][j][1] + 1;
+                    res = Math.max(res, dp[i + 1][j + 1][1]);
+
+                    dp[i + 1][j + 1][2] = dp[i][j][2] + 1;
+                    res = Math.max(res, dp[i + 1][j + 1][2]);
+
+                    dp[i + 1][j + 1][3] = dp[i][j + 2][3] + 1;
+                    res = Math.max(res, dp[i + 1][j + 1][3]);
+                }
+            }
+        }
+
+        return res;
+    }
 }

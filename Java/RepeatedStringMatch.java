@@ -18,4 +18,19 @@ class Solution {
         }
         return repeatedTimes;
     }
+
+    // Updated on 31 Mar 2019
+    public int repeatedStringMatch1(String A, String B) {
+        int count = 0;
+        StringBuilder sb = new StringBuilder();
+        while (sb.length() < B.length()) {
+            sb.append(A);
+            count++;
+        }
+
+        if (sb.indexOf(B) > -1) return count;
+        sb.append(A);
+        if (sb.indexOf(B) > -1) return ++count;
+        return -1;
+    }
 }
