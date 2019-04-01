@@ -26,4 +26,57 @@ public class GraphValidTree {
         if (roots[i] == -1) return i;
         return find(roots, roots[i]);
     }
+
+    // Updated on 1 Apr 2019
+    class DSU {
+        int[] root;
+        int[] size;
+        int count;
+        public DSU(int n) {
+            root = new int[n];
+            size = new int[n];
+            for (int i = 0; i < n; i++) {
+                root[i] = i;
+            }
+            count = n;
+        }
+
+        public int find(int x) {
+            if (root[x] != x) {
+                root[x] = find(root[x]);
+            }
+
+            return root[x];
+        }
+
+        public void union(int x, int y) {
+            int rootX = root[x];
+            int rootY = root[y];
+            if (rootX  == rootY) return;
+
+            if (size[rootX] <= size[rootY]) {
+                root[rootX] = rootY;
+                size[rootY]++;
+            } else {
+                root[rootY] = rootX;
+                size[rootX]++;
+            }
+            count--;
+        }
+    }
+
+    public boolean validTree(int n, int[][] edges) {
+        DSU dsu = new DSU(n);
+        for (int[] edge : edges) {
+            int x = edge[0];
+            int y = edge[1];
+
+            int rootX = dsu.find(x);
+            int rootY = dsu.find(y);
+            if (rootX == rootY) return false;
+            dsu.union(x, y);
+        }
+
+        return dsu.count == 1;
+    }
 }
