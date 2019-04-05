@@ -68,11 +68,46 @@ public class LongestIncreasingPathInAMatrix {
             int rr = r[i] + row;
             int cc = c[i] + col;
             if (rr >= 0 && cc >= 0 && rr < matrix.length && cc < matrix[0].length &&
-               matrix[rr][cc] > matrix[row][col]) {
+                matrix[rr][cc] > matrix[row][col]) {
                 dp[row][col] = Math.max(dp[row][col], dfs(matrix, rr, cc, dp));
             }
         }
         dp[row][col] += 1;
+        return dp[row][col];
+    }
+
+
+    // Updated on 5 Apr 2019
+    public int longestIncreasingPath(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) return 0;
+        int rows = matrix.length, cols = matrix[0].length;
+        int[][] dp = new int[rows][cols];
+
+        int res = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (dp[i][j] == 0) {
+                    dfs(matrix, i, j, dp, Integer.MIN_VALUE);
+                    res = Math.max(res, dp[i][j]);
+                }
+            }
+        }
+
+        return res;
+    }
+
+    private int dfs(int[][] matrix, int row, int col, int[][] dp, int prev) {
+        if (row < 0 || row > matrix.length - 1 ||
+            col < 0 || col > matrix[0].length - 1 ||
+            matrix[row][col] <= prev) return 0;
+
+        if (dp[row][col] != 0) return dp[row][col];
+
+        int left = dfs(matrix, row, col - 1, dp, matrix[row][col]);
+        int right = dfs(matrix, row, col + 1, dp, matrix[row][col]);
+        int up = dfs(matrix, row - 1, col, dp, matrix[row][col]);
+        int down = dfs(matrix, row + 1, col, dp, matrix[row][col]);
+        dp[row][col] = Math.max(left, Math.max(right, Math.max(down, up))) + 1;
         return dp[row][col];
     }
 }
