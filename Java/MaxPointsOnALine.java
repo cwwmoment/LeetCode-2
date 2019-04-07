@@ -53,4 +53,38 @@ class Solution {
         if (b == 0) return a;
         return gcd(b, a % b);
     }
+
+    // Updated on 7 Apr 2019
+    public int maxPoints1(Point[] points) {
+        int n = points.length;
+        if (n < 3) return n;
+        int max = 2;
+        for (int i = 1; i < n; i++) {
+            int count = 0;
+            long x1 = points[i - 1].x;
+            long y1 = points[i - 1].y;
+            long x2 = points[i].x;
+            long y2 = points[i].y;
+
+            if (x1 == x2 && y1 == y2) {
+                for (int j = 0; j < n; j++) {
+                    if (points[j].x == x1 &&
+                        points[j].y == y1) {
+                        count++;
+                    }
+                }
+            } else {
+                for (int j = 0; j < n; j++) {
+                    if ((points[j].y - y2) * (x2 - x1) ==
+                        (y2 - y1) * (points[j].x - x2)) {
+                        count++;
+                    }
+                }
+            }
+
+            max = Math.max(max, count);
+        }
+
+        return max;
+    }
 }

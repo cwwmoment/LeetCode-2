@@ -32,21 +32,21 @@ public class Solution extends Reader4 {
         return index;
     }
 
-    public int read(char[] buf, int n) {
+    // Updated on 7 Apr 2019
+    public int read1(char[] buf, int n) {
         char[] tmp = new char[4];
-        int total = 0;
 
+        int total = 0;
         while (total < n) {
             int count = read4(tmp);
-            count = Math.min(count, n - total);
-            System.arraycopy(tmp, 0, buf, total, count);
-            //    for(int i = 0;  i < count; i++){
-            //       buf[total++] = tmp[i];
-            //  }
-            total += count; // Do not forget to update total
+            int tmpCnt = 0;
+            while (total < n && tmpCnt < count) {
+                buf[total++] = tmp[tmpCnt++];
+            }
             if (count < 4) break;
         }
+
         return total;
     }
 }
-}
+
