@@ -5,15 +5,6 @@
  *
  */
 
-/*
-This problem asks us to find the median point in 2D grid and then calculate all the points to that median point.
-
-We can simply this problem to 1D situation.
-
-2 tricks:
-0. get the coordinate from small to larget, so do not need to sort
-1. use two pointers to get the distance from all the points to the median point.
- */
 class Solution {
     public int minTotalDistance(int[][] grid) {
         List<Integer> rows = new ArrayList<>();
@@ -34,18 +25,18 @@ class Solution {
             }
         }
 
-        return getDis(rows) + getDis(cols);
+        return getDist(rows) + getDist(cols);
     }
 
-    // 0, 0, 2
-    private int getDis(List<Integer> rows) {
-        int i = 0, j = rows.size() - 1;
-        int dis = 0;
-        while (i < j) {
-            dis += rows.get(j) - rows.get(i);
-            j--; i++;
+    private int getDist(List<Integer> list) {
+        int lo = 0, hi = list.size() - 1;
+        int d = 0;
+        while (lo < hi) {
+            d += list.get(hi) - list.get(lo);
+            hi--;
+            lo++;
         }
 
-        return dis;
+        return d;
     }
 }
