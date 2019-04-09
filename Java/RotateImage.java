@@ -13,7 +13,7 @@ public class RotateImage {
 
         int n = m.length;
         int tmp = 0;
-        for (int i = 0; i <= (n - 1) / 2; i++) {
+f        for (int i = 0; i <= (n - 1) / 2; i++) {
             for (int j = i; j < n - 1 - i; j++) {
                 tmp = m[i][j];
                 m[i][j] = m[n - 1 - j][i];

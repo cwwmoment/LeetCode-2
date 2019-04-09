@@ -31,3 +31,31 @@ class RLEIterator {
  * RLEIterator obj = new RLEIterator(A);
  * int param_1 = obj.next(n);
  */
+
+// Updated on 9 Apr 2019
+class RLEIterator {
+
+    private int left;
+    private int index;
+    private int[] nums;
+    public RLEIterator(int[] A) {
+        nums = A;
+        index = 0;
+        left = nums[index];
+    }
+
+    public int next(int n) {
+        while (index < nums.length) {
+            if (n <= left) {
+                left -= n;
+                return nums[index + 1];
+            }
+
+            n -= left;
+            index += 2;
+            if (index < nums.length) left = nums[index];
+        }
+
+        return -1;
+    }
+}
