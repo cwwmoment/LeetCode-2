@@ -5,11 +5,51 @@
  */
 
 public class MaximalRectangle {
-    // 这题好难，和之前那个直方图求最大面积差不多的思路
-    // 但是这题更加复杂一点，就是说把以每一行为底部，然后
-    // 计算每个点处的最高处，和这个高度能遍及的最左边
-    // 和最右边+1，计算最大面积，就是底乘高，每次存起来
-    // 周六的时候要汇总一下这类题
+    // Updated on 12 Apr 2019
+    public int maximalRectangle(char[][] matrix) {
+        if (matrix == null || matrix.length == 0) return 0;
+        int[][] grid = new int[matrix.length][matrix[0].length];
+        buildHistogram(matrix, grid);
+        int max = 0;
+        for (int i = 0; i < grid.length; i++) {
+            max = Math.max(max, maxRec(grid, i, matrix[i].length));
+        }
+        return max;
+    }
+
+    private void buildHistogram(char[][] matrix, int[][] grid) {
+        for (int j = 0; j < matrix[0].length; j++) {
+            grid[0][j] = matrix[0][j] == '1' ? 1 : 0;
+        }
+
+        for (int i = 1; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                grid[i][j] += matrix[i][j] == '0' ? 0 : grid[i - 1][j] + 1;
+            }
+        }
+    }
+
+    private int maxRec(int[][] grid, int bottom, int n) {
+        int max = 0;
+        Deque<Integer> stack = new ArrayDeque<>();
+        stack.push(-1);
+        int curIndex = 0;
+
+        while (curIndex < n) {
+            while (stack.peek() != -1 && grid[bottom][curIndex] <= grid[bottom][stack.peek()]) {
+                max = Math.max(max, grid[bottom][stack.pop()] * (curIndex - stack.peek() - 1));
+            }
+
+            stack.push(curIndex++);
+        }
+
+        while (stack.peek() != -1) {
+            max = Math.max(max, grid[bottom][stack.pop()] * (curIndex - stack.peek() - 1));
+        }
+
+        return max;
+    }
+
     public int maximalRectangle(char[][] m) {
         if (m == null || col == 0) return 0;
 
