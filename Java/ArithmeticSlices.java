@@ -2,7 +2,7 @@
  * Created on 10 Feb 2019 by happygirlzt
  *
  * LeetCode #413. Arithmetic Slices
- * 
+ *
  */
 
 class Solution {
@@ -10,7 +10,7 @@ class Solution {
         int dp = 0;
         int sum = 0;
         for (int i = 2; i < A.length; i++) {
-            if (A[i] - A[i - 1] == A[i - 1] - A[i - 2]) {           
+            if (A[i] - A[i - 1] == A[i - 1] - A[i - 2]) {
                 dp = 1 + dp;
                 sum += dp;
             } else {
