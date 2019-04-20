@@ -10,6 +10,31 @@
 // dp[i][0] 表示当前是0，需要反转的1的数量
 // dp[i][1] 表示当前是1，需要反转的0的数量
 class Solution {
+    // Updated on 20 Apr 2019
+    // O(N), O(1)
+    public int minFlipsMonoIncr(String S) {
+        if (S == null || S.length() == 0) return 0;
+
+        int zeroes = 0, ones = 0;
+        int flip = 0;
+
+        for (char c : S.toCharArray()) {
+            if (c == '0') {
+                if (ones != 0) {
+                    flip++;
+                } else continue;
+            } else {
+                ones++;
+            }
+
+            if (flip > ones) {
+                flip = ones;
+            }
+        }
+
+        return flip;
+    }
+
     public int minFlipsMonoIncr(String S) {
         int n = S.length();
         int[][] dp = new int[n + 1][2];
