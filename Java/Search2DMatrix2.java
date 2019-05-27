@@ -6,6 +6,27 @@
  */
 
 public class Search2DMatrix2 {
+    // Updated on 27 May 2019
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0) return false;
+        int m = matrix.length, n = matrix[0].length;
+
+        int curRow = 0, curCol = n - 1;
+        while (curRow < m && curCol >= 0) {
+            if (matrix[curRow][curCol] == target) {
+                return true;
+            }
+
+            if (matrix[curRow][curCol] < target) {
+                curRow++;
+            } else {
+                curCol--;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * 这题一看题目就知道是二分搜索。。 先判断那几行不可能，然后在可能的那几行里再做二分搜索
      * 耶，过了！敲开心。。看了discuss，再次感到了智商碾压。。

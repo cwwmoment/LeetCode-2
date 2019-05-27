@@ -4,6 +4,28 @@
  * Created on 6 Aug 2018
  */
 public class Search2DMatrix {
+    // Updated on 27 May 2019
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0) return false;
+        int m = matrix.length, n = matrix[0].length;
+        int lo = 0, hi = m * n - 1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+
+            if (matrix[mid / n][mid % n] == target) {
+                return true;
+            }
+
+            if (matrix[mid / n][mid % n] < target) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+
+        return false;
+    }
+
     public static boolean searchMatrix(int[][] matrix, int target) {
         int top = 0, down = matrix.length - 1;
         int mid = (top + down) / 2;
